@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d9488" />
+      <stop offset="100%" stop-color="#0f766e" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdfa" />
+      <stop offset="100%" stop-color="#ccfbf1" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f8fafc" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="125%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0f766e" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- Background decorative elements -->
+  <rect width="500" height="400" rx="24" fill="url(#bgGrad)" />
+  <circle cx="80" cy="70" r="40" fill="#99f6e4" opacity="0.4" />
+  <circle cx="430" cy="320" r="60" fill="#fde68a" opacity="0.4" />
+  <circle cx="450" cy="80" r="30" fill="#a7f3d0" opacity="0.4" />
+
+  <!-- Central Vault / Fund Management Card -->
+  <rect x="70" y="60" width="360" height="260" rx="18" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#e2e8f0" stroke-width="1.5" />
+
+  <!-- Top bar of the card -->
+  <rect x="70" y="60" width="360" height="42" rx="18" fill="url(#primaryGrad)" />
+  <rect x="70" y="86" width="360" height="16" fill="url(#primaryGrad)" />
+  <circle cx="95" cy="81" r="5" fill="#fecdd3" />
+  <circle cx="110" cy="81" r="5" fill="#fef08a" />
+  <circle cx="125" cy="81" r="5" fill="#bbf7d0" />
+  <text x="250" y="86" fill="#ffffff" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="600" text-anchor="middle">Secure Fund Management Portal</text>
+
+  <!-- Charity / Growth Icon in Center -->
+  <g transform="translate(195, 120)">
+    <circle cx="55" cy="50" r="45" fill="#ecfdf5" stroke="#10b981" stroke-width="2" stroke-dasharray="4 2" />
+    <!-- Hands holding coin/heart -->
+    <path d="M 30 65 C 30 65, 45 75, 55 75 C 65 75, 80 65, 80 65 C 80 65, 75 85, 55 85 C 35 85, 30 65, 30 65 Z" fill="#0d9488" />
+    <!-- Coin -->
+    <circle cx="55" cy="40" r="20" fill="url(#accentGrad)" />
+    <text x="55" y="47" font-family="'Segoe UI', sans-serif" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">$</text>
+    <!-- Heart above coin -->
+    <path d="M 55 14 C 55 14 50 6 43 8 C 36 10 37 18 43 23 L 55 33 L 67 23 C 73 18 74 10 67 8 C 60 6 55 14 55 14 Z" fill="#ef4444" />
+  </g>
+
+  <!-- Left Stats badge -->
+  <g transform="translate(90, 130)">
+    <rect width="90" height="55" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1" />
+    <text x="12" y="24" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#15803d">FUNDS IN</text>
+    <text x="12" y="44" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="bold" fill="#166534">+$842,500</text>
+  </g>
+
+  <!-- Right Stats badge -->
+  <g transform="translate(320, 130)">
+    <rect width="90" height="55" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1" />
+    <text x="12" y="24" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#b45309">DISBURSED</text>
+    <text x="12" y="44" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="bold" fill="#92400e">-$618,300</text>
+  </g>
+
+  <!-- Security Shield & Lock Badge -->
+  <g transform="translate(195, 235)">
+    <rect width="110" height="34" rx="17" fill="#042f2e" />
+    <!-- Lock icon -->
+    <path d="M 22 17 L 22 14 C 22 10.5 24.5 8 28 8 C 31.5 8 34 10.5 34 14 L 34 17 M 18 17 L 38 17 L 38 26 L 18 26 Z" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round" />
+    <circle cx="28" cy="21" r="1.5" fill="#2dd4bf" />
+    <text x="44" y="22" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#5eead4">256-Bit Encrypted</text>
+  </g>
+
+  <!-- Bottom verified text -->
+  <text x="250" y="295" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="middle">Transparent Audit &amp; Certified NGO Platform</text>
+</svg>
