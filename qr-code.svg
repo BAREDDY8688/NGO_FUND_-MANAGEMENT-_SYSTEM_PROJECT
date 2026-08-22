@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+  <rect width="300" height="300" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="4" />
+  
+  <!-- QR Corner Markers Top-Left -->
+  <rect x="25" y="25" width="70" height="70" rx="8" fill="#0f766e" />
+  <rect x="37" y="37" width="46" height="46" rx="4" fill="#ffffff" />
+  <rect x="47" y="47" width="26" height="26" rx="3" fill="#0f766e" />
+
+  <!-- QR Corner Markers Top-Right -->
+  <rect x="205" y="25" width="70" height="70" rx="8" fill="#0f766e" />
+  <rect x="217" y="37" width="46" height="46" rx="4" fill="#ffffff" />
+  <rect x="227" y="47" width="26" height="26" rx="3" fill="#0f766e" />
+
+  <!-- QR Corner Markers Bottom-Left -->
+  <rect x="25" y="205" width="70" height="70" rx="8" fill="#0f766e" />
+  <rect x="37" y="217" width="46" height="46" rx="4" fill="#ffffff" />
+  <rect x="47" y="227" width="26" height="26" rx="3" fill="#0f766e" />
+
+  <!-- Matrix Pattern Dots & Blocks -->
+  <g fill="#1e293b">
+    <rect x="110" y="30" width="12" height="12" rx="2" />
+    <rect x="135" y="30" width="24" height="12" rx="2" />
+    <rect x="175" y="30" width="12" height="24" rx="2" />
+    <rect x="110" y="55" width="24" height="12" rx="2" />
+    <rect x="150" y="55" width="12" height="36" rx="2" />
+    <rect x="110" y="80" width="12" height="12" rx="2" />
+    <rect x="175" y="70" width="15" height="22" rx="2" />
+    
+    <!-- Left Mid -->
+    <rect x="30" y="110" width="24" height="12" rx="2" />
+    <rect x="70" y="110" width="12" height="36" rx="2" />
+    <rect x="40" y="135" width="12" height="12" rx="2" />
+    <rect x="30" y="160" width="36" height="12" rx="2" />
+    <rect x="80" y="160" width="15" height="25" rx="2" />
+
+    <!-- Center Pattern -->
+    <rect x="110" y="110" width="15" height="15" rx="2" />
+    <rect x="175" y="110" width="15" height="15" rx="2" />
+    <rect x="110" y="175" width="15" height="15" rx="2" />
+    <rect x="175" y="175" width="15" height="15" rx="2" />
+
+    <!-- Right Mid -->
+    <rect x="210" y="110" width="30" height="12" rx="2" />
+    <rect x="255" y="110" width="15" height="35" rx="2" />
+    <rect x="210" y="135" width="15" height="25" rx="2" />
+    <rect x="235" y="150" width="20" height="12" rx="2" />
+    <rect x="210" y="175" width="35" height="12" rx="2" />
+    <rect x="260" y="165" width="12" height="25" rx="2" />
+
+    <!-- Bottom Center & Right -->
+    <rect x="110" y="210" width="25" height="12" rx="2" />
+    <rect x="150" y="210" width="15" height="35" rx="2" />
+    <rect x="180" y="210" width="12" height="12" rx="2" />
+    <rect x="110" y="235" width="12" height="35" rx="2" />
+    <rect x="135" y="255" width="30" height="15" rx="2" />
+    <rect x="180" y="240" width="15" height="30" rx="2" />
+    <rect x="210" y="210" width="12" height="24" rx="2" />
+    <rect x="235" y="210" width="35" height="12" rx="2" />
+    <rect x="235" y="235" width="15" height="35" rx="2" />
+    <rect x="260" y="240" width="12" height="15" rx="2" />
+  </g>
+
+  <!-- Center Logo Badge -->
+  <circle cx="150" cy="150" r="28" fill="#0d9488" stroke="#ffffff" stroke-width="4" />
+  <!-- Logo symbol: Heart + Coin -->
+  <path d="M 150 140 C 150 140 144 133 138 135 C 132 137 133 143 138 147 L 150 156 L 162 147 C 167 143 168 137 162 135 C 156 133 150 140 150 140 Z" fill="#ffffff" />
+  <circle cx="150" cy="152" r="6" fill="#fbbf24" />
+</svg>
