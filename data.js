@@ -196,7 +196,6 @@ class DataService {
     const donations = this.getDonations();
     const expenses = this.getExpenses();
     const requests = this.getRequests();
-
     const totalRaised = donations.reduce((sum, item) => sum + Number(item.amount || 0), 0);
     const totalExpenses = expenses.reduce((sum, item) => sum + Number(item.amount || 0), 0);
     const balance = totalRaised - totalExpenses;
