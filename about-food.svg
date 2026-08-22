@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="100%" height="100%">
+  <defs>
+    <linearGradient id="foodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="foodBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ecfdf5" />
+      <stop offset="100%" stop-color="#d1fae5" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="280" rx="16" fill="url(#foodBg)" />
+  <circle cx="200" cy="140" r="85" fill="#a7f3d0" opacity="0.6" />
+
+  <!-- Food Bowl & Sprout -->
+  <g transform="translate(130, 80)">
+    <!-- Bowl -->
+    <path d="M 10 50 C 10 110, 130 110, 130 50 Z" fill="url(#foodGrad)" />
+    <ellipse cx="70" cy="50" rx="60" ry="14" fill="#34d399" />
+    <!-- Sprout / Grain of wheat in the bowl -->
+    <path d="M 70 50 C 70 20, 50 15, 45 10 C 60 20, 68 35, 70 50 Z" fill="#f59e0b" />
+    <path d="M 70 50 C 70 20, 90 15, 95 10 C 80 20, 72 35, 70 50 Z" fill="#fbbf24" />
+    <line x1="70" y1="50" x2="70" y2="5" stroke="#d97706" stroke-width="3" stroke-linecap="round" />
+    <!-- Steam / Warmth lines -->
+    <path d="M 50 25 C 45 15, 55 10, 50 0" fill="none" stroke="#6ee7b7" stroke-width="2.5" stroke-linecap="round" />
+    <path d="M 90 25 C 85 15, 95 10, 90 0" fill="none" stroke="#6ee7b7" stroke-width="2.5" stroke-linecap="round" />
+  </g>
+
+  <!-- Hand base supporting the bowl -->
+  <path d="M 150 210 C 180 230, 220 230, 250 210" fill="none" stroke="#059669" stroke-width="5" stroke-linecap="round" />
+  <circle cx="90" cy="90" r="16" fill="#6ee7b7" opacity="0.5" />
+  <circle cx="310" cy="180" r="22" fill="#34d399" opacity="0.4" />
+</svg>
