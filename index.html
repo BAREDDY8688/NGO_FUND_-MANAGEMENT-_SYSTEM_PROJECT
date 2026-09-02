@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NGO FUND MANAGEMENT SYSTEM - Transparent Non-Profit Financial Platform</title>
+  <title>FUND BRIDGE - NGO Fund Management System | Transparent Non-Profit Financial Platform</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/ngo-logo.svg" />
@@ -248,13 +248,13 @@ button, input, select, textarea { max-width: 100%; }
 <style id="final-sidebar-layout-fix">
 /* =========================================================
    FINAL NGO PORTAL SIDEBAR
-   Hamburger is ONLY in the main/topbar.
-   Sidebar itself has NO hamburger beside the logo.
+   Always-expanded: icons + module names are shown at all
+   times. The hamburger/3-line toggle has been removed, so
+   the sidebar never collapses to icon-only.
    ========================================================= */
 
 :root{
     --sidebar-expanded:250px;
-    --sidebar-collapsed:78px;
 }
 
 /* Main portal */
@@ -265,122 +265,42 @@ button, input, select, textarea { max-width: 100%; }
     overflow-x:hidden;
 }
 
-/* Sidebar */
+/* Sidebar - permanently expanded (icons + names) */
 #portalWrapper .portal-sidebar{
     position:fixed !important;
     left:0;
     top:0;
     bottom:0;
-    width:var(--sidebar-collapsed) !important;
+    width:var(--sidebar-expanded) !important;
     height:100vh;
     z-index:1000;
     overflow-x:hidden;
     overflow-y:auto;
-    transition:width .25s ease;
+    transform:none !important;
 }
 
-/* Expanded sidebar */
-#portalWrapper.sidebar-expanded .portal-sidebar{
-    width:var(--sidebar-expanded) !important;
-}
-
-/* Main content - collapsed */
+/* Main content area shifted to match the fixed sidebar width */
 #portalWrapper .portal-main{
     position:relative;
-    width:calc(100% - var(--sidebar-collapsed)) !important;
-    margin-left:var(--sidebar-collapsed) !important;
+    width:calc(100% - var(--sidebar-expanded)) !important;
+    margin-left:var(--sidebar-expanded) !important;
     min-width:0 !important;
     max-width:none !important;
     overflow-x:hidden;
-    transition:width .25s ease, margin-left .25s ease;
-}
-
-/* Main content - expanded */
-#portalWrapper.sidebar-expanded .portal-main{
-    width:calc(100% - var(--sidebar-expanded)) !important;
-    margin-left:var(--sidebar-expanded) !important;
 }
 
 /* =========================================================
-   COLLAPSED SIDEBAR = ICONS ONLY
+   HAMBURGER / 3-LINE TOGGLE REMOVED
+   Sidebar is always expanded, so the toggle button that used
+   to collapse it down to icons-only is hidden everywhere.
    ========================================================= */
-
-#portalWrapper:not(.sidebar-expanded) .sidebar-brand span,
-#portalWrapper:not(.sidebar-expanded) .sidebar-heading,
-#portalWrapper:not(.sidebar-expanded) .sidebar-nav-item .nav-text,
-#portalWrapper:not(.sidebar-expanded) .sidebar-user-info,
-#portalWrapper:not(.sidebar-expanded) .sidebar-logout-btn .nav-text{
+#portalWrapper #mobileSidebarToggle{
     display:none !important;
 }
 
-#portalWrapper:not(.sidebar-expanded) .sidebar-header{
-    justify-content:center !important;
-}
-
-#portalWrapper:not(.sidebar-expanded) .sidebar-brand{
-    width:40px;
-    justify-content:center !important;
-    margin:0 auto;
-}
-
-#portalWrapper:not(.sidebar-expanded) .sidebar-nav-item{
-    justify-content:center !important;
-    padding-left:0 !important;
-    padding-right:0 !important;
-    gap:0 !important;
-}
-
-#portalWrapper:not(.sidebar-expanded) .sidebar-nav-item i{
-    margin:0 !important;
-}
-
-#portalWrapper:not(.sidebar-expanded) .sidebar-logout-btn{
-    justify-content:center !important;
-    padding-left:0 !important;
-    padding-right:0 !important;
-}
-
-#portalWrapper:not(.sidebar-expanded) .nav-badge{
-    position:absolute;
-    right:5px;
-    top:5px;
-    margin:0 !important;
-}
-
-/* =========================================================
-   MAIN PAGE HAMBURGER
-   ========================================================= */
-
-#portalWrapper #mobileSidebarToggle{
-    display:flex !important;
-    align-items:center;
-    justify-content:center;
-    flex:0 0 auto;
-
-    width:36px;
-    height:36px;
-
-    border:0;
-    border-radius:8px;
-
-    cursor:pointer;
-
-    background:#0f766e;
-    color:#fff;
-
-    font-size:16px;
-
-    box-shadow:0 2px 7px rgba(0,0,0,.12);
-
-    transition:all .2s ease;
-}
-
-#portalWrapper #mobileSidebarToggle:hover{
-    transform:translateY(-1px);
-}
-
-#portalWrapper #mobileSidebarToggle i{
-    pointer-events:none;
+#portalWrapper .nav-badge{
+    position:static;
+    margin-left:auto;
 }
 
 /* =========================================================
@@ -431,6 +351,12 @@ button, input, select, textarea { max-width: 100%; }
     overflow-x:auto;
 }
 
+/* =========================================================
+   TOPBAR (search + Record Donation / Submit Expense buttons)
+   Sizes flex down freely so the buttons never overflow or
+   wrap awkwardly, now that the sidebar always takes up space.
+   ========================================================= */
+
 #portalWrapper .portal-topbar,
 #portalWrapper .topbar-left,
 #portalWrapper .topbar-right{
@@ -439,27 +365,80 @@ button, input, select, textarea { max-width: 100%; }
 
 #portalWrapper .portal-topbar{
     max-width:100%;
+    flex-wrap:wrap;
+    row-gap:8px;
+}
+
+#portalWrapper .topbar-left{
+    flex:1 1 auto;
+    min-width:0;
+}
+
+#portalWrapper .page-title-badge{
+    min-width:0;
+}
+
+#portalWrapper .page-title-badge h2{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+#portalWrapper .topbar-right{
+    flex:0 1 auto;
+    display:flex;
+    align-items:center;
+    gap:0.5rem;
+    min-width:0;
+}
+
+#portalWrapper .topbar-search{
+    flex:1 1 140px;
+    min-width:0;
+}
+
+#portalWrapper .topbar-search input{
+    width:100%;
+    min-width:0;
+}
+
+#portalWrapper .topbar-quick-btns{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.4rem;
+    flex:0 1 auto;
+    min-width:0;
+}
+
+#portalWrapper .topbar-quick-btns .btn{
+    white-space:nowrap;
+    flex:0 1 auto;
 }
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE - sidebar width shrinks but text stays visible
    ========================================================= */
+
+@media(max-width:1200px){
+    :root{ --sidebar-expanded:220px; }
+}
+
+@media(max-width:1024px){
+    :root{ --sidebar-expanded:200px; }
+
+    #portalWrapper .topbar-quick-btns .btn{
+        padding:0.4rem 0.55rem;
+        font-size:0.72rem;
+    }
+    #portalWrapper .topbar-quick-btns .btn i{
+        margin-right:0.25rem;
+    }
+}
 
 @media(max-width:768px){
 
     :root{
-        --sidebar-expanded:220px;
-        --sidebar-collapsed:68px;
-    }
-
-    #portalWrapper .portal-main{
-        width:calc(100% - var(--sidebar-collapsed)) !important;
-        margin-left:var(--sidebar-collapsed) !important;
-    }
-
-    #portalWrapper.sidebar-expanded .portal-main{
-        width:calc(100% - var(--sidebar-expanded)) !important;
-        margin-left:var(--sidebar-expanded) !important;
+        --sidebar-expanded:180px;
     }
 
     #portalWrapper .profile-grid,
@@ -476,6 +455,7 @@ button, input, select, textarea { max-width: 100%; }
     #portalWrapper .portal-topbar{
         flex-wrap:wrap;
         gap:8px;
+        padding:0.6rem 0.7rem;
     }
 
     #portalWrapper .page-title-badge{
@@ -484,37 +464,68 @@ button, input, select, textarea { max-width: 100%; }
     }
 
     #portalWrapper .page-title-badge h2{
+        font-size:0.85rem;
         white-space:normal;
         overflow-wrap:anywhere;
     }
+
+    #portalWrapper .topbar-search{
+        order:3;
+        flex:1 1 100%;
+    }
+
+    #portalWrapper .topbar-quick-btns .btn{
+        padding:0.35rem 0.5rem;
+        font-size:0.66rem;
+    }
+
+    /* Icon-only buttons: hide button label text to save space */
+    #portalWrapper .topbar-quick-btns .btn .btn-text{
+        display:none;
+    }
 }
 
-/* Small phones */
+/* Small phones - keep icons + short names, shrink further */
 @media(max-width:480px){
 
     :root{
-        --sidebar-expanded:205px;
-        --sidebar-collapsed:64px;
+        --sidebar-expanded:150px;
     }
 
-    #portalWrapper .portal-main{
-        width:calc(100% - 64px) !important;
-        margin-left:64px !important;
+    #portalWrapper .portal-sidebar{
+        font-size:0.85rem;
     }
 
-    #portalWrapper.sidebar-expanded .portal-main{
-        width:calc(100% - 205px) !important;
-        margin-left:205px !important;
+    #portalWrapper .sidebar-nav-item i,
+    #portalWrapper .sidebar-brand img{
+        flex:0 0 auto;
+    }
+
+    #portalWrapper .sidebar-user-info,
+    #portalWrapper .sidebar-heading{
+        font-size:0.7rem;
     }
 
     #portalWrapper .portal-content-body{
         padding:8px !important;
     }
 
-    #portalWrapper #mobileSidebarToggle{
-        width:32px;
-        height:32px;
-        font-size:14px;
+    #portalWrapper .page-title-badge h2{
+        font-size:0.75rem;
+    }
+
+    #portalWrapper .topbar-quick-btns .btn{
+        width:34px;
+        height:34px;
+        padding:0;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        font-size:0.85rem;
+    }
+
+    #portalWrapper .topbar-quick-btns .btn i{
+        margin-right:0;
     }
 }
 </style>
@@ -741,8 +752,8 @@ button, input, select, textarea { max-width: 100%; }
   <header id="publicNavbar" class="public-navbar">
     <div class="nav-container">
       <a href="#home" class="brand-logo">
-        <img src="assets/ngo-logo.svg" alt="NGO Logo" />
-        <span>NGO FUND MANAGEMENT SYSTEM</span>
+        <img src="assets/ngo-logo.svg" alt="Fund Bridge Logo" />
+        <span>FUND BRIDGE</span>
       </a>
 
       <!-- Desktop Navigation Menu -->
@@ -828,10 +839,10 @@ button, input, select, textarea { max-width: 100%; }
               <i class="fa-solid fa-shield-halved"></i> 100% Transparent Financial Audit
             </div>
             <h1 class="hero-title">
-              Empowering Communities Through <span>Transparent Fund</span> Management
+              <span>Fund Bridge</span> — Our NGO Fund Management System
             </h1>
             <p class="hero-subtitle">
-              Every dollar contributed is tracked with real-time audit verification. From urgent medical aid and children's education to disaster relief, we ensure funds reach verified beneficiaries instantly.
+              Fund Bridge is the digital bridge connecting donors, NGOs, and the communities they serve. Built as a complete NGO Fund Management System, every dollar contributed is tracked with real-time audit verification. From urgent medical aid and children's education to disaster relief, we ensure funds reach verified beneficiaries instantly.
             </p>
             <div class="hero-buttons">
               <a href="#request" class="btn btn-primary btn-lg">
@@ -1672,9 +1683,6 @@ button, input, select, textarea { max-width: 100%; }
       <!-- Topbar Header -->
       <header class="portal-topbar">
         <div class="topbar-left">
-          <button id="mobileSidebarToggle" class="mobile-sidebar-toggle">
-            <i class="fa-solid fa-bars"></i>
-          </button>
           <div class="page-title-badge">
             <h2 id="topbarPageTitle">📊 Financial Overview &amp; Analytics</h2>
           </div>
@@ -1687,11 +1695,11 @@ button, input, select, textarea { max-width: 100%; }
           </div>
 
           <div class="topbar-quick-btns">
-            <button id="quickAddDonationBtn" class="btn btn-primary btn-sm">
-              <i class="fa-solid fa-plus"></i> Record Donation
+            <button id="quickAddDonationBtn" class="btn btn-primary btn-sm" title="Record Donation">
+              <i class="fa-solid fa-plus"></i> <span class="btn-text">Record Donation</span>
             </button>
-            <button id="quickAddExpenseBtn" class="btn btn-accent btn-sm">
-              <i class="fa-solid fa-file-invoice"></i> Submit Expense
+            <button id="quickAddExpenseBtn" class="btn btn-accent btn-sm" title="Submit Expense">
+              <i class="fa-solid fa-file-invoice"></i> <span class="btn-text">Submit Expense</span>
             </button>
           </div>
         </div>
@@ -2166,7 +2174,7 @@ button, input, select, textarea { max-width: 100%; }
       <div class="footer-brand">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
           <img src="assets/ngo-logo.svg" alt="Logo" style="width: 32px; height: 32px;" />
-          <h3 style="margin: 0;">NGO FUND MANAGEMENT SYSTEM</h3>
+          <h3 style="margin: 0;">FUND BRIDGE</h3>
         </div>
         <p style="font-size: 0.85rem; line-height: 1.6; color: #94a3b8;">
           A transparent non-profit platform ensuring 100% accountability in fund raising, audited disbursements, and real-time community impact tracking.
@@ -2201,7 +2209,7 @@ button, input, select, textarea { max-width: 100%; }
     </div>
 
     <div class="footer-bottom">
-      <div>&copy; 2026 NGO FUND MANAGEMENT SYSTEM. All rights reserved.</div>
+      <div>&copy; 2026 FUND BRIDGE. All rights reserved.</div>
       <div>Designed with 100% Financial Transparency &amp; Public Accountability.</div>
     </div>
   </footer>
@@ -2437,68 +2445,18 @@ document.addEventListener("DOMContentLoaded", function () {
 <script id="final-sidebar-layout-fix-js">
 document.addEventListener("DOMContentLoaded", function(){
 
-    const wrapper = document.getElementById("portalWrapper");
-    const sidebar = document.getElementById("portalSidebar");
-    const mainToggle = document.getElementById("mobileSidebarToggle");
-
-    if(!wrapper || !sidebar || !mainToggle){
-        console.error("NGO portal sidebar elements were not found.");
-        return;
-    }
-
-    function updateSidebar(){
-
-        const expanded =
-            wrapper.classList.contains("sidebar-expanded");
-
-        const icon = mainToggle.querySelector("i");
-
-        if(icon){
-            icon.className = expanded
-                ? "fa-solid fa-xmark"
-                : "fa-solid fa-bars";
-        }
-
-        mainToggle.setAttribute(
-            "aria-expanded",
-            String(expanded)
-        );
-
-        mainToggle.setAttribute(
-            "aria-label",
-            expanded
-                ? "Close modules"
-                : "Open modules"
-        );
-
-        mainToggle.title =
-            expanded
-                ? "Close modules"
-                : "Open modules";
-
-        setTimeout(function(){
-            window.dispatchEvent(new Event("resize"));
-        },260);
-    }
-
-    /* MAIN PAGE HAMBURGER ONLY */
-    mainToggle.addEventListener("click", function(event){
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        wrapper.classList.toggle("sidebar-expanded");
-
-        updateSidebar();
-    });
-
     /*
-       Start with modules closed.
-       Click the hamburger on the main page to open them.
+       Sidebar is now permanently expanded (icons + module
+       names always visible) via CSS alone, so there is no
+       hamburger/3-line toggle to wire up here anymore.
+       Just make sure any code elsewhere that checks for the
+       "sidebar-expanded" class keeps working.
     */
-    wrapper.classList.remove("sidebar-expanded");
+    const wrapper = document.getElementById("portalWrapper");
 
-    updateSidebar();
+    if(wrapper){
+        wrapper.classList.add("sidebar-expanded");
+    }
 
 });
 </script>
