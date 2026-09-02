@@ -1637,7 +1637,7 @@ button, input, select, textarea { max-width: 100%; }
           <span id="sidebarMessagesBadge" class="nav-badge">2</span>
         </a>
 
-        <a href="#contact" class="sidebar-nav-item" data-target="contact">
+        <a href="#" class="sidebar-nav-item" data-target="portalContact">
           <i class="fa-solid fa-headset"></i>
           <span class="nav-text">Contact Us</span>
         </a>
@@ -1990,6 +1990,80 @@ button, input, select, textarea { max-width: 100%; }
           </div>
         </div>
 
+        <!-- SUB-VIEW: CONTACT US VIEW (inside dashboard, keeps sidebar visible) -->
+        <div id="portalContactView" class="dash-view">
+          <div class="contact-layout">
+            <!-- Left: Contact Information Cards -->
+            <div class="contact-info-cards">
+              <div class="contact-info-item">
+                <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div>
+                  <h4 style="margin-bottom: 0.25rem;">Global Headquarters</h4>
+                  <p style="font-size: 0.85rem;">Global NGO Tower, Suite 400, Financial District, NY &amp; MG Road, New Delhi</p>
+                </div>
+              </div>
+
+              <div class="contact-info-item">
+                <div class="contact-icon"><i class="fa-solid fa-phone-volume"></i></div>
+                <div>
+                  <h4 style="margin-bottom: 0.25rem;">24/7 Helpline &amp; Inquiries</h4>
+                  <p style="font-size: 0.85rem;">+1 (800) 456-7890 / +91 98765 43210</p>
+                </div>
+              </div>
+
+              <div class="contact-info-item">
+                <div class="contact-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                <div>
+                  <h4 style="margin-bottom: 0.25rem;">Official Email</h4>
+                  <p style="font-size: 0.85rem;">contact@ngofunds.org / support@ngofunds.org</p>
+                </div>
+              </div>
+
+              <div class="contact-info-item">
+                <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
+                <div>
+                  <h4 style="margin-bottom: 0.25rem;">Audit &amp; Operational Hours</h4>
+                  <p style="font-size: 0.85rem;">Monday – Saturday: 9:00 AM – 6:00 PM (Emergency Desk 24/7)</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Contact Form -->
+            <div class="card-box">
+              <h3 style="margin-bottom: 1.25rem;"><i class="fa-solid fa-paper-plane" style="color: var(--primary);"></i> Send an Inquiry</h3>
+              <form id="portalContactForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" id="portalContactName" class="form-control" placeholder="John Doe" required />
+                  </div>
+                  <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" id="portalContactEmail" class="form-control" placeholder="john@example.com" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Subject / Topic</label>
+                  <input type="text" id="portalContactSubject" class="form-control" placeholder="e.g. Corporate CSR / Donation Receipt Query" />
+                </div>
+
+                <div class="form-group">
+                  <label>Your Message *</label>
+                  <textarea id="portalContactMessage" class="form-control" rows="4" placeholder="Type your message here..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                  <i class="fa-solid fa-paper-plane"></i> Send Direct Message
+                </button>
+                <div id="portalContactStatus" style="display:none; margin-top: 0.75rem; padding: 0.65rem 0.9rem; border-radius: 8px; background: rgba(16,185,129,0.12); color: #059669; font-size: 0.85rem;">
+                  <i class="fa-solid fa-circle-check"></i> Your message has been sent to our team.
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
         <!-- SUB-VIEW 6: SETTINGS VIEW -->
         <div id="settingsView" class="dash-view">
           <div class="settings-grid">
@@ -2288,6 +2362,77 @@ button, input, select, textarea { max-width: 100%; }
   <script src="js/auth.js"></script>
   <script src="js/charts.js"></script>
   <script src="js/app.js"></script>
+
+<script id="portal-contact-view-fix-js">
+document.addEventListener("DOMContentLoaded", function () {
+
+    var portalWrapper   = document.getElementById("portalWrapper");
+    var contactLink     = document.querySelector('.sidebar-nav-item[data-target="portalContact"]');
+    var contactView     = document.getElementById("portalContactView");
+    var topbarTitle      = document.getElementById("topbarPageTitle");
+    var contactForm      = document.getElementById("portalContactForm");
+    var contactStatus    = document.getElementById("portalContactStatus");
+
+    if (!portalWrapper || !contactLink || !contactView) {
+        return;
+    }
+
+    function openPortalContactView() {
+        // Show only the contact sub-view inside the dashboard.
+        document.querySelectorAll(".portal-content-body .dash-view").forEach(function (view) {
+            view.classList.remove("active-dash-view");
+        });
+        contactView.classList.add("active-dash-view");
+
+        // Mark the sidebar link as active.
+        document.querySelectorAll(".sidebar-nav-item").forEach(function (item) {
+            item.classList.remove("active");
+        });
+        contactLink.classList.add("active");
+
+        // Update the topbar heading.
+        if (topbarTitle) {
+            topbarTitle.textContent = "📩 Contact Us";
+        }
+
+        // Close the sidebar on mobile after navigating.
+        portalWrapper.classList.remove("sidebar-expanded");
+        if (portalWrapper.classList.contains("mobile-open")) {
+            portalWrapper.classList.remove("mobile-open");
+        }
+        var sidebarEl = document.getElementById("portalSidebar");
+        if (sidebarEl) {
+            sidebarEl.classList.remove("mobile-open");
+        }
+
+        window.dispatchEvent(new Event("resize"));
+    }
+
+    // Intercept the click in the capture phase so this always wins,
+    // regardless of any other listeners already bound to this link.
+    document.addEventListener("click", function (event) {
+        var link = event.target.closest('.sidebar-nav-item[data-target="portalContact"]');
+        if (!link) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        openPortalContactView();
+    }, true);
+
+    // Simple handling for the in-dashboard contact form.
+    if (contactForm) {
+        contactForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            if (contactStatus) {
+                contactStatus.style.display = "block";
+            }
+            contactForm.reset();
+        });
+    }
+
+});
+</script>
 
 <script id="final-sidebar-layout-fix-js">
 document.addEventListener("DOMContentLoaded", function(){
