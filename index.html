@@ -2918,9 +2918,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function closeMenu() {
         navMenu.classList.remove("open");
-        // Force-hide even if some other script re-applies the "open" class,
-        // or leaves an inline style behind.
-        navMenu.style.display = "none";
+        // Only force-hide with inline display on mobile widths, where the
+        // menu is a toggled dropdown. On desktop/tablet widths the menu bar
+        // must always stay visible, so we clear any inline override instead
+        // and let the responsive CSS control its display.
+        if (window.innerWidth <= 768) {
+            navMenu.style.display = "none";
+        } else {
+            navMenu.style.display = "";
+        }
     }
 
     function openMenu() {
