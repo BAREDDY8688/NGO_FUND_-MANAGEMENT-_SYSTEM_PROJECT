@@ -245,288 +245,560 @@ button, input, select, textarea { max-width: 100%; }
 
 </style>
 
-<style id="final-sidebar-layout-fix">
+<style id="chatgpt-moving-sidebar-style">
 /* =========================================================
-   FINAL NGO PORTAL SIDEBAR
-   Always-expanded: icons + module names are shown at all
-   times. The hamburger/3-line toggle has been removed, so
-   the sidebar never collapses to icon-only.
+   CHATGPT-STYLE COLLAPSIBLE SIDEBAR & LOGO TOGGLE
    ========================================================= */
 
-:root{
-    --sidebar-expanded:250px;
+:root {
+  --sidebar-expanded-w: 260px;
+  --sidebar-collapsed-w: 68px;
 }
 
-/* Main portal */
-#portalWrapper{
-    width:100%;
-    min-height:100vh;
-    min-width:0;
-    overflow-x:hidden;
+#portalWrapper {
+  width: 100%;
+  min-height: 100vh;
+  min-width: 0;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* Sidebar - permanently expanded (icons + names) */
-#portalWrapper .portal-sidebar{
-    position:fixed !important;
-    left:0;
-    top:0;
-    bottom:0;
-    width:var(--sidebar-expanded) !important;
-    height:100vh;
-    z-index:1000;
-    overflow-x:hidden;
-    overflow-y:auto;
-    transform:none !important;
+/* Base Sidebar */
+#portalWrapper .portal-sidebar {
+  position: fixed !important;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-expanded-w) !important;
+  height: 100vh;
+  z-index: 1050;
+  background: #0f172a;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-/* Main content area shifted to match the fixed sidebar width */
-#portalWrapper .portal-main{
-    position:relative;
-    width:calc(100% - var(--sidebar-expanded)) !important;
-    margin-left:var(--sidebar-expanded) !important;
-    min-width:0 !important;
-    max-width:none !important;
-    overflow-x:hidden;
+/* Main Content Area */
+#portalWrapper .portal-main {
+  position: relative;
+  width: calc(100% - var(--sidebar-expanded-w)) !important;
+  margin-left: var(--sidebar-expanded-w) !important;
+  min-height: 100vh;
+  transition: margin-left 0.35s cubic-bezier(0.16, 1, 0.3, 1), width 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  min-width: 0 !important;
+}
+
+/* COLLAPSED / CLOSED STATE (ChatGPT style: Icon-only sidebar 68px) */
+#portalWrapper .portal-sidebar.sidebar-closed,
+#portalWrapper .portal-sidebar.collapsed {
+  width: var(--sidebar-collapsed-w) !important;
+  transform: translateX(0) !important;
+}
+
+/* Shift main content area when sidebar is collapsed */
+#portalWrapper .portal-sidebar.sidebar-closed ~ .portal-main,
+#portalWrapper .portal-sidebar.collapsed ~ .portal-main,
+#portalWrapper.sidebar-is-closed .portal-main {
+  width: calc(100% - var(--sidebar-collapsed-w)) !important;
+  margin-left: var(--sidebar-collapsed-w) !important;
+}
+
+/* --- SIDEBAR HEADER LOGO TOGGLE --- */
+.sidebar-header {
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #1e293b;
+  background: #090d16;
+}
+
+.sidebar-logo-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #ffffff;
+  width: 100%;
+  padding: 0.45rem 0.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.sidebar-logo-toggle-btn:hover {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-logo-box {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.sidebar-logo-toggle-btn:hover .sidebar-logo-box {
+  background: var(--primary, #0d9488);
+  border-color: var(--primary, #0d9488);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.45);
+}
+
+.sidebar-ngo-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.sidebar-logo-toggle-btn:hover .sidebar-ngo-logo {
+  transform: scale(0.85);
+  opacity: 0.3;
+}
+
+.logo-toggle-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.95rem;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.25s ease;
+}
+
+.sidebar-logo-toggle-btn:hover .logo-toggle-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Rotate icon when collapsed & align toggle button with remaining icons */
+#portalSidebar.sidebar-closed .sidebar-header,
+#portalSidebar.collapsed .sidebar-header {
+  padding: 0.75rem 0;
+  justify-content: center;
+}
+
+#portalSidebar.sidebar-closed .sidebar-logo-toggle-btn,
+#portalSidebar.collapsed .sidebar-logo-toggle-btn {
+  justify-content: center;
+  padding: 0;
+  width: 44px;
+  margin: 0 auto;
+}
+
+#portalSidebar.sidebar-closed .sidebar-logo-box,
+#portalSidebar.collapsed .sidebar-logo-box {
+  width: 36px;
+  height: 36px;
+  margin: 0 auto;
+}
+
+#portalSidebar.sidebar-closed .logo-toggle-icon i,
+#portalSidebar.collapsed .logo-toggle-icon i {
+  transform: rotate(180deg);
+}
+
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar-brand-text .brand-name {
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.sidebar-brand-text .brand-sub {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* Hide brand text when collapsed */
+#portalSidebar.sidebar-closed .sidebar-brand-text,
+#portalSidebar.collapsed .sidebar-brand-text {
+  opacity: 0;
+  display: none;
+}
+
+/* --- SIDEBAR MENU ITEMS IN COLLAPSED MODE --- */
+.sidebar-menu-wrap {
+  padding: 0.75rem 0.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sidebar-heading {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.6rem 0.75rem 0.2rem;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+#portalSidebar.sidebar-closed .sidebar-heading,
+#portalSidebar.collapsed .sidebar-heading {
+  opacity: 0;
+  display: none;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 0.9rem;
+  color: #94a3b8;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  position: relative;
+}
+
+.sidebar-nav-item i {
+  font-size: 1.15rem;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.sidebar-nav-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.sidebar-nav-item.active {
+  background: var(--primary, #0d9488);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+}
+
+.nav-text {
+  transition: opacity 0.2s ease;
+  overflow: hidden;
+}
+
+#portalSidebar.sidebar-closed .nav-text,
+#portalSidebar.collapsed .nav-text {
+  opacity: 0;
+  display: none;
+}
+
+/* Center icons in Collapsed Mode */
+#portalSidebar.sidebar-closed .sidebar-nav-item,
+#portalSidebar.collapsed .sidebar-nav-item {
+  justify-content: center;
+  padding: 0.75rem 0;
+  width: 44px;
+  margin: 0 auto;
+}
+
+/* Badges in Collapsed Mode */
+.nav-badge {
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 10px;
+  margin-left: auto;
+}
+
+#portalSidebar.sidebar-closed .nav-badge,
+#portalSidebar.collapsed .nav-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  border-radius: 50%;
+  margin-left: 0;
+}
+
+/* --- SIDEBAR FOOTER & USER PROFILE IN COLLAPSED MODE --- */
+.sidebar-footer {
+  padding: 0.85rem 0.6rem;
+  border-top: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: #090d16;
+}
+
+.sidebar-user-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.sidebar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #0d9488;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sidebar-user-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#portalSidebar.sidebar-closed .sidebar-user-info,
+#portalSidebar.collapsed .sidebar-user-info,
+#portalSidebar.sidebar-closed .sidebar-logout-btn .nav-text,
+#portalSidebar.collapsed .sidebar-logout-btn .nav-text {
+  display: none;
+}
+
+#portalSidebar.sidebar-closed .sidebar-user-pill,
+#portalSidebar.collapsed .sidebar-user-pill {
+  justify-content: center;
+  padding: 0;
+}
+
+#portalSidebar.sidebar-closed .sidebar-logout-btn,
+#portalSidebar.collapsed .sidebar-logout-btn {
+  justify-content: center;
+  padding: 0.6rem 0;
+  width: 44px;
+  margin: 0 auto;
 }
 
 /* =========================================================
-   HAMBURGER / 3-LINE TOGGLE REMOVED
-   Sidebar is always expanded, so the toggle button that used
-   to collapse it down to icons-only is hidden everywhere.
-   ========================================================= */
-#portalWrapper #mobileSidebarToggle{
-    display:none !important;
-}
-
-#portalWrapper .nav-badge{
-    position:static;
-    margin-left:auto;
-}
-
-/* =========================================================
-   CONTENT SAFETY
+   RESPONSIVE DESIGN SYSTEM (MOBILE, TABLET & DESKTOP)
    ========================================================= */
 
+/* Mobile Sidebar Backdrop Overlay */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1040;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile Sidebar Toggle Button (Hidden on Desktop) */
+.mobile-sidebar-toggle-btn {
+  display: none !important;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.mobile-sidebar-toggle-btn:hover {
+  background: #0d9488;
+  color: #ffffff;
+  border-color: #0d9488;
+}
+
+.mobile-logo-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* RESPONSIVE SAFETY CONTAINERS */
 #portalWrapper .portal-content-body,
 #portalWrapper .dash-view,
 #portalWrapper .profile-grid,
 #portalWrapper .settings-grid,
 #portalWrapper .charts-grid,
 #portalWrapper .messages-layout,
-#portalWrapper .table-card{
-    min-width:0 !important;
-    max-width:100%;
+#portalWrapper .table-card {
+  min-width: 0 !important;
+  max-width: 100%;
 }
 
-#portalWrapper .portal-content-body{
-    width:100%;
-    overflow-x:hidden;
+/* Tablet Screen Breakpoint (769px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  :root {
+    --sidebar-expanded-w: 220px;
+  }
+
+  .portal-topbar {
+    padding: 0.75rem 1rem;
+  }
 }
 
-#portalWrapper .profile-grid > *,
-#portalWrapper .profile-form-card,
-#portalWrapper .profile-card-sidebar{
-    min-width:0 !important;
-    max-width:100%;
+/* Mobile & Responsive Screen Breakpoint (<= 768px) */
+@media (max-width: 768px) {
+  .mobile-sidebar-toggle-btn {
+    display: inline-flex !important;
+  }
+
+  #portalWrapper .portal-main {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  #portalWrapper .portal-sidebar {
+    position: fixed !important;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 280px !important;
+    max-width: 85vw !important;
+    transform: translateX(-100%) !important;
+    z-index: 1050;
+    box-shadow: none;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease !important;
+  }
+
+  /* When toggled open on responsive: Slide in total sidebar */
+  #portalWrapper .portal-sidebar.mobile-open,
+  #portalWrapper .portal-sidebar.open {
+    transform: translateX(0) !important;
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  /* Display total sidebar contents (brand text, section headings, nav labels, user profile) */
+  #portalWrapper .portal-sidebar.mobile-open .sidebar-brand-text,
+  #portalWrapper .portal-sidebar.mobile-open .sidebar-heading,
+  #portalWrapper .portal-sidebar.mobile-open .nav-text,
+  #portalWrapper .portal-sidebar.mobile-open .sidebar-user-info {
+    display: flex !important;
+    opacity: 1 !important;
+    width: auto !important;
+  }
+
+  #portalWrapper .portal-sidebar.mobile-open .sidebar-nav-item {
+    justify-content: flex-start !important;
+    width: 100% !important;
+    padding: 0.75rem 0.9rem !important;
+    margin: 0 !important;
+  }
+
+  #portalWrapper .portal-sidebar.mobile-open .sidebar-user-pill {
+    justify-content: flex-start !important;
+    padding: 0.4rem !important;
+  }
+
+  #portalWrapper .portal-sidebar.mobile-open .sidebar-logout-btn {
+    justify-content: flex-start !important;
+    width: 100% !important;
+    padding: 0.6rem 0.9rem !important;
+  }
+
+  #portalWrapper .portal-sidebar.mobile-open .sidebar-header {
+    justify-content: flex-start !important;
+    padding: 1rem 0.75rem !important;
+  }
+
+  #portalWrapper .portal-sidebar.mobile-open .sidebar-logo-toggle-btn {
+    justify-content: flex-start !important;
+    width: 100% !important;
+  }
+
+  .portal-topbar {
+    padding: 0.6rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .topbar-search {
+    order: 3;
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .topbar-quick-btns .btn .btn-text {
+    display: none;
+  }
+
+  .topbar-quick-btns .btn {
+    padding: 0.4rem 0.6rem;
+  }
 }
 
-#portalWrapper .form-control{
-    width:100%;
-    max-width:100%;
-    min-width:0;
+  .portal-topbar {
+    padding: 0.6rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .topbar-search {
+    order: 3;
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .topbar-quick-btns .btn .btn-text {
+    display: none;
+  }
+
+  .topbar-quick-btns .btn {
+    padding: 0.4rem 0.6rem;
+  }
 }
 
-#portalWrapper h1,
-#portalWrapper h2,
-#portalWrapper h3,
-#portalWrapper h4,
-#portalWrapper p,
-#portalWrapper label{
-    overflow-wrap:anywhere;
-}
+/* Small Phone Screens (<= 480px) */
+@media (max-width: 480px) {
+  .page-title-badge h2 {
+    font-size: 0.85rem;
+  }
 
-#portalWrapper .table-responsive{
-    width:100%;
-    max-width:100%;
-    overflow-x:auto;
-}
-
-/* =========================================================
-   TOPBAR (search + Record Donation / Submit Expense buttons)
-   Sizes flex down freely so the buttons never overflow or
-   wrap awkwardly, now that the sidebar always takes up space.
-   ========================================================= */
-
-#portalWrapper .portal-topbar,
-#portalWrapper .topbar-left,
-#portalWrapper .topbar-right{
-    min-width:0;
-}
-
-#portalWrapper .portal-topbar{
-    max-width:100%;
-    flex-wrap:wrap;
-    row-gap:8px;
-}
-
-#portalWrapper .topbar-left{
-    flex:1 1 auto;
-    min-width:0;
-}
-
-#portalWrapper .page-title-badge{
-    min-width:0;
-}
-
-#portalWrapper .page-title-badge h2{
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-#portalWrapper .topbar-right{
-    flex:0 1 auto;
-    display:flex;
-    align-items:center;
-    gap:0.5rem;
-    min-width:0;
-}
-
-#portalWrapper .topbar-search{
-    flex:1 1 140px;
-    min-width:0;
-}
-
-#portalWrapper .topbar-search input{
-    width:100%;
-    min-width:0;
-}
-
-#portalWrapper .topbar-quick-btns{
-    display:flex;
-    flex-wrap:wrap;
-    gap:0.4rem;
-    flex:0 1 auto;
-    min-width:0;
-}
-
-#portalWrapper .topbar-quick-btns .btn{
-    white-space:nowrap;
-    flex:0 1 auto;
-}
-
-/* =========================================================
-   RESPONSIVE - sidebar width shrinks but text stays visible
-   ========================================================= */
-
-@media(max-width:1200px){
-    :root{ --sidebar-expanded:220px; }
-}
-
-@media(max-width:1024px){
-    :root{ --sidebar-expanded:200px; }
-
-    #portalWrapper .topbar-quick-btns .btn{
-        padding:0.4rem 0.55rem;
-        font-size:0.72rem;
-    }
-    #portalWrapper .topbar-quick-btns .btn i{
-        margin-right:0.25rem;
-    }
-}
-
-@media(max-width:768px){
-
-    :root{
-        --sidebar-expanded:180px;
-    }
-
-    #portalWrapper .profile-grid,
-    #portalWrapper .settings-grid,
-    #portalWrapper .charts-grid,
-    #portalWrapper .messages-layout{
-        grid-template-columns:1fr !important;
-    }
-
-    #portalWrapper .portal-content-body{
-        padding:12px !important;
-    }
-
-    #portalWrapper .portal-topbar{
-        flex-wrap:wrap;
-        gap:8px;
-        padding:0.6rem 0.7rem;
-    }
-
-    #portalWrapper .page-title-badge{
-        max-width:100%;
-        min-width:0;
-    }
-
-    #portalWrapper .page-title-badge h2{
-        font-size:0.85rem;
-        white-space:normal;
-        overflow-wrap:anywhere;
-    }
-
-    #portalWrapper .topbar-search{
-        order:3;
-        flex:1 1 100%;
-    }
-
-    #portalWrapper .topbar-quick-btns .btn{
-        padding:0.35rem 0.5rem;
-        font-size:0.66rem;
-    }
-
-    /* Icon-only buttons: hide button label text to save space */
-    #portalWrapper .topbar-quick-btns .btn .btn-text{
-        display:none;
-    }
-}
-
-/* Small phones - keep icons + short names, shrink further */
-@media(max-width:480px){
-
-    :root{
-        --sidebar-expanded:150px;
-    }
-
-    #portalWrapper .portal-sidebar{
-        font-size:0.85rem;
-    }
-
-    #portalWrapper .sidebar-nav-item i,
-    #portalWrapper .sidebar-brand img{
-        flex:0 0 auto;
-    }
-
-    #portalWrapper .sidebar-user-info,
-    #portalWrapper .sidebar-heading{
-        font-size:0.7rem;
-    }
-
-    #portalWrapper .portal-content-body{
-        padding:8px !important;
-    }
-
-    #portalWrapper .page-title-badge h2{
-        font-size:0.75rem;
-    }
-
-    #portalWrapper .topbar-quick-btns .btn{
-        width:34px;
-        height:34px;
-        padding:0;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        font-size:0.85rem;
-    }
-
-    #portalWrapper .topbar-quick-btns .btn i{
-        margin-right:0;
-    }
+  .portal-content-body {
+    padding: 0.75rem !important;
+  }
 }
 </style>
 
@@ -818,7 +1090,7 @@ button, input, select, textarea { max-width: 100%; }
         </div>
 
         <button id="mobileMenuBtn" class="mobile-toggle" aria-label="Toggle menu">
-          <i class="fa-solid fa-bars"></i>
+          <img src="assets/ngo-logo.svg" alt="NGO Logo" style="width: 24px; height: 24px; object-fit: contain;" />
         </button>
       </div>
     </div>
@@ -1608,13 +1880,19 @@ button, input, select, textarea { max-width: 100%; }
   <div id="portalWrapper" class="app-portal-wrapper" style="display: none;">
     <!-- Persistent Sidebar -->
     <aside id="portalSidebar" class="portal-sidebar">
-      <!-- Sidebar Header -->
+      <!-- Sidebar Header with Interactive NGO Logo Toggle -->
       <div class="sidebar-header">
-        <a href="#dashboard" class="sidebar-brand">
-          <img src="assets/ngo-logo.svg" alt="NGO Logo" />
-          <span>NGO FUND PORTAL</span>
-        </a>
-</div>
+        <button type="button" id="sidebarLogoToggleBtn" class="sidebar-logo-toggle-btn" title="Toggle / Close Sidebar" aria-label="Toggle Sidebar">
+          <div class="sidebar-logo-box">
+            <img src="assets/ngo-logo.svg" alt="NGO Logo" class="sidebar-ngo-logo" />
+            <span class="logo-toggle-icon"><i class="fa-solid fa-chevron-left"></i></span>
+          </div>
+          <div class="sidebar-brand-text">
+            <span class="brand-name">NGO FUND PORTAL</span>
+            <span class="brand-sub">Management System</span>
+          </div>
+        </button>
+      </div>
 
       <!-- Navigation Menu with Badges & Icons -->
       <div class="sidebar-menu-wrap">
@@ -1678,11 +1956,17 @@ button, input, select, textarea { max-width: 100%; }
       </div>
     </aside>
 
+    <!-- Mobile Backdrop Overlay -->
+    <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
     <!-- Main Content Area of Portal -->
     <main class="portal-main">
       <!-- Topbar Header -->
       <header class="portal-topbar">
         <div class="topbar-left">
+          <button type="button" id="mobileSidebarToggle" class="mobile-sidebar-toggle-btn" title="Open Navigation Menu" aria-label="Open Navigation Menu">
+            <img src="assets/ngo-logo.svg" alt="NGO Logo" class="mobile-logo-icon" />
+          </button>
           <div class="page-title-badge">
             <h2 id="topbarPageTitle">📊 Financial Overview &amp; Analytics</h2>
           </div>
@@ -2442,24 +2726,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<script id="final-sidebar-layout-fix-js">
-document.addEventListener("DOMContentLoaded", function(){
 
-    /*
-       Sidebar is now permanently expanded (icons + module
-       names always visible) via CSS alone, so there is no
-       hamburger/3-line toggle to wire up here anymore.
-       Just make sure any code elsewhere that checks for the
-       "sidebar-expanded" class keeps working.
-    */
-    const wrapper = document.getElementById("portalWrapper");
-
-    if(wrapper){
-        wrapper.classList.add("sidebar-expanded");
-    }
-
-});
-</script>
 
 </body>
 </html>
