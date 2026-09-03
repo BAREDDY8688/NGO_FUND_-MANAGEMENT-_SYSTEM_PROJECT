@@ -163,10 +163,10 @@ button, input, select, textarea { max-width: 100%; }
   .steps-grid, .campaigns-grid, .gallery-grid, .values-grid { grid-template-columns: 1fr; gap: 0.9rem; }
   .step-card, .campaign-card, .gallery-item, .value-card { min-width: 0; }
 
-  /* Dashboard on phones */
-  .portal-sidebar { width: 260px; transform: translateX(-100%); }
-  .portal-sidebar.mobile-open { transform: translateX(0); }
-  .portal-main { width: 100%; margin-left: 0 !important; min-width: 0; }
+  /* Dashboard on phones: 68px icon-only bar when closed, expanded to 260px when opened */
+  .portal-sidebar { width: 68px; transform: translateX(0); }
+  .portal-sidebar.mobile-open { width: 260px; }
+  .portal-main { width: calc(100% - 68px); margin-left: 68px !important; min-width: 0; }
   .portal-content-body { width: 100%; padding: 0.75rem; }
   .portal-topbar { width: 100%; padding: 0.55rem 0.7rem; gap: 0.5rem; }
   .topbar-left { min-width: 0; flex: 1 1 auto; gap: 0.5rem; }
@@ -684,35 +684,70 @@ button, input, select, textarea { max-width: 100%; }
 /* Mobile & Responsive Screen Breakpoint (<= 768px) */
 @media (max-width: 768px) {
   .mobile-sidebar-toggle-btn {
-    display: inline-flex !important;
+    display: none !important;
   }
 
-  #portalWrapper .portal-main {
-    width: 100% !important;
-    margin-left: 0 !important;
-  }
-
+  /* On mobile, after closing the sidebar, show ONLY the logos (ChatGPT style 68px bar) */
   #portalWrapper .portal-sidebar {
     position: fixed !important;
     left: 0;
     top: 0;
     bottom: 0;
-    width: 280px !important;
-    max-width: 85vw !important;
-    transform: translateX(-100%) !important;
+    width: var(--sidebar-collapsed-w) !important;
+    transform: translateX(0) !important;
     z-index: 1050;
-    box-shadow: none;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease !important;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.25) !important;
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
-  /* When toggled open on responsive: Slide in total sidebar */
+  #portalWrapper .portal-main {
+    width: calc(100% - var(--sidebar-collapsed-w)) !important;
+    margin-left: var(--sidebar-collapsed-w) !important;
+  }
+
+  /* When collapsed on responsive (default when not mobile-open): Center icons and hide text */
+  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-brand-text,
+  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-heading,
+  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .nav-text,
+  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-user-info {
+    display: none !important;
+    opacity: 0 !important;
+  }
+
+  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-header {
+    padding: 0.75rem 0 !important;
+    justify-content: center !important;
+  }
+
+  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-logo-toggle-btn {
+    justify-content: center !important;
+    padding: 0 !important;
+    width: 44px !important;
+    margin: 0 auto !important;
+  }
+
+  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-nav-item {
+    justify-content: center !important;
+    padding: 0.75rem 0 !important;
+    width: 44px !important;
+    margin: 0 auto !important;
+  }
+
+  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-user-pill,
+  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-logout-btn {
+    justify-content: center !important;
+    padding: 0.4rem 0 !important;
+    width: 44px !important;
+    margin: 0 auto !important;
+  }
+
+  /* When expanded / toggled open on responsive screens (mobile-open active): Total expanded sidebar (260px) */
   #portalWrapper .portal-sidebar.mobile-open,
   #portalWrapper .portal-sidebar.open {
-    transform: translateX(0) !important;
+    width: var(--sidebar-expanded-w) !important;
     box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* Display total sidebar contents (brand text, section headings, nav labels, user profile) */
   #portalWrapper .portal-sidebar.mobile-open .sidebar-brand-text,
   #portalWrapper .portal-sidebar.mobile-open .sidebar-heading,
   #portalWrapper .portal-sidebar.mobile-open .nav-text,
@@ -742,33 +777,13 @@ button, input, select, textarea { max-width: 100%; }
 
   #portalWrapper .portal-sidebar.mobile-open .sidebar-header {
     justify-content: flex-start !important;
-    padding: 1rem 0.75rem !important;
+    padding: 0.75rem !important;
   }
 
   #portalWrapper .portal-sidebar.mobile-open .sidebar-logo-toggle-btn {
     justify-content: flex-start !important;
     width: 100% !important;
   }
-
-  .portal-topbar {
-    padding: 0.6rem 0.75rem;
-    gap: 0.5rem;
-  }
-
-  .topbar-search {
-    order: 3;
-    width: 100%;
-    flex: 1 1 100%;
-  }
-
-  .topbar-quick-btns .btn .btn-text {
-    display: none;
-  }
-
-  .topbar-quick-btns .btn {
-    padding: 0.4rem 0.6rem;
-  }
-}
 
   .portal-topbar {
     padding: 0.6rem 0.75rem;
