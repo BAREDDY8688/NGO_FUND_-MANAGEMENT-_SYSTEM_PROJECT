@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+A<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -1105,7 +1105,7 @@ button, input, select, textarea { max-width: 100%; }
         </div>
 
         <button id="mobileMenuBtn" class="mobile-toggle" aria-label="Toggle menu">
-          <img src="assets/ngo-logo.svg" alt="NGO Logo" style="width: 24px; height: 24px; object-fit: contain;" />
+          <i class="fa-solid fa-bars"></i>
         </button>
       </div>
     </div>
@@ -2737,6 +2737,79 @@ document.addEventListener("DOMContentLoaded", function () {
             contactForm.reset();
         });
     }
+
+});
+</script>
+
+<!-- Public Navbar: mobile hamburger menu toggle + single-active-link behavior -->
+<script id="public-nav-mobile-toggle-js">
+document.addEventListener("DOMContentLoaded", function () {
+
+    var menuBtn = document.getElementById("mobileMenuBtn");
+    var navMenu = document.getElementById("publicNavMenu");
+
+    if (!menuBtn || !navMenu) {
+        return;
+    }
+
+    function closeMenu() {
+        navMenu.classList.remove("open");
+        // Force-hide even if some other script re-applies the "open" class,
+        // or leaves an inline style behind.
+        navMenu.style.display = "none";
+    }
+
+    function openMenu() {
+        navMenu.classList.add("open");
+        navMenu.style.display = "flex";
+    }
+
+    function toggleMenu() {
+        if (navMenu.classList.contains("open")) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+
+    // Open / close the dropdown when the hamburger icon is tapped.
+    // Capture phase so this always fires, even if other scripts bind
+    // conflicting handlers to the same button.
+    menuBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
+        toggleMenu();
+    }, true);
+
+    // When any menu option is chosen: mark only that option as active,
+    // then close the menu. Delegated + capture phase so it keeps working
+    // even if the menu links are re-rendered later, and always runs before
+    // any other click handler on the link (e.g. SPA view-switching logic).
+    document.addEventListener("click", function (event) {
+        var link = event.target.closest("#publicNavMenu .nav-link");
+        if (!link) return;
+
+        navMenu.querySelectorAll(".nav-link").forEach(function (item) {
+            item.classList.remove("active");
+        });
+        link.classList.add("active");
+        closeMenu();
+    }, true);
+
+    // Close the menu if the user taps anywhere outside of it.
+    document.addEventListener("click", function (event) {
+        if (!navMenu.classList.contains("open")) return;
+        if (navMenu.contains(event.target) || menuBtn.contains(event.target)) return;
+        closeMenu();
+    });
+
+    // Close the menu automatically if the screen is resized back to desktop width,
+    // and clear the forced inline display so desktop CSS takes back over.
+    window.addEventListener("resize", function () {
+        if (window.innerWidth > 768) {
+            navMenu.classList.remove("open");
+            navMenu.style.display = "";
+        }
+    });
 
 });
 </script>
