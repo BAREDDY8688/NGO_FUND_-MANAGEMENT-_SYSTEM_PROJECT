@@ -1,4 +1,4 @@
-A<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -2809,6 +2809,58 @@ document.addEventListener("DOMContentLoaded", function () {
             navMenu.classList.remove("open");
             navMenu.style.display = "";
         }
+    });
+
+});
+</script>
+
+<!-- Public Navbar: Live Announcements (bell) dropdown — closes after choosing any item -->
+<script id="public-notif-dropdown-close-js">
+document.addEventListener("DOMContentLoaded", function () {
+
+    var notifBtn = document.getElementById("publicNotifBtn");
+    var notifDropdown = document.getElementById("publicNotifDropdown");
+    var notifWrap = document.getElementById("publicNotifWrap");
+
+    if (!notifBtn || !notifDropdown || !notifWrap) {
+        return;
+    }
+
+    function isOpen() {
+        return notifDropdown.style.display === "block";
+    }
+
+    function closeDropdown() {
+        notifDropdown.style.display = "none";
+    }
+
+    function openDropdown() {
+        notifDropdown.style.display = "block";
+    }
+
+    // Toggle the dropdown when the bell icon is tapped. Capture phase so this
+    // always fires, even alongside any other click handler already bound to it.
+    notifBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
+        if (isOpen()) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    }, true);
+
+    // Close the dropdown as soon as any item or link inside it is chosen.
+    document.addEventListener("click", function (event) {
+        var chosen = event.target.closest("#publicNotifDropdown a, #publicNotifDropdown button");
+        if (!chosen) return;
+        closeDropdown();
+    }, true);
+
+    // Close it if the user taps anywhere outside the dropdown.
+    document.addEventListener("click", function (event) {
+        if (!isOpen()) return;
+        if (notifWrap.contains(event.target)) return;
+        closeDropdown();
     });
 
 });
