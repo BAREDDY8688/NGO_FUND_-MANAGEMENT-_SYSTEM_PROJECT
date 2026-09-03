@@ -578,22 +578,69 @@ function initDashboardEvents() {
     });
   });
 
-  // Sidebar Collapse Toggle
-  const sidebarCollapseBtn = document.getElementById('sidebarCollapseBtn');
+  // Responsive Sidebar Toggle & Backdrop Logic
   const sidebar = document.getElementById('portalSidebar');
-  if (sidebarCollapseBtn && sidebar) {
-    sidebarCollapseBtn.addEventListener('click', () => {
+  const portalWrapper = document.getElementById('portalWrapper');
+  const sidebarLogoBtn = document.getElementById('sidebarLogoToggleBtn');
+  const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+  function openMobileSidebar() {
+    if (sidebar) sidebar.classList.add('mobile-open');
+    if (sidebarBackdrop) sidebarBackdrop.classList.add('active');
+  }
+
+  function closeMobileSidebar() {
+    if (sidebar) sidebar.classList.remove('mobile-open');
+    if (sidebarBackdrop) sidebarBackdrop.classList.remove('active');
+  }
+
+  function togglePortalSidebar() {
+    if (!sidebar) return;
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      if (sidebar.classList.contains('mobile-open')) {
+        closeMobileSidebar();
+      } else {
+        openMobileSidebar();
+      }
+    } else {
+      sidebar.classList.toggle('sidebar-closed');
       sidebar.classList.toggle('collapsed');
+      if (portalWrapper) {
+        portalWrapper.classList.toggle('sidebar-is-closed');
+      }
+    }
+  }
+
+  if (sidebarLogoBtn) {
+    sidebarLogoBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      togglePortalSidebar();
     });
   }
 
-  // Mobile Sidebar Toggle
-  const mobileSidebarBtn = document.getElementById('mobileSidebarToggle');
-  if (mobileSidebarBtn && sidebar) {
-    mobileSidebarBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('mobile-open');
+  if (mobileSidebarToggle) {
+    mobileSidebarToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      togglePortalSidebar();
     });
   }
+
+  if (sidebarBackdrop) {
+    sidebarBackdrop.addEventListener('click', () => {
+      closeMobileSidebar();
+    });
+  }
+
+  // Auto-close mobile sidebar when navigating via sidebar link on small screens
+  document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        closeMobileSidebar();
+      }
+    });
+  });
 
   // Quick Action Buttons
   const quickAddDonationBtn = document.getElementById('quickAddDonationBtn');
