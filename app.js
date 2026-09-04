@@ -35,7 +35,7 @@ function initRouter() {
 
 function handleRoute() {
   const hash = window.location.hash.replace('#', '') || 'home';
-  
+
   const publicNavbar = document.getElementById('publicNavbar');
   const publicFooter = document.getElementById('publicFooter');
   const publicContainer = document.getElementById('publicViewsContainer');
@@ -134,12 +134,19 @@ function handleRoute() {
    PUBLIC PAGES EVENTS & LOGIC
    ========================================================================== */
 function initPublicEvents() {
-  // Mobile Nav Toggle
+  // Mobile Nav Toggle & Auto-Close on Option Click
   const mobileToggle = document.getElementById('mobileMenuBtn');
   const navMenu = document.getElementById('publicNavMenu');
   if (mobileToggle && navMenu) {
     mobileToggle.addEventListener('click', () => {
       navMenu.classList.toggle('open');
+    });
+
+    // Auto-close public mobile menu when any navigation link or action button is clicked
+    document.querySelectorAll('#publicNavbar .nav-link, #publicNavbar .nav-actions a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+      });
     });
   }
 
@@ -470,7 +477,7 @@ function initAuthEvents() {
       const role = pill.dataset.role;
       document.getElementById('loginEmail').value = email;
       document.getElementById('loginPassword').value = 'password123';
-      
+
       // Auto submit login
       executeLogin(email, 'password123', role);
     });
@@ -611,6 +618,8 @@ function initDashboardEvents() {
         portalWrapper.classList.toggle('sidebar-is-closed');
       }
     }
+    // Sync position of any active modals to current sidebar width
+    document.querySelectorAll('.modal-backdrop.active').forEach(m => syncModalPosition(m));
   }
 
   if (sidebarLogoBtn) {
@@ -641,6 +650,84 @@ function initDashboardEvents() {
       }
     });
   });
+
+  // Real-time Drag Resizable Sidebar Edge Logic
+  const sidebarResizer = document.getElementById('sidebarResizer');
+  let isResizing = false;
+  let startX = 0;
+  let startWidth = 0;
+
+  if (sidebarResizer && sidebar && portalWrapper) {
+    const portalMain = portalWrapper.querySelector('.portal-main');
+
+    function startResize(e) {
+      isResizing = true;
+      startX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      startWidth = sidebar.getBoundingClientRect().width;
+
+      document.body.classList.add('is-resizing-sidebar');
+      sidebarResizer.classList.add('is-dragging');
+
+      document.addEventListener('mousemove', handleResize);
+      document.addEventListener('mouseup', stopResize);
+      document.addEventListener('touchmove', handleResize);
+      document.addEventListener('touchend', stopResize);
+    }
+
+    function handleResize(e) {
+      if (!isResizing) return;
+      const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      const deltaX = currentX - startX;
+      let newWidth = startWidth + deltaX;
+
+      const minWidth = 68;  // Icon-only collapsed width
+      const maxWidth = Math.min(500, window.innerWidth * 0.5); // Maximum width
+
+      if (newWidth < minWidth) newWidth = minWidth;
+      if (newWidth > maxWidth) newWidth = maxWidth;
+
+      // Adapt sidebar and main content width dynamically in real time
+      sidebar.style.width = `${newWidth}px`;
+      if (portalMain) {
+        portalMain.style.width = `calc(100% - ${newWidth}px)`;
+        portalMain.style.marginLeft = `${newWidth}px`;
+      }
+
+      // Automatically collapse/expand elements based on drag width threshold
+      if (newWidth <= 120) {
+        sidebar.classList.add('collapsed');
+        sidebar.classList.add('sidebar-closed');
+      } else {
+        sidebar.classList.remove('collapsed');
+        sidebar.classList.remove('sidebar-closed');
+      }
+
+      // Sync active modals to new drag width
+      document.querySelectorAll('.modal-backdrop.active').forEach(m => syncModalPosition(m));
+
+      // Trigger resize event for real-time chart layout recalculations
+      window.dispatchEvent(new Event('resize'));
+    }
+
+    function stopResize() {
+      if (!isResizing) return;
+      isResizing = false;
+      document.body.classList.remove('is-resizing-sidebar');
+      sidebarResizer.classList.remove('is-dragging');
+
+      document.removeEventListener('mousemove', handleResize);
+      document.removeEventListener('mouseup', stopResize);
+      document.removeEventListener('touchmove', handleResize);
+      document.removeEventListener('touchend', stopResize);
+
+      if (window.initDashboardCharts) {
+        window.initDashboardCharts();
+      }
+    }
+
+    sidebarResizer.addEventListener('mousedown', startResize);
+    sidebarResizer.addEventListener('touchstart', startResize, { passive: true });
+  }
 
   // Quick Action Buttons
   const quickAddDonationBtn = document.getElementById('quickAddDonationBtn');
@@ -1024,9 +1111,25 @@ function filterTableByQuery(q) {
 /* ==========================================================================
    MODAL & TOAST NOTIFICATION HELPERS
    ========================================================================== */
+function syncModalPosition(modal) {
+  const sidebar = document.getElementById('portalSidebar');
+  if (!modal || !sidebar) return;
+  const isMobile = window.innerWidth <= 768;
+  if (isMobile) {
+    modal.style.left = '0px';
+  } else {
+    let sidebarW = sidebar.getBoundingClientRect().width;
+    if (sidebar.classList.contains('sidebar-closed') || sidebar.classList.contains('collapsed')) {
+      sidebarW = 68;
+    }
+    modal.style.left = `${sidebarW}px`;
+  }
+}
+
 function openModal(modalId) {
   const modal = document.getElementById(modalId);
   if (modal) {
+    syncModalPosition(modal);
     modal.classList.add('active');
   }
 }
