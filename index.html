@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FUND BRIDGE - NGO Fund Management System | Transparent Non-Profit Financial Platform</title>
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/ngo-logo.svg" />
 
   <!-- Font Awesome Icons CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Chart.js CDN for Interactive Financial Visualizations -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -17,1179 +20,2055 @@
   <!-- Core & Dashboard Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/dashboard.css" />
-<style id="compact-responsive-fix">
-
-/* =========================================================
+  <style id="compact-responsive-fix">
+    /* =========================================================
    FIXED RESPONSIVE LAYOUT
    Designed for mobile, tablet, laptop and desktop.
    ========================================================= */
-html { font-size: 16px; }
-*, *::before, *::after { box-sizing: border-box; }
-html, body { width: 100%; max-width: 100%; margin: 0; padding: 0; }
-body { overflow-x: hidden; }
-img, svg, video, canvas { max-width: 100%; }
-button, input, select, textarea { max-width: 100%; }
+    html {
+      font-size: 16px;
+    }
 
-/* Prevent grid/flex children from forcing horizontal overflow */
-.hero-container > *,
-.container > *,
-.about-grid > *,
-.donation-layout > *,
-.request-grid > *,
-.contact-layout > *,
-.auth-card > *,
-.steps-grid > *,
-.campaigns-grid > *,
-.gallery-grid > *,
-.values-grid > *,
-.kpi-grid > *,
-.charts-grid > *,
-.profile-grid > *,
-.messages-layout > * { min-width: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-/* ---------------- DESKTOP / LAPTOP ---------------- */
-@media (max-width: 1200px) {
-  html { font-size: 15px; }
-  .public-navbar { padding: 0.65rem 1.25rem; }
-  .nav-container { width: 100%; max-width: 1100px; min-width: 0; }
-  .nav-menu { gap: 0.45rem; }
-  .nav-item a { font-size: 0.82rem; padding: 0.4rem 0.5rem; }
-  .nav-actions { gap: 0.45rem; flex-shrink: 0; }
-  .btn-sm { padding: 0.4rem 0.65rem; font-size: 0.78rem; }
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-  .hero-section { padding: 3rem 1.25rem 2.5rem; }
-  .hero-container { width: 100%; max-width: 1100px; gap: 2rem; }
-  .hero-title { font-size: 2.55rem; }
-  .hero-subtitle { font-size: 1rem; }
-  .hero-buttons { gap: 0.65rem; }
-  .hero-buttons .btn-lg { padding: 0.7rem 1rem; font-size: 0.88rem; }
-  .container { width: 100%; padding-left: 1.25rem; padding-right: 1.25rem; }
+    body {
+      overflow-x: hidden;
+    }
 
-  .portal-sidebar { width: 240px; }
-  .portal-main { margin-left: 240px; }
-  .portal-content-body { padding: 1.25rem; }
-  .kpi-card, .chart-card, .profile-card-sidebar, .message-preview-panel, .settings-card { padding: 1.15rem; }
-}
+    img,
+    svg,
+    video,
+    canvas {
+      max-width: 100%;
+    }
 
-/* ---------------- TABLET ---------------- */
-@media (max-width: 1024px) {
-  html { font-size: 14px; }
+    button,
+    input,
+    select,
+    textarea {
+      max-width: 100%;
+    }
 
-  .public-navbar { padding: 0.55rem 0.9rem; }
-  .nav-container { gap: 0.5rem; }
-  .brand-logo { font-size: 0.9rem; gap: 0.45rem; min-width: 0; }
-  .brand-logo img { width: 34px; height: 34px; flex: 0 0 auto; }
-  .nav-menu { gap: 0.15rem; }
-  .nav-item a { font-size: 0.72rem; padding: 0.35rem 0.35rem; }
-  .nav-actions { gap: 0.3rem; }
-  .nav-actions .btn { padding: 0.38rem 0.5rem; font-size: 0.7rem; }
+    /* Prevent grid/flex children from forcing horizontal overflow */
+    .hero-container>*,
+    .container>*,
+    .about-grid>*,
+    .donation-layout>*,
+    .request-grid>*,
+    .contact-layout>*,
+    .auth-card>*,
+    .steps-grid>*,
+    .campaigns-grid>*,
+    .gallery-grid>*,
+    .values-grid>*,
+    .kpi-grid>*,
+    .charts-grid>*,
+    .profile-grid>*,
+    .messages-layout>* {
+      min-width: 0;
+    }
 
-  .hero-section { padding: 2.5rem 1rem 2rem; }
-  .hero-container { grid-template-columns: 1fr; gap: 1.5rem; }
-  .hero-text-wrap { width: 100%; min-width: 0; }
-  .hero-image-wrap { width: 100%; }
-  .hero-image-wrap img { width: min(100%, 520px); }
-  .hero-title { font-size: 2.25rem; }
+    /* ---------------- DESKTOP / LAPTOP ---------------- */
+    @media (max-width: 1200px) {
+      html {
+        font-size: 15px;
+      }
 
-  .steps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-  .campaigns-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+      .public-navbar {
+        padding: 0.65rem 1.25rem;
+      }
 
-  .portal-sidebar { width: 220px; }
-  .portal-main { margin-left: 220px; }
-  .charts-grid, .profile-grid, .messages-layout { grid-template-columns: 1fr; }
-  .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
-}
+      .nav-container {
+        width: 100%;
+        max-width: 1100px;
+        min-width: 0;
+      }
 
-/* ---------------- MOBILE ---------------- */
-@media (max-width: 768px) {
-  html { font-size: 14px; }
-  body { overflow-x: hidden; }
+      .nav-menu {
+        gap: 0.45rem;
+      }
 
-  .public-navbar { padding: 0.5rem 0.65rem; }
-  .nav-container { width: 100%; min-width: 0; gap: 0.35rem; }
-  .brand-logo { flex: 1 1 auto; min-width: 0; max-width: 55%; font-size: 0.75rem; gap: 0.4rem; }
-  .brand-logo img { width: 30px; height: 30px; }
-  .brand-logo span { display: block; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+      .nav-item a {
+        font-size: 0.82rem;
+        padding: 0.4rem 0.5rem;
+      }
 
-  .nav-menu { display: none; }
-  .nav-menu.open { display: flex; position: absolute; top: 100%; left: 0; right: 0; width: 100%; }
-  .nav-actions { flex: 0 0 auto; gap: 0.3rem; }
-  /* Keep Donate available on mobile. Show it as a compact QR button. */
-  .nav-actions .btn-accent {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: auto;
-    min-width: 58px;
-    height: 32px;
-    padding: 0.35rem 0.5rem;
-    font-size: 0.62rem;
-    line-height: 1;
-    white-space: nowrap;
-  }
-  .nav-actions .btn-accent i {
-    display: inline-block;
-    font-size: 0.7rem;
-    margin-right: 0.25rem;
-  }
-  .nav-actions .btn-primary { padding: 0.38rem 0.5rem; font-size: 0.68rem; white-space: nowrap; }
-  .notif-icon-btn { width: 32px; height: 32px; font-size: 0.85rem; }
-  .mobile-toggle { display: block; font-size: 1.25rem; padding: 0.25rem; flex: 0 0 auto; }
+      .nav-actions {
+        gap: 0.45rem;
+        flex-shrink: 0;
+      }
 
-  .container { width: 100%; max-width: 100%; padding: 1.25rem 0.85rem; }
+      .btn-sm {
+        padding: 0.4rem 0.65rem;
+        font-size: 0.78rem;
+      }
 
-  .hero-section { width: 100%; padding: 1.5rem 0.85rem 1.25rem; }
-  .hero-container { width: 100%; max-width: 100%; display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
-  .hero-text-wrap { width: 100%; max-width: 100%; min-width: 0; overflow: visible; }
-  .hero-badge { max-width: 100%; white-space: normal; line-height: 1.25; font-size: 0.68rem; padding: 0.35rem 0.65rem; margin-bottom: 0.8rem; }
-  .hero-title { width: 100%; max-width: 100%; font-size: 1.85rem; line-height: 1.18; overflow-wrap: anywhere; word-break: normal; margin-bottom: 0.8rem; }
-  .hero-title span { overflow-wrap: anywhere; }
-  .hero-subtitle { width: 100%; max-width: 100%; font-size: 0.82rem; line-height: 1.5; margin-bottom: 1rem; }
-  .hero-buttons { width: 100%; display: grid; grid-template-columns: 1fr; gap: 0.5rem; margin-bottom: 1.2rem; }
-  .hero-buttons .btn { width: 100%; min-width: 0; padding: 0.62rem 0.7rem; font-size: 0.78rem; white-space: normal; }
-  .hero-image-wrap { width: 100%; max-width: 100%; text-align: center; }
-  .hero-image-wrap img { display: block; width: min(92%, 360px); height: auto; margin: 0 auto; }
+      .hero-section {
+        padding: 3rem 1.25rem 2.5rem;
+      }
 
-  .hero-stats-row { width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.35rem; padding-top: 1rem; }
-  .hero-stat-item { min-width: 0; text-align: center; }
-  .hero-stat-item h3 { font-size: 1.05rem; white-space: nowrap; }
-  .hero-stat-item p { font-size: 0.58rem; line-height: 1.25; }
+      .hero-container {
+        width: 100%;
+        max-width: 1100px;
+        gap: 2rem;
+      }
 
-  .section-header { width: 100%; max-width: 100%; margin-bottom: 1.25rem; }
-  .section-header h2 { font-size: 1.45rem; line-height: 1.2; overflow-wrap: anywhere; }
-  .section-header p { font-size: 0.78rem; line-height: 1.45; }
-  .section-tag { max-width: 100%; font-size: 0.62rem; white-space: normal; }
+      .hero-title {
+        font-size: 2.55rem;
+      }
 
-  .steps-grid, .campaigns-grid, .gallery-grid, .values-grid { grid-template-columns: 1fr; gap: 0.9rem; }
-  .step-card, .campaign-card, .gallery-item, .value-card { min-width: 0; }
+      .hero-subtitle {
+        font-size: 1rem;
+      }
 
-  /* Dashboard on phones: 68px icon-only bar when closed, expanded to 260px when opened */
-  .portal-sidebar { width: 68px; transform: translateX(0); }
-  .portal-sidebar.mobile-open { width: 260px; }
-  .portal-main { width: calc(100% - 68px); margin-left: 68px !important; min-width: 0; }
-  .portal-content-body { width: 100%; padding: 0.75rem; }
-  .portal-topbar { width: 100%; padding: 0.55rem 0.7rem; gap: 0.5rem; }
-  .topbar-left { min-width: 0; flex: 1 1 auto; gap: 0.5rem; }
-  .page-title-badge { min-width: 0; }
-  .page-title-badge h2 { font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .topbar-right { min-width: 0; flex: 0 0 auto; }
-  .topbar-search { display: none; }
-  .topbar-quick-btns { gap: 0.25rem; }
-  .topbar-quick-btns .btn { padding: 0.35rem 0.45rem; font-size: 0.62rem; }
+      .hero-buttons {
+        gap: 0.65rem;
+      }
 
-  .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
-  .kpi-card { min-width: 0; padding: 0.7rem; }
-  .kpi-data { min-width: 0; }
-  .kpi-data h4 { font-size: 0.56rem; line-height: 1.2; }
-  .kpi-data .kpi-value { font-size: 1.05rem; }
-  .kpi-icon-wrap { width: 32px; height: 32px; font-size: 0.8rem; flex: 0 0 auto; }
+      .hero-buttons .btn-lg {
+        padding: 0.7rem 1rem;
+        font-size: 0.88rem;
+      }
 
-  .charts-grid, .profile-grid, .messages-layout { grid-template-columns: 1fr; gap: 0.7rem; }
-  .chart-card { min-width: 0; padding: 0.8rem; }
-  .chart-canvas-box { height: 190px; }
+      .container {
+        width: 100%;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
 
-  .table-responsive { width: 100%; max-width: 100%; overflow-x: auto; }
-  .custom-table { min-width: 580px; }
+      .portal-sidebar {
+        width: 240px;
+      }
 
-  .form-row { grid-template-columns: 1fr !important; }
-  .form-control { width: 100%; max-width: 100%; }
-}
+      .portal-main {
+        margin-left: 240px;
+      }
 
-/* ---------------- SMALL PHONES ---------------- */
-@media (max-width: 480px) {
-  html { font-size: 13px; }
+      .portal-content-body {
+        padding: 1.25rem;
+      }
 
-  .public-navbar { padding: 0.4rem 0.5rem; }
-  .brand-logo { max-width: 48%; font-size: 0.68rem; }
-  .brand-logo img { width: 28px; height: 28px; }
-  .nav-actions .btn-accent {
-    display: inline-flex;
-    width: auto;
-    min-width: 54px;
-    height: 29px;
-    padding: 0.3rem 0.4rem;
-    font-size: 0.56rem;
-    line-height: 1;
-    white-space: nowrap;
-  }
-  .nav-actions .btn-accent i {
-    font-size: 0.65rem;
-    margin-right: 0.2rem;
-  }
-  .nav-actions .btn-primary { font-size: 0.62rem; padding: 0.34rem 0.4rem; }
-  .notif-icon-btn { width: 29px; height: 29px; }
-  .mobile-toggle { font-size: 1.1rem; }
+      .kpi-card,
+      .chart-card,
+      .profile-card-sidebar,
+      .message-preview-panel,
+      .settings-card {
+        padding: 1.15rem;
+      }
+    }
 
-  .hero-section { padding: 1.2rem 0.6rem 1rem; }
-  .hero-title { font-size: 1.5rem; }
-  .hero-subtitle { font-size: 0.74rem; }
-  .hero-buttons .btn { font-size: 0.72rem; padding: 0.55rem 0.55rem; }
-  .hero-stat-item h3 { font-size: 0.92rem; }
-  .hero-stat-item p { font-size: 0.52rem; }
-  .hero-image-wrap img { width: 94%; }
+    /* ---------------- TABLET ---------------- */
+    @media (max-width: 1024px) {
+      html {
+        font-size: 14px;
+      }
 
-  .container { padding: 1rem 0.65rem; }
-  .section-header h2 { font-size: 1.25rem; }
-  .section-header p { font-size: 0.72rem; }
+      .public-navbar {
+        padding: 0.55rem 0.9rem;
+      }
 
-  .portal-content-body { padding: 0.55rem; }
-  .portal-topbar { padding: 0.45rem 0.55rem; }
-  .page-title-badge h2 { font-size: 0.8rem; }
-  .topbar-quick-btns .btn { font-size: 0.56rem; padding: 0.3rem 0.35rem; }
-  .kpi-card { padding: 0.55rem; }
-  .kpi-data .kpi-value { font-size: 0.95rem; }
-  .kpi-icon-wrap { width: 28px; height: 28px; font-size: 0.7rem; }
-  .chart-card { padding: 0.65rem; }
-  .chart-canvas-box { height: 170px; }
-}
+      .nav-container {
+        gap: 0.5rem;
+      }
 
-</style>
+      .brand-logo {
+        font-size: 0.9rem;
+        gap: 0.45rem;
+        min-width: 0;
+      }
 
-<style id="settings-donation-expense-responsive-fix">
-/* =========================================================
+      .brand-logo img {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+      }
+
+      .nav-menu {
+        gap: 0.15rem;
+      }
+
+      .nav-item a {
+        font-size: 0.72rem;
+        padding: 0.35rem 0.35rem;
+      }
+
+      .nav-actions {
+        gap: 0.3rem;
+      }
+
+      .nav-actions .btn {
+        padding: 0.38rem 0.5rem;
+        font-size: 0.7rem;
+      }
+
+      .hero-section {
+        padding: 2.5rem 1rem 2rem;
+      }
+
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .hero-text-wrap {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .hero-image-wrap {
+        width: 100%;
+      }
+
+      .hero-image-wrap img {
+        width: min(100%, 520px);
+      }
+
+      .hero-title {
+        font-size: 2.25rem;
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .campaigns-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .portal-sidebar {
+        width: 220px;
+      }
+
+      .portal-main {
+        margin-left: 220px;
+      }
+
+      .charts-grid,
+      .profile-grid,
+      .messages-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem;
+      }
+    }
+
+    /* ---------------- MOBILE ---------------- */
+    @media (max-width: 768px) {
+      html {
+        font-size: 14px;
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+
+      .public-navbar {
+        padding: 0.5rem 0.65rem;
+      }
+
+      .nav-container {
+        width: 100%;
+        min-width: 0;
+        gap: 0.35rem;
+      }
+
+      .brand-logo {
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: 55%;
+        font-size: 0.75rem;
+        gap: 0.4rem;
+      }
+
+      .brand-logo img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .brand-logo span {
+        display: block;
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .nav-menu.open {
+        display: flex;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+      }
+
+      .nav-actions {
+        flex: 0 0 auto;
+        gap: 0.3rem;
+      }
+
+      /* Keep Donate available on mobile. Show it as a compact QR button. */
+      .nav-actions .btn-accent {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        min-width: 58px;
+        height: 32px;
+        padding: 0.35rem 0.5rem;
+        font-size: 0.62rem;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .nav-actions .btn-accent i {
+        display: inline-block;
+        font-size: 0.7rem;
+        margin-right: 0.25rem;
+      }
+
+      .nav-actions .btn-primary {
+        padding: 0.38rem 0.5rem;
+        font-size: 0.68rem;
+        white-space: nowrap;
+      }
+
+      .notif-icon-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+      }
+
+      .mobile-toggle {
+        display: block;
+        font-size: 1.25rem;
+        padding: 0.25rem;
+        flex: 0 0 auto;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 1.25rem 0.85rem;
+      }
+
+      .hero-section {
+        width: 100%;
+        padding: 1.5rem 0.85rem 1.25rem;
+      }
+
+      .hero-container {
+        width: 100%;
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .hero-text-wrap {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: visible;
+      }
+
+      .hero-badge {
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.25;
+        font-size: 0.68rem;
+        padding: 0.35rem 0.65rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .hero-title {
+        width: 100%;
+        max-width: 100%;
+        font-size: 1.85rem;
+        line-height: 1.18;
+        overflow-wrap: anywhere;
+        word-break: normal;
+        margin-bottom: 0.8rem;
+      }
+
+      .hero-title span {
+        overflow-wrap: anywhere;
+      }
+
+      .hero-subtitle {
+        width: 100%;
+        max-width: 100%;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+      }
+
+      .hero-buttons {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+        min-width: 0;
+        padding: 0.62rem 0.7rem;
+        font-size: 0.78rem;
+        white-space: normal;
+      }
+
+      .hero-image-wrap {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .hero-image-wrap img {
+        display: block;
+        width: min(92%, 360px);
+        height: auto;
+        margin: 0 auto;
+      }
+
+      .hero-stats-row {
+        width: 100%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.35rem;
+        padding-top: 1rem;
+      }
+
+      .hero-stat-item {
+        min-width: 0;
+        text-align: center;
+      }
+
+      .hero-stat-item h3 {
+        font-size: 1.05rem;
+        white-space: nowrap;
+      }
+
+      .hero-stat-item p {
+        font-size: 0.58rem;
+        line-height: 1.25;
+      }
+
+      .section-header {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1.25rem;
+      }
+
+      .section-header h2 {
+        font-size: 1.45rem;
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+      }
+
+      .section-header p {
+        font-size: 0.78rem;
+        line-height: 1.45;
+      }
+
+      .section-tag {
+        max-width: 100%;
+        font-size: 0.62rem;
+        white-space: normal;
+      }
+
+      .steps-grid,
+      .campaigns-grid,
+      .gallery-grid,
+      .values-grid {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+      }
+
+      .step-card,
+      .campaign-card,
+      .gallery-item,
+      .value-card {
+        min-width: 0;
+      }
+
+      /* Dashboard on phones: 68px icon-only bar when closed, expanded to 260px when opened */
+      .portal-sidebar {
+        width: 68px;
+        transform: translateX(0);
+      }
+
+      .portal-sidebar.mobile-open {
+        width: 260px;
+      }
+
+      .portal-main {
+        width: calc(100% - 68px);
+        margin-left: 68px !important;
+        min-width: 0;
+      }
+
+      .portal-content-body {
+        width: 100%;
+        padding: 0.75rem;
+      }
+
+      .portal-topbar {
+        width: 100%;
+        padding: 0.55rem 0.7rem;
+        gap: 0.5rem;
+      }
+
+      .topbar-left {
+        min-width: 0;
+        flex: 1 1 auto;
+        gap: 0.5rem;
+      }
+
+      .page-title-badge {
+        min-width: 0;
+      }
+
+      .page-title-badge h2 {
+        font-size: 0.9rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .topbar-right {
+        min-width: 0;
+        flex: 0 0 auto;
+      }
+
+      .topbar-search {
+        display: none;
+      }
+
+      .topbar-quick-btns {
+        gap: 0.25rem;
+      }
+
+      .topbar-quick-btns .btn {
+        padding: 0.35rem 0.45rem;
+        font-size: 0.62rem;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+
+      .kpi-card {
+        min-width: 0;
+        padding: 0.7rem;
+      }
+
+      .kpi-data {
+        min-width: 0;
+      }
+
+      .kpi-data h4 {
+        font-size: 0.56rem;
+        line-height: 1.2;
+      }
+
+      .kpi-data .kpi-value {
+        font-size: 1.05rem;
+      }
+
+      .kpi-icon-wrap {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+        flex: 0 0 auto;
+      }
+
+      .charts-grid,
+      .profile-grid,
+      .messages-layout {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+
+      .chart-card {
+        min-width: 0;
+        padding: 0.8rem;
+      }
+
+      .chart-canvas-box {
+        height: 190px;
+      }
+
+      .table-responsive {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+      }
+
+      .custom-table {
+        min-width: 580px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr !important;
+      }
+
+      .form-control {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    /* ---------------- SMALL PHONES ---------------- */
+    @media (max-width: 480px) {
+      html {
+        font-size: 13px;
+      }
+
+      .public-navbar {
+        padding: 0.4rem 0.5rem;
+      }
+
+      .brand-logo {
+        max-width: 48%;
+        font-size: 0.68rem;
+      }
+
+      .brand-logo img {
+        width: 28px;
+        height: 28px;
+      }
+
+      .nav-actions .btn-accent {
+        display: inline-flex;
+        width: auto;
+        min-width: 54px;
+        height: 29px;
+        padding: 0.3rem 0.4rem;
+        font-size: 0.56rem;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .nav-actions .btn-accent i {
+        font-size: 0.65rem;
+        margin-right: 0.2rem;
+      }
+
+      .nav-actions .btn-primary {
+        font-size: 0.62rem;
+        padding: 0.34rem 0.4rem;
+      }
+
+      .notif-icon-btn {
+        width: 29px;
+        height: 29px;
+      }
+
+      .mobile-toggle {
+        font-size: 1.1rem;
+      }
+
+      .hero-section {
+        padding: 1.2rem 0.6rem 1rem;
+      }
+
+      .hero-title {
+        font-size: 1.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.74rem;
+      }
+
+      .hero-buttons .btn {
+        font-size: 0.72rem;
+        padding: 0.55rem 0.55rem;
+      }
+
+      .hero-stat-item h3 {
+        font-size: 0.92rem;
+      }
+
+      .hero-stat-item p {
+        font-size: 0.52rem;
+      }
+
+      .hero-image-wrap img {
+        width: 94%;
+      }
+
+      .container {
+        padding: 1rem 0.65rem;
+      }
+
+      .section-header h2 {
+        font-size: 1.25rem;
+      }
+
+      .section-header p {
+        font-size: 0.72rem;
+      }
+
+      .portal-content-body {
+        padding: 0.55rem;
+      }
+
+      .portal-topbar {
+        padding: 0.45rem 0.55rem;
+      }
+
+      .page-title-badge h2 {
+        font-size: 0.8rem;
+      }
+
+      .topbar-quick-btns .btn {
+        font-size: 0.56rem;
+        padding: 0.3rem 0.35rem;
+      }
+
+      .kpi-card {
+        padding: 0.55rem;
+      }
+
+      .kpi-data .kpi-value {
+        font-size: 0.95rem;
+      }
+
+      .kpi-icon-wrap {
+        width: 28px;
+        height: 28px;
+        font-size: 0.7rem;
+      }
+
+      .chart-card {
+        padding: 0.65rem;
+      }
+
+      .chart-canvas-box {
+        height: 170px;
+      }
+    }
+  </style>
+
+  <style id="settings-donation-expense-responsive-fix">
+    /* =========================================================
    RESPONSIVE FIXES: Settings, Record Donation & Submit
    Expense (modals + table toolbars) across all breakpoints.
    ========================================================= */
 
-/* ---------- Base (all sizes): safe defaults ---------- */
-.settings-grid { min-width: 0; }
-.settings-card { min-width: 0; }
-.settings-card h3 { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    /* ---------- Base (all sizes): safe defaults ---------- */
+    .settings-grid {
+      min-width: 0;
+    }
 
-.switch-control { min-width: 0; }
-.switch-control > div:first-child { min-width: 0; }
-.switch-control .switch-label { overflow-wrap: anywhere; }
+    .settings-card {
+      min-width: 0;
+    }
 
-/* Modal backdrop: centers the modal in the CONTENT area only — it is
+    .settings-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .switch-control {
+      min-width: 0;
+    }
+
+    .switch-control>div:first-child {
+      min-width: 0;
+    }
+
+    .switch-control .switch-label {
+      overflow-wrap: anywhere;
+    }
+
+    /* Modal backdrop: centers the modal in the CONTENT area only — it is
    offset by the current sidebar width so it never covers, dims, or
    sits on top of the sidebar. z-index is still raised above the
    sidebar (1050) purely so the modal itself is never clipped. */
-.modal-backdrop {
-  position: fixed !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  right: 0 !important;
-  left: 260px !important; /* default: expanded sidebar (desktop) */
-  width: auto !important;
-  height: 100vh !important;
-  padding: 1rem;
-  box-sizing: border-box;
-  align-items: center;
-  justify-content: center;
-  z-index: 3000 !important;
-  transition: left 0.2s ease;
-}
-/* Only affects display when the backdrop is actually shown (base JS/CSS
+    .modal-backdrop {
+      position: fixed !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      right: 0 !important;
+      left: 260px !important;
+      /* default: expanded sidebar (desktop) */
+      width: auto !important;
+      height: 100vh !important;
+      padding: 1rem;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+      z-index: 3000 !important;
+      transition: left 0.2s ease;
+    }
+
+    /* Only affects display when the backdrop is actually shown (base JS/CSS
    toggles this via a class such as .active/.open/.show) — never forces
    a hidden modal to appear. */
-.modal-backdrop.active,
-.modal-backdrop.open,
-.modal-backdrop.show {
-  display: flex !important;
-}
-.modal-window {
-  position: relative;
-  width: 100%;
-  max-height: 85vh;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  box-sizing: border-box;
-  z-index: 3001;
-  margin: 0 auto;
-}
-.modal-header { flex: 0 0 auto; gap: 0.5rem; }
-.modal-header h3 { min-width: 0; overflow-wrap: anywhere; font-size: 1.05rem; }
-.modal-body { flex: 1 1 auto; overflow-y: auto; min-width: 0; }
-.modal-footer { flex: 0 0 auto; flex-wrap: wrap; gap: 0.5rem; }
-.modal-footer .btn { flex: 0 0 auto; }
+    .modal-backdrop.active,
+    .modal-backdrop.open,
+    .modal-backdrop.show {
+      display: flex !important;
+    }
 
-.table-header-toolbar { flex-wrap: wrap; gap: 0.75rem; row-gap: 0.6rem; }
-.table-title { min-width: 0; }
-.table-filters { flex-wrap: wrap; gap: 0.5rem; }
+    .modal-window {
+      position: relative;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      box-sizing: border-box;
+      z-index: 3001;
+      margin: 0 auto;
+    }
 
-/* ---------- LAPTOP (<=1200px) — sidebar is 240px here ---------- */
-@media (max-width: 1200px) {
-  .settings-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; }
-  .settings-card { padding: 1.15rem; }
-  .settings-card h3 { font-size: 1.02rem; }
+    .modal-header {
+      flex: 0 0 auto;
+      gap: 0.5rem;
+    }
 
-  .modal-backdrop { left: 240px !important; }
-  .modal-window { max-width: 420px; }
-  .modal-header, .modal-body, .modal-footer { padding: 0.9rem 1.15rem; }
+    .modal-header h3 {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      font-size: 1.05rem;
+    }
 
-  .table-header-toolbar { padding: 1rem 1.15rem; }
-}
+    .modal-body {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      min-width: 0;
+    }
 
-/* ---------- TABLET (<=1024px) — sidebar is 220px here ---------- */
-@media (max-width: 1024px) {
-  .settings-grid { grid-template-columns: 1fr; gap: 1rem; }
-  .settings-card { padding: 1.1rem; }
+    .modal-footer {
+      flex: 0 0 auto;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
 
-  .modal-backdrop { left: 220px !important; }
-  .modal-window { max-width: 380px; max-height: 82vh; }
+    .modal-footer .btn {
+      flex: 0 0 auto;
+    }
 
-  .table-header-toolbar { flex-direction: column; align-items: flex-start; }
-  .table-filters { width: 100%; }
-  .table-filters .btn { flex: 1 1 auto; justify-content: center; }
-}
+    .table-header-toolbar {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      row-gap: 0.6rem;
+    }
 
-/* ---------- MOBILE (<=768px) — sidebar collapses to 68px icon rail --------- */
-@media (max-width: 768px) {
-  .settings-grid { grid-template-columns: 1fr; gap: 0.75rem; }
-  .settings-card { padding: 0.85rem; border-radius: 12px; }
-  .settings-card h3 { font-size: 0.92rem; margin-bottom: 0.85rem; }
-  .settings-card h3 i { font-size: 0.9rem; }
-  .settings-card .form-group label { font-size: 0.78rem; }
-  .settings-card .btn-block { font-size: 0.8rem; padding: 0.65rem; }
+    .table-title {
+      min-width: 0;
+    }
 
-  .switch-control { flex-wrap: wrap; padding: 0.65rem 0; gap: 0.5rem; }
-  .switch-control .switch-label { font-size: 0.82rem; }
-  .switch-control > div:first-child > div:last-child { font-size: 0.68rem !important; }
+    .table-filters {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
 
-  /* Settings "System Maintenance" action row -> full-width stacked buttons */
-  #settingsView div[style*="display: flex; gap: 0.75rem"] {
-    flex-direction: column !important;
-  }
-  #settingsView div[style*="display: flex; gap: 0.75rem"] .btn {
-    width: 100%;
-    justify-content: center;
-  }
+    /* ---------- LAPTOP (<=1200px) — sidebar is 240px here ---------- */
+    @media (max-width: 1200px) {
+      .settings-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.1rem;
+      }
 
-  /* Modals: compact card, centered in the space to the right of the
+      .settings-card {
+        padding: 1.15rem;
+      }
+
+      .settings-card h3 {
+        font-size: 1.02rem;
+      }
+
+      .modal-backdrop {
+        left: 240px !important;
+      }
+
+      .modal-window {
+        max-width: 420px;
+      }
+
+      .modal-header,
+      .modal-body,
+      .modal-footer {
+        padding: 0.9rem 1.15rem;
+      }
+
+      .table-header-toolbar {
+        padding: 1rem 1.15rem;
+      }
+    }
+
+    /* ---------- TABLET (<=1024px) — sidebar is 220px here ---------- */
+    @media (max-width: 1024px) {
+      .settings-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .settings-card {
+        padding: 1.1rem;
+      }
+
+      .modal-backdrop {
+        left: 220px !important;
+      }
+
+      .modal-window {
+        max-width: 380px;
+        max-height: 82vh;
+      }
+
+      .table-header-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .table-filters {
+        width: 100%;
+      }
+
+      .table-filters .btn {
+        flex: 1 1 auto;
+        justify-content: center;
+      }
+    }
+
+    /* ---------- MOBILE (<=768px) — sidebar collapses to 68px icon rail --------- */
+    @media (max-width: 768px) {
+      .settings-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+
+      .settings-card {
+        padding: 0.85rem;
+        border-radius: 12px;
+      }
+
+      .settings-card h3 {
+        font-size: 0.92rem;
+        margin-bottom: 0.85rem;
+      }
+
+      .settings-card h3 i {
+        font-size: 0.9rem;
+      }
+
+      .settings-card .form-group label {
+        font-size: 0.78rem;
+      }
+
+      .settings-card .btn-block {
+        font-size: 0.8rem;
+        padding: 0.65rem;
+      }
+
+      .switch-control {
+        flex-wrap: wrap;
+        padding: 0.65rem 0;
+        gap: 0.5rem;
+      }
+
+      .switch-control .switch-label {
+        font-size: 0.82rem;
+      }
+
+      .switch-control>div:first-child>div:last-child {
+        font-size: 0.68rem !important;
+      }
+
+      /* Settings "System Maintenance" action row -> full-width stacked buttons */
+      #settingsView div[style*="display: flex; gap: 0.75rem"] {
+        flex-direction: column !important;
+      }
+
+      #settingsView div[style*="display: flex; gap: 0.75rem"] .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* Modals: compact card, centered in the space to the right of the
      68px icon sidebar — the sidebar stays fully visible and untouched */
-  .modal-backdrop {
-    left: 68px !important;
-    padding: 0.75rem;
-    align-items: center;
-    justify-content: center;
-  }
-  .modal-window {
-    max-width: 300px;
-    width: 100%;
-    max-height: 78vh;
-    margin: auto;
-    border-radius: 16px;
-  }
-  .modal-header { padding: 0.7rem 0.85rem; }
-  .modal-header h3 { font-size: 0.86rem; }
-  .modal-close-btn { font-size: 1.05rem; }
-  .modal-body { padding: 0.7rem 0.85rem; }
-  .modal-body .form-group { margin-bottom: 0.6rem; }
-  .modal-body label { font-size: 0.7rem; margin-bottom: 0.2rem; }
-  .modal-body .form-control { font-size: 0.78rem; padding: 0.4rem 0.5rem; }
-  .modal-body .form-row { grid-template-columns: 1fr !important; gap: 0.45rem; }
-  .modal-footer { padding: 0.6rem 0.85rem; flex-direction: column-reverse; gap: 0.4rem; }
-  .modal-footer .btn { width: 100%; font-size: 0.78rem; padding: 0.5rem; }
+      .modal-backdrop {
+        left: 68px !important;
+        padding: 0.75rem;
+        align-items: center;
+        justify-content: center;
+      }
 
-  /* Donations/Expenses table view toolbar: stacked, full-width actions */
-  .table-header-toolbar { padding: 0.85rem; }
-  .table-title h3 { font-size: 0.92rem; }
-  .table-title p { font-size: 0.72rem; }
-  .table-filters { flex-direction: column; }
-  .table-filters .btn { width: 100%; }
-}
+      .modal-window {
+        max-width: 300px;
+        width: 100%;
+        max-height: 78vh;
+        margin: auto;
+        border-radius: 16px;
+      }
 
-/* ---------- SMALL PHONES (<=480px) — sidebar still 68px rail ---------- */
-@media (max-width: 480px) {
-  .settings-card { padding: 0.7rem; }
-  .settings-card h3 { font-size: 0.85rem; }
+      .modal-header {
+        padding: 0.7rem 0.85rem;
+      }
 
-  .modal-backdrop { left: 68px !important; padding: 0.5rem; }
-  .modal-window { max-width: 260px; }
-  .modal-header h3 { font-size: 0.8rem; }
-  .modal-body { padding: 0.6rem 0.7rem; }
-  .modal-body label { font-size: 0.66rem; }
-  .modal-body .form-control { font-size: 0.75rem; padding: 0.4rem 0.5rem; }
-  .modal-footer { padding: 0.55rem 0.7rem; }
-  .modal-footer .btn { font-size: 0.74rem; padding: 0.5rem; }
+      .modal-header h3 {
+        font-size: 0.86rem;
+      }
 
-  .table-title h3 { font-size: 0.85rem; }
-  .table-title p { font-size: 0.68rem; }
-}
-</style>
+      .modal-close-btn {
+        font-size: 1.05rem;
+      }
 
-<style id="chatgpt-moving-sidebar-style">
-/* =========================================================
+      .modal-body {
+        padding: 0.7rem 0.85rem;
+      }
+
+      .modal-body .form-group {
+        margin-bottom: 0.6rem;
+      }
+
+      .modal-body label {
+        font-size: 0.7rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .modal-body .form-control {
+        font-size: 0.78rem;
+        padding: 0.4rem 0.5rem;
+      }
+
+      .modal-body .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 0.45rem;
+      }
+
+      .modal-footer {
+        padding: 0.6rem 0.85rem;
+        flex-direction: column-reverse;
+        gap: 0.4rem;
+      }
+
+      .modal-footer .btn {
+        width: 100%;
+        font-size: 0.78rem;
+        padding: 0.5rem;
+      }
+
+      /* Donations/Expenses table view toolbar: stacked, full-width actions */
+      .table-header-toolbar {
+        padding: 0.85rem;
+      }
+
+      .table-title h3 {
+        font-size: 0.92rem;
+      }
+
+      .table-title p {
+        font-size: 0.72rem;
+      }
+
+      .table-filters {
+        flex-direction: column;
+      }
+
+      .table-filters .btn {
+        width: 100%;
+      }
+    }
+
+    /* ---------- SMALL PHONES (<=480px) — sidebar still 68px rail ---------- */
+    @media (max-width: 480px) {
+      .settings-card {
+        padding: 0.7rem;
+      }
+
+      .settings-card h3 {
+        font-size: 0.85rem;
+      }
+
+      .modal-backdrop {
+        left: 68px !important;
+        padding: 0.5rem;
+      }
+
+      .modal-window {
+        max-width: 260px;
+      }
+
+      .modal-header h3 {
+        font-size: 0.8rem;
+      }
+
+      .modal-body {
+        padding: 0.6rem 0.7rem;
+      }
+
+      .modal-body label {
+        font-size: 0.66rem;
+      }
+
+      .modal-body .form-control {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.5rem;
+      }
+
+      .modal-footer {
+        padding: 0.55rem 0.7rem;
+      }
+
+      .modal-footer .btn {
+        font-size: 0.74rem;
+        padding: 0.5rem;
+      }
+
+      .table-title h3 {
+        font-size: 0.85rem;
+      }
+
+      .table-title p {
+        font-size: 0.68rem;
+      }
+    }
+  </style>
+
+  <style id="chatgpt-moving-sidebar-style">
+    /* =========================================================
    CHATGPT-STYLE COLLAPSIBLE SIDEBAR & LOGO TOGGLE
    ========================================================= */
 
-:root {
-  --sidebar-expanded-w: 260px;
-  --sidebar-collapsed-w: 68px;
-}
+    :root {
+      --sidebar-expanded-w: 260px;
+      --sidebar-collapsed-w: 68px;
+    }
 
-#portalWrapper {
-  width: 100%;
-  min-height: 100vh;
-  min-width: 0;
-  overflow-x: hidden;
-  position: relative;
-}
+    #portalWrapper {
+      width: 100%;
+      min-height: 100vh;
+      min-width: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-/* Base Sidebar */
-#portalWrapper .portal-sidebar {
-  position: fixed !important;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: var(--sidebar-expanded-w) !important;
-  height: 100vh;
-  z-index: 1050;
-  background: #0f172a;
-  color: #f8fafc;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
-  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
+    /* Sidebar Drag Resizer Handle */
+    .sidebar-resizer {
+      position: absolute;
+      top: 0;
+      right: -5px;
+      width: 10px;
+      height: 100%;
+      cursor: col-resize;
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      touch-action: none;
+      transition: background 0.2s ease;
+    }
 
-/* Main Content Area */
-#portalWrapper .portal-main {
-  position: relative;
-  width: calc(100% - var(--sidebar-expanded-w)) !important;
-  margin-left: var(--sidebar-expanded-w) !important;
-  min-height: 100vh;
-  transition: margin-left 0.35s cubic-bezier(0.16, 1, 0.3, 1), width 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  min-width: 0 !important;
-}
+    .resizer-handle-line {
+      width: 3px;
+      height: 36px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.2s ease;
+    }
 
-/* COLLAPSED / CLOSED STATE (ChatGPT style: Icon-only sidebar 68px) */
-#portalWrapper .portal-sidebar.sidebar-closed,
-#portalWrapper .portal-sidebar.collapsed {
-  width: var(--sidebar-collapsed-w) !important;
-  transform: translateX(0) !important;
-}
+    .sidebar-resizer:hover .resizer-handle-line,
+    .sidebar-resizer.is-dragging .resizer-handle-line {
+      background: var(--primary, #0d9488);
+      height: 60px;
+      width: 4px;
+      box-shadow: 0 0 10px rgba(13, 148, 136, 0.8);
+    }
 
-/* Shift main content area when sidebar is collapsed */
-#portalWrapper .portal-sidebar.sidebar-closed ~ .portal-main,
-#portalWrapper .portal-sidebar.collapsed ~ .portal-main,
-#portalWrapper.sidebar-is-closed .portal-main {
-  width: calc(100% - var(--sidebar-collapsed-w)) !important;
-  margin-left: var(--sidebar-collapsed-w) !important;
-}
+    .sidebar-resizer:hover,
+    .sidebar-resizer.is-dragging {
+      background: rgba(13, 148, 136, 0.15);
+    }
 
-/* --- SIDEBAR HEADER LOGO TOGGLE --- */
-.sidebar-header {
-  padding: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid #1e293b;
-  background: #090d16;
-}
+    /* Real-time 60fps Adaptability during dragging */
+    body.is-resizing-sidebar {
+      user-select: none !important;
+      cursor: col-resize !important;
+    }
 
-.sidebar-logo-toggle-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  background: transparent;
-  border: 1px solid transparent;
-  color: #ffffff;
-  width: 100%;
-  padding: 0.45rem 0.5rem;
-  border-radius: 12px;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.25s ease;
-  overflow: hidden;
-}
+    body.is-resizing-sidebar #portalSidebar,
+    body.is-resizing-sidebar .portal-main {
+      transition: none !important;
+    }
 
-.sidebar-logo-toggle-btn:hover {
-  background: #1e293b;
-  border-color: rgba(255, 255, 255, 0.12);
-}
+    /* Modal Backdrop Positioning & Adaptability based on Sidebar Open / Closed States */
+    .modal-backdrop {
+      position: fixed !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      right: 0 !important;
+      left: var(--sidebar-expanded-w, 260px);
+      height: 100vh !important;
+      z-index: 3000 !important;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      box-sizing: border-box;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
 
-.sidebar-logo-box {
-  position: relative;
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 10px;
-  transition: all 0.25s ease;
-}
+    /* Dynamically adjust backdrop when sidebar is closed or collapsed */
+    #portalWrapper.sidebar-is-closed~.modal-backdrop,
+    #portalSidebar.sidebar-closed~.modal-backdrop,
+    #portalSidebar.collapsed~.modal-backdrop,
+    .portal-sidebar.sidebar-closed~.modal-backdrop,
+    .portal-sidebar.collapsed~.modal-backdrop {
+      left: 68px !important;
+    }
 
-.sidebar-logo-toggle-btn:hover .sidebar-logo-box {
-  background: var(--primary, #0d9488);
-  border-color: var(--primary, #0d9488);
-  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.45);
-}
+    /* Modal Windows Sizing Fixes (Record Donation, Submit Expense, Donation Receipt, Logout) */
+    #addDonationModal .modal-window,
+    #addExpenseModal .modal-window,
+    #donationReceiptModal .modal-window,
+    #requestSuccessModal .modal-window {
+      width: min(560px, 92%) !important;
+      max-width: 560px !important;
+      max-height: 88vh !important;
+      margin: 0 auto !important;
+    }
 
-.sidebar-ngo-logo {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  transition: transform 0.3s ease, opacity 0.2s ease;
-}
+    #logoutConfirmModal .modal-window {
+      width: min(420px, 90%) !important;
+      max-width: 420px !important;
+      max-height: 85vh !important;
+      margin: 0 auto !important;
+    }
 
-.sidebar-logo-toggle-btn:hover .sidebar-ngo-logo {
-  transform: scale(0.85);
-  opacity: 0.3;
-}
+    /* Sidebar Logout Button Size Adaptability (Expanded vs Collapsed) */
+    .sidebar-logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 0.6rem 0.9rem;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-.logo-toggle-icon {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-size: 0.95rem;
-  opacity: 0;
-  transform: scale(0.5);
-  transition: all 0.25s ease;
-}
+    #portalSidebar.sidebar-closed .sidebar-logout-btn,
+    #portalSidebar.collapsed .sidebar-logout-btn {
+      justify-content: center !important;
+      padding: 0.6rem 0 !important;
+      width: 44px !important;
+      margin: 0 auto !important;
+    }
 
-.sidebar-logo-toggle-btn:hover .logo-toggle-icon {
-  opacity: 1;
-  transform: scale(1);
-}
+    /* Base Sidebar */
+    #portalWrapper .portal-sidebar {
+      position: fixed !important;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--sidebar-expanded-w) !important;
+      height: 100vh;
+      z-index: 1050;
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
+      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
 
-/* Rotate icon when collapsed & align toggle button with remaining icons */
-#portalSidebar.sidebar-closed .sidebar-header,
-#portalSidebar.collapsed .sidebar-header {
-  padding: 0.75rem 0;
-  justify-content: center;
-}
+    /* Main Content Area */
+    #portalWrapper .portal-main {
+      position: relative;
+      width: calc(100% - var(--sidebar-expanded-w)) !important;
+      margin-left: var(--sidebar-expanded-w) !important;
+      min-height: 100vh;
+      transition: margin-left 0.35s cubic-bezier(0.16, 1, 0.3, 1), width 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      min-width: 0 !important;
+    }
 
-#portalSidebar.sidebar-closed .sidebar-logo-toggle-btn,
-#portalSidebar.collapsed .sidebar-logo-toggle-btn {
-  justify-content: center;
-  padding: 0;
-  width: 44px;
-  margin: 0 auto;
-}
+    /* COLLAPSED / CLOSED STATE (ChatGPT style: Icon-only sidebar 68px) */
+    #portalWrapper .portal-sidebar.sidebar-closed,
+    #portalWrapper .portal-sidebar.collapsed {
+      width: var(--sidebar-collapsed-w) !important;
+      transform: translateX(0) !important;
+    }
 
-#portalSidebar.sidebar-closed .sidebar-logo-box,
-#portalSidebar.collapsed .sidebar-logo-box {
-  width: 36px;
-  height: 36px;
-  margin: 0 auto;
-}
+    /* Shift main content area when sidebar is collapsed */
+    #portalWrapper .portal-sidebar.sidebar-closed~.portal-main,
+    #portalWrapper .portal-sidebar.collapsed~.portal-main,
+    #portalWrapper.sidebar-is-closed .portal-main {
+      width: calc(100% - var(--sidebar-collapsed-w)) !important;
+      margin-left: var(--sidebar-collapsed-w) !important;
+    }
 
-#portalSidebar.sidebar-closed .logo-toggle-icon i,
-#portalSidebar.collapsed .logo-toggle-icon i {
-  transform: rotate(180deg);
-}
+    /* --- SIDEBAR HEADER LOGO TOGGLE --- */
+    .sidebar-header {
+      padding: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #1e293b;
+      background: #090d16;
+    }
 
-.sidebar-brand-text {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  white-space: nowrap;
-  transition: opacity 0.2s ease;
-}
+    .sidebar-logo-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      background: transparent;
+      border: 1px solid transparent;
+      color: #ffffff;
+      width: 100%;
+      padding: 0.45rem 0.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.25s ease;
+      overflow: hidden;
+    }
 
-.sidebar-brand-text .brand-name {
-  font-weight: 800;
-  font-size: 0.92rem;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-  line-height: 1.2;
-}
+    .sidebar-logo-toggle-btn:hover {
+      background: #1e293b;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
 
-.sidebar-brand-text .brand-sub {
-  font-size: 0.65rem;
-  color: #94a3b8;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-}
+    .sidebar-logo-box {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      transition: all 0.25s ease;
+    }
 
-/* Hide brand text when collapsed */
-#portalSidebar.sidebar-closed .sidebar-brand-text,
-#portalSidebar.collapsed .sidebar-brand-text {
-  opacity: 0;
-  display: none;
-}
+    .sidebar-logo-toggle-btn:hover .sidebar-logo-box {
+      background: var(--primary, #0d9488);
+      border-color: var(--primary, #0d9488);
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.45);
+    }
 
-/* --- SIDEBAR MENU ITEMS IN COLLAPSED MODE --- */
-.sidebar-menu-wrap {
-  padding: 0.75rem 0.5rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
+    .sidebar-ngo-logo {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      transition: transform 0.3s ease, opacity 0.2s ease;
+    }
 
-.sidebar-heading {
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 0.6rem 0.75rem 0.2rem;
-  white-space: nowrap;
-  transition: opacity 0.2s ease;
-}
+    .sidebar-logo-toggle-btn:hover .sidebar-ngo-logo {
+      transform: scale(0.85);
+      opacity: 0.3;
+    }
 
-#portalSidebar.sidebar-closed .sidebar-heading,
-#portalSidebar.collapsed .sidebar-heading {
-  opacity: 0;
-  display: none;
-}
+    .logo-toggle-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 0.95rem;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.25s ease;
+    }
 
-.sidebar-nav-item {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  padding: 0.75rem 0.9rem;
-  color: #94a3b8;
-  border-radius: 12px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  position: relative;
-}
+    .sidebar-logo-toggle-btn:hover .logo-toggle-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
 
-.sidebar-nav-item i {
-  font-size: 1.15rem;
-  width: 24px;
-  text-align: center;
-  flex-shrink: 0;
-}
+    /* Rotate icon when collapsed & align toggle button with remaining icons */
+    #portalSidebar.sidebar-closed .sidebar-header,
+    #portalSidebar.collapsed .sidebar-header {
+      padding: 0.75rem 0;
+      justify-content: center;
+    }
 
-.sidebar-nav-item:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
-}
+    #portalSidebar.sidebar-closed .sidebar-logo-toggle-btn,
+    #portalSidebar.collapsed .sidebar-logo-toggle-btn {
+      justify-content: center;
+      padding: 0;
+      width: 44px;
+      margin: 0 auto;
+    }
 
-.sidebar-nav-item.active {
-  background: var(--primary, #0d9488);
-  color: #ffffff;
-  font-weight: 600;
-  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
-}
+    #portalSidebar.sidebar-closed .sidebar-logo-box,
+    #portalSidebar.collapsed .sidebar-logo-box {
+      width: 36px;
+      height: 36px;
+      margin: 0 auto;
+    }
 
-.nav-text {
-  transition: opacity 0.2s ease;
-  overflow: hidden;
-}
+    #portalSidebar.sidebar-closed .logo-toggle-icon i,
+    #portalSidebar.collapsed .logo-toggle-icon i {
+      transform: rotate(180deg);
+    }
 
-#portalSidebar.sidebar-closed .nav-text,
-#portalSidebar.collapsed .nav-text {
-  opacity: 0;
-  display: none;
-}
+    .sidebar-brand-text {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
 
-/* Center icons in Collapsed Mode */
-#portalSidebar.sidebar-closed .sidebar-nav-item,
-#portalSidebar.collapsed .sidebar-nav-item {
-  justify-content: center;
-  padding: 0.75rem 0;
-  width: 44px;
-  margin: 0 auto;
-}
+    .sidebar-brand-text .brand-name {
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
 
-/* Badges in Collapsed Mode */
-.nav-badge {
-  background: #ef4444;
-  color: #ffffff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.15rem 0.45rem;
-  border-radius: 10px;
-  margin-left: auto;
-}
+    .sidebar-brand-text .brand-sub {
+      font-size: 0.65rem;
+      color: #94a3b8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
 
-#portalSidebar.sidebar-closed .nav-badge,
-#portalSidebar.collapsed .nav-badge {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  font-size: 0.6rem;
-  padding: 0.1rem 0.3rem;
-  border-radius: 50%;
-  margin-left: 0;
-}
+    /* Hide brand text when collapsed */
+    #portalSidebar.sidebar-closed .sidebar-brand-text,
+    #portalSidebar.collapsed .sidebar-brand-text {
+      opacity: 0;
+      display: none;
+    }
 
-/* --- SIDEBAR FOOTER & USER PROFILE IN COLLAPSED MODE --- */
-.sidebar-footer {
-  padding: 0.85rem 0.6rem;
-  border-top: 1px solid #1e293b;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  background: #090d16;
-}
+    /* --- SIDEBAR MENU ITEMS IN COLLAPSED MODE --- */
+    .sidebar-menu-wrap {
+      padding: 0.75rem 0.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
 
-.sidebar-user-pill {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.4rem;
-  border-radius: 10px;
-  overflow: hidden;
-}
+    .sidebar-heading {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.6rem 0.75rem 0.2rem;
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
 
-.sidebar-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #0d9488;
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
+    #portalSidebar.sidebar-closed .sidebar-heading,
+    #portalSidebar.collapsed .sidebar-heading {
+      opacity: 0;
+      display: none;
+    }
 
-.sidebar-user-info {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  white-space: nowrap;
-}
+    .sidebar-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.75rem 0.9rem;
+      color: #94a3b8;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      position: relative;
+    }
 
-#portalSidebar.sidebar-closed .sidebar-user-info,
-#portalSidebar.collapsed .sidebar-user-info,
-#portalSidebar.sidebar-closed .sidebar-logout-btn .nav-text,
-#portalSidebar.collapsed .sidebar-logout-btn .nav-text {
-  display: none;
-}
+    .sidebar-nav-item i {
+      font-size: 1.15rem;
+      width: 24px;
+      text-align: center;
+      flex-shrink: 0;
+    }
 
-#portalSidebar.sidebar-closed .sidebar-user-pill,
-#portalSidebar.collapsed .sidebar-user-pill {
-  justify-content: center;
-  padding: 0;
-}
+    .sidebar-nav-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+    }
 
-#portalSidebar.sidebar-closed .sidebar-logout-btn,
-#portalSidebar.collapsed .sidebar-logout-btn {
-  justify-content: center;
-  padding: 0.6rem 0;
-  width: 44px;
-  margin: 0 auto;
-}
+    .sidebar-nav-item.active {
+      background: var(--primary, #0d9488);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+    }
 
-/* =========================================================
+    .nav-text {
+      transition: opacity 0.2s ease;
+      overflow: hidden;
+    }
+
+    #portalSidebar.sidebar-closed .nav-text,
+    #portalSidebar.collapsed .nav-text {
+      opacity: 0;
+      display: none;
+    }
+
+    /* Center icons in Collapsed Mode */
+    #portalSidebar.sidebar-closed .sidebar-nav-item,
+    #portalSidebar.collapsed .sidebar-nav-item {
+      justify-content: center;
+      padding: 0.75rem 0;
+      width: 44px;
+      margin: 0 auto;
+    }
+
+    /* Badges in Collapsed Mode */
+    .nav-badge {
+      background: #ef4444;
+      color: #ffffff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 10px;
+      margin-left: auto;
+    }
+
+    #portalSidebar.sidebar-closed .nav-badge,
+    #portalSidebar.collapsed .nav-badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      font-size: 0.6rem;
+      padding: 0.1rem 0.3rem;
+      border-radius: 50%;
+      margin-left: 0;
+    }
+
+    /* --- SIDEBAR FOOTER & USER PROFILE IN COLLAPSED MODE --- */
+    .sidebar-footer {
+      padding: 0.85rem 0.6rem;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      background: #090d16;
+    }
+
+    .sidebar-user-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.4rem;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .sidebar-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #0d9488;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-user-info {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    #portalSidebar.sidebar-closed .sidebar-user-info,
+    #portalSidebar.collapsed .sidebar-user-info,
+    #portalSidebar.sidebar-closed .sidebar-logout-btn .nav-text,
+    #portalSidebar.collapsed .sidebar-logout-btn .nav-text {
+      display: none;
+    }
+
+    #portalSidebar.sidebar-closed .sidebar-user-pill,
+    #portalSidebar.collapsed .sidebar-user-pill {
+      justify-content: center;
+      padding: 0;
+    }
+
+    #portalSidebar.sidebar-closed .sidebar-logout-btn,
+    #portalSidebar.collapsed .sidebar-logout-btn {
+      justify-content: center;
+      padding: 0.6rem 0;
+      width: 44px;
+      margin: 0 auto;
+    }
+
+    /* =========================================================
    RESPONSIVE DESIGN SYSTEM (MOBILE, TABLET & DESKTOP)
    ========================================================= */
 
-/* Mobile Sidebar Backdrop Overlay */
-.sidebar-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(4px);
-  z-index: 1040;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
+    /* Mobile Sidebar Backdrop Overlay */
+    .sidebar-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1040;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
 
-.sidebar-backdrop.active {
-  opacity: 1;
-  visibility: visible;
-}
+    .sidebar-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
 
-/* Mobile Sidebar Toggle Button (Hidden on Desktop) */
-.mobile-sidebar-toggle-btn {
-  display: none !important;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 0.75rem;
-  background: #ffffff;
-  border: 1.5px solid #cbd5e1;
-  border-radius: 10px;
-  cursor: pointer;
-  color: #0f172a;
-  font-weight: 700;
-  font-size: 0.85rem;
-  transition: all 0.2s ease;
-}
+    /* Mobile Sidebar Toggle Button (Hidden on Desktop) */
+    .mobile-sidebar-toggle-btn {
+      display: none !important;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.75rem;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
 
-.mobile-sidebar-toggle-btn:hover {
-  background: #0d9488;
-  color: #ffffff;
-  border-color: #0d9488;
-}
+    .mobile-sidebar-toggle-btn:hover {
+      background: #0d9488;
+      color: #ffffff;
+      border-color: #0d9488;
+    }
 
-.mobile-logo-icon {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-}
+    .mobile-logo-icon {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+    }
 
-/* RESPONSIVE SAFETY CONTAINERS */
-#portalWrapper .portal-content-body,
-#portalWrapper .dash-view,
-#portalWrapper .profile-grid,
-#portalWrapper .settings-grid,
-#portalWrapper .charts-grid,
-#portalWrapper .messages-layout,
-#portalWrapper .table-card {
-  min-width: 0 !important;
-  max-width: 100%;
-}
+    /* RESPONSIVE SAFETY CONTAINERS */
+    #portalWrapper .portal-content-body,
+    #portalWrapper .dash-view,
+    #portalWrapper .profile-grid,
+    #portalWrapper .settings-grid,
+    #portalWrapper .charts-grid,
+    #portalWrapper .messages-layout,
+    #portalWrapper .table-card {
+      min-width: 0 !important;
+      max-width: 100%;
+    }
 
-/* Tablet Screen Breakpoint (769px - 1024px) */
-@media (max-width: 1024px) and (min-width: 769px) {
-  :root {
-    --sidebar-expanded-w: 220px;
-  }
+    /* Tablet Screen Breakpoint (769px - 1024px) */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      :root {
+        --sidebar-expanded-w: 220px;
+      }
 
-  .portal-topbar {
-    padding: 0.75rem 1rem;
-  }
-}
+      .portal-topbar {
+        padding: 0.75rem 1rem;
+      }
+    }
 
-/* Mobile & Responsive Screen Breakpoint (<= 768px) */
-@media (max-width: 768px) {
-  .mobile-sidebar-toggle-btn {
-    display: none !important;
-  }
+    /* Mobile & Responsive Screen Breakpoint (<= 768px) */
+    @media (max-width: 768px) {
+      .mobile-sidebar-toggle-btn {
+        display: none !important;
+      }
 
-  /* On mobile, after closing the sidebar, show ONLY the logos (ChatGPT style 68px bar) */
-  #portalWrapper .portal-sidebar {
-    position: fixed !important;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: var(--sidebar-collapsed-w) !important;
-    transform: translateX(0) !important;
-    z-index: 1050;
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.25) !important;
-    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  }
+      /* On mobile, after closing the sidebar, show ONLY the logos (ChatGPT style 68px bar) */
+      #portalWrapper .portal-sidebar {
+        position: fixed !important;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--sidebar-collapsed-w) !important;
+        transform: translateX(0) !important;
+        z-index: 1050;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.25) !important;
+        transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      }
 
-  #portalWrapper .portal-main {
-    width: calc(100% - var(--sidebar-collapsed-w)) !important;
-    margin-left: var(--sidebar-collapsed-w) !important;
-  }
+      #portalWrapper .portal-main {
+        width: calc(100% - var(--sidebar-collapsed-w)) !important;
+        margin-left: var(--sidebar-collapsed-w) !important;
+      }
 
-  /* When collapsed on responsive (default when not mobile-open): Center icons and hide text */
-  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-brand-text,
-  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-heading,
-  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .nav-text,
-  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-user-info {
-    display: none !important;
-    opacity: 0 !important;
-  }
+      /* When collapsed on responsive (default when not mobile-open): Center icons and hide text */
+      #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-brand-text,
+      #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-heading,
+      #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .nav-text,
+      #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-user-info {
+        display: none !important;
+        opacity: 0 !important;
+      }
 
-  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-header {
-    padding: 0.75rem 0 !important;
-    justify-content: center !important;
-  }
+      #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-header {
+        padding: 0.75rem 0 !important;
+        justify-content: center !important;
+      }
 
-  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-logo-toggle-btn {
-    justify-content: center !important;
-    padding: 0 !important;
-    width: 44px !important;
-    margin: 0 auto !important;
-  }
+      #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-logo-toggle-btn {
+        justify-content: center !important;
+        padding: 0 !important;
+        width: 44px !important;
+        margin: 0 auto !important;
+      }
 
-  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-nav-item {
-    justify-content: center !important;
-    padding: 0.75rem 0 !important;
-    width: 44px !important;
-    margin: 0 auto !important;
-  }
+      #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-nav-item {
+        justify-content: center !important;
+        padding: 0.75rem 0 !important;
+        width: 44px !important;
+        margin: 0 auto !important;
+      }
 
-  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-user-pill,
-  #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-logout-btn {
-    justify-content: center !important;
-    padding: 0.4rem 0 !important;
-    width: 44px !important;
-    margin: 0 auto !important;
-  }
+      #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-user-pill,
+      #portalWrapper .portal-sidebar:not(.mobile-open):not(.open) .sidebar-logout-btn {
+        justify-content: center !important;
+        padding: 0.4rem 0 !important;
+        width: 44px !important;
+        margin: 0 auto !important;
+      }
 
-  /* When expanded / toggled open on responsive screens (mobile-open active): Total expanded sidebar (260px) */
-  #portalWrapper .portal-sidebar.mobile-open,
-  #portalWrapper .portal-sidebar.open {
-    width: var(--sidebar-expanded-w) !important;
-    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5) !important;
-  }
+      /* When expanded / toggled open on responsive screens (mobile-open active): Total expanded sidebar (260px) */
+      #portalWrapper .portal-sidebar.mobile-open,
+      #portalWrapper .portal-sidebar.open {
+        width: var(--sidebar-expanded-w) !important;
+        box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5) !important;
+      }
 
-  #portalWrapper .portal-sidebar.mobile-open .sidebar-brand-text,
-  #portalWrapper .portal-sidebar.mobile-open .sidebar-heading,
-  #portalWrapper .portal-sidebar.mobile-open .nav-text,
-  #portalWrapper .portal-sidebar.mobile-open .sidebar-user-info {
-    display: flex !important;
-    opacity: 1 !important;
-    width: auto !important;
-  }
+      #portalWrapper .portal-sidebar.mobile-open .sidebar-brand-text,
+      #portalWrapper .portal-sidebar.mobile-open .sidebar-heading,
+      #portalWrapper .portal-sidebar.mobile-open .nav-text,
+      #portalWrapper .portal-sidebar.mobile-open .sidebar-user-info {
+        display: flex !important;
+        opacity: 1 !important;
+        width: auto !important;
+      }
 
-  #portalWrapper .portal-sidebar.mobile-open .sidebar-nav-item {
-    justify-content: flex-start !important;
-    width: 100% !important;
-    padding: 0.75rem 0.9rem !important;
-    margin: 0 !important;
-  }
+      #portalWrapper .portal-sidebar.mobile-open .sidebar-nav-item {
+        justify-content: flex-start !important;
+        width: 100% !important;
+        padding: 0.75rem 0.9rem !important;
+        margin: 0 !important;
+      }
 
-  #portalWrapper .portal-sidebar.mobile-open .sidebar-user-pill {
-    justify-content: flex-start !important;
-    padding: 0.4rem !important;
-  }
+      #portalWrapper .portal-sidebar.mobile-open .sidebar-user-pill {
+        justify-content: flex-start !important;
+        padding: 0.4rem !important;
+      }
 
-  #portalWrapper .portal-sidebar.mobile-open .sidebar-logout-btn {
-    justify-content: flex-start !important;
-    width: 100% !important;
-    padding: 0.6rem 0.9rem !important;
-  }
+      #portalWrapper .portal-sidebar.mobile-open .sidebar-logout-btn {
+        justify-content: flex-start !important;
+        width: 100% !important;
+        padding: 0.6rem 0.9rem !important;
+      }
 
-  #portalWrapper .portal-sidebar.mobile-open .sidebar-header {
-    justify-content: flex-start !important;
-    padding: 0.75rem !important;
-  }
+      #portalWrapper .portal-sidebar.mobile-open .sidebar-header {
+        justify-content: flex-start !important;
+        padding: 0.75rem !important;
+      }
 
-  #portalWrapper .portal-sidebar.mobile-open .sidebar-logo-toggle-btn {
-    justify-content: flex-start !important;
-    width: 100% !important;
-  }
+      #portalWrapper .portal-sidebar.mobile-open .sidebar-logo-toggle-btn {
+        justify-content: flex-start !important;
+        width: 100% !important;
+      }
 
-  .portal-topbar {
-    padding: 0.6rem 0.75rem;
-    gap: 0.5rem;
-  }
+      .portal-topbar {
+        padding: 0.6rem 0.75rem;
+        gap: 0.5rem;
+      }
 
-  .topbar-search {
-    order: 3;
-    width: 100%;
-    flex: 1 1 100%;
-  }
+      .topbar-search {
+        order: 3;
+        width: 100%;
+        flex: 1 1 100%;
+      }
 
-  .topbar-quick-btns .btn .btn-text {
-    display: none;
-  }
+      .topbar-quick-btns .btn .btn-text {
+        display: none;
+      }
 
-  .topbar-quick-btns .btn {
-    padding: 0.4rem 0.6rem;
-  }
-}
+      .topbar-quick-btns .btn {
+        padding: 0.4rem 0.6rem;
+      }
+    }
 
-/* Small Phone Screens (<= 480px) */
-@media (max-width: 480px) {
-  .page-title-badge h2 {
-    font-size: 0.85rem;
-  }
+    /* Small Phone Screens (<= 480px) */
+    @media (max-width: 480px) {
+      .page-title-badge h2 {
+        font-size: 0.85rem;
+      }
 
-  .portal-content-body {
-    padding: 0.75rem !important;
-  }
-}
-</style>
+      .portal-content-body {
+        padding: 0.75rem !important;
+      }
+    }
+  </style>
 
 
-<style id="mobile-login-image-fix">
-/* =========================================================
+  <style id="mobile-login-image-fix">
+    /* =========================================================
    LOGIN IMAGE - RESPONSIVE FIX
    Keeps the NGO illustration visible on phones and tablets.
    ========================================================= */
-.auth-graphic-side {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  min-width: 0 !important;
-}
+    .auth-graphic-side {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      min-width: 0 !important;
+    }
 
-.auth-illustration-img {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  width: 100% !important;
-  max-width: 460px !important;
-  height: auto !important;
-  max-height: 360px !important;
-  object-fit: contain !important;
-  margin: 1rem auto !important;
-}
+    .auth-illustration-img {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      width: 100% !important;
+      max-width: 460px !important;
+      height: auto !important;
+      max-height: 360px !important;
+      object-fit: contain !important;
+      margin: 1rem auto !important;
+    }
 
-@media (max-width: 1024px) {
-  .auth-illustration-img {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: min(100%, 420px) !important;
-    max-width: 420px !important;
-    height: auto !important;
-    max-height: 300px !important;
-    margin: 0.75rem auto !important;
-  }
-}
+    @media (max-width: 1024px) {
+      .auth-illustration-img {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: min(100%, 420px) !important;
+        max-width: 420px !important;
+        height: auto !important;
+        max-height: 300px !important;
+        margin: 0.75rem auto !important;
+      }
+    }
 
-@media (max-width: 768px) {
-  /* Stack the login graphic above the form on mobile. */
-  .auth-wrapper {
-    width: 100% !important;
-    min-height: auto !important;
-    padding: 0.75rem !important;
-    display: flex !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-  }
+    @media (max-width: 768px) {
 
-  .auth-card {
-    width: 100% !important;
-    max-width: 520px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    overflow: visible !important;
-  }
+      /* Stack the login graphic above the form on mobile. */
+      .auth-wrapper {
+        width: 100% !important;
+        min-height: auto !important;
+        padding: 0.75rem !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+      }
 
-  .auth-graphic-side {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    min-height: 220px !important;
-    padding: 1.25rem !important;
-    order: 1 !important;
-    text-align: center !important;
-    overflow: visible !important;
-  }
+      .auth-card {
+        width: 100% !important;
+        max-width: 520px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: visible !important;
+      }
 
-  .auth-graphic-side > div:first-child {
-    width: 100% !important;
-  }
+      .auth-graphic-side {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 220px !important;
+        padding: 1.25rem !important;
+        order: 1 !important;
+        text-align: center !important;
+        overflow: visible !important;
+      }
 
-  .auth-graphic-side h2 {
-    font-size: 1.25rem !important;
-    line-height: 1.2 !important;
-    overflow-wrap: anywhere !important;
-  }
+      .auth-graphic-side>div:first-child {
+        width: 100% !important;
+      }
 
-  .auth-graphic-side p {
-    font-size: 0.78rem !important;
-    line-height: 1.4 !important;
-  }
+      .auth-graphic-side h2 {
+        font-size: 1.25rem !important;
+        line-height: 1.2 !important;
+        overflow-wrap: anywhere !important;
+      }
 
-  .auth-illustration-img {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: min(88%, 330px) !important;
-    max-width: 330px !important;
-    height: auto !important;
-    max-height: 230px !important;
-    object-fit: contain !important;
-    margin: 0.5rem auto !important;
-  }
+      .auth-graphic-side p {
+        font-size: 0.78rem !important;
+        line-height: 1.4 !important;
+      }
 
-  .auth-feature-list {
-    width: 100% !important;
-    margin-top: 0.5rem !important;
-    text-align: left !important;
-  }
+      .auth-illustration-img {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: min(88%, 330px) !important;
+        max-width: 330px !important;
+        height: auto !important;
+        max-height: 230px !important;
+        object-fit: contain !important;
+        margin: 0.5rem auto !important;
+      }
 
-  .auth-form-side {
-    width: 100% !important;
-    min-width: 0 !important;
-    order: 2 !important;
-  }
-}
+      .auth-feature-list {
+        width: 100% !important;
+        margin-top: 0.5rem !important;
+        text-align: left !important;
+      }
 
-@media (max-width: 480px) {
-  .auth-wrapper {
-    padding: 0.5rem !important;
-  }
+      .auth-form-side {
+        width: 100% !important;
+        min-width: 0 !important;
+        order: 2 !important;
+      }
+    }
 
-  .auth-card {
-    max-width: 100% !important;
-  }
+    @media (max-width: 480px) {
+      .auth-wrapper {
+        padding: 0.5rem !important;
+      }
 
-  .auth-graphic-side {
-    min-height: 190px !important;
-    padding: 0.9rem !important;
-  }
+      .auth-card {
+        max-width: 100% !important;
+      }
 
-  .auth-graphic-side h2 {
-    font-size: 1.05rem !important;
-  }
+      .auth-graphic-side {
+        min-height: 190px !important;
+        padding: 0.9rem !important;
+      }
 
-  .auth-graphic-side p {
-    font-size: 0.7rem !important;
-  }
+      .auth-graphic-side h2 {
+        font-size: 1.05rem !important;
+      }
 
-  .auth-illustration-img {
-    width: min(82%, 260px) !important;
-    max-width: 260px !important;
-    max-height: 175px !important;
-    margin: 0.35rem auto !important;
-  }
+      .auth-graphic-side p {
+        font-size: 0.7rem !important;
+      }
 
-  /* Keep the mobile login page compact while retaining the image. */
-  .auth-feature-list {
-    display: none !important;
-  }
-}
-</style>
+      .auth-illustration-img {
+        width: min(82%, 260px) !important;
+        max-width: 260px !important;
+        max-height: 175px !important;
+        margin: 0.35rem auto !important;
+      }
+
+      /* Keep the mobile login page compact while retaining the image. */
+      .auth-feature-list {
+        display: none !important;
+      }
+    }
+  </style>
 
 
-<style id="FINAL-MOBILE-LOGIN-IMAGE-FIX">
-/* FINAL MOBILE OVERRIDE - DO NOT HIDE LOGIN ILLUSTRATION */
-@media screen and (max-width: 768px) {
-  #loginView .auth-wrapper {
-    display:flex !important;
-    width:100% !important;
-    min-height:0 !important;
-    padding:10px !important;
-    align-items:flex-start !important;
-    justify-content:center !important;
-  }
-  #loginView .auth-card {
-    display:flex !important;
-    flex-direction:column !important;
-    width:100% !important;
-    max-width:520px !important;
-    height:auto !important;
-    overflow:visible !important;
-  }
-  #loginView .auth-graphic-side {
-    display:flex !important;
-    visibility:visible !important;
-    opacity:1 !important;
-    width:100% !important;
-    min-width:0 !important;
-    min-height:170px !important;
-    height:auto !important;
-    flex:0 0 auto !important;
-    order:1 !important;
-    overflow:visible !important;
-  }
-  #loginView .auth-graphic-side img.auth-illustration-img {
-    display:block !important;
-    visibility:visible !important;
-    opacity:1 !important;
-    position:static !important;
-    width:85% !important;
-    max-width:300px !important;
-    height:auto !important;
-    max-height:190px !important;
-    min-height:80px !important;
-    object-fit:contain !important;
-    margin:8px auto !important;
-  }
-  #loginView .auth-form-side {
-    display:block !important;
-    visibility:visible !important;
-    opacity:1 !important;
-    width:100% !important;
-    min-width:0 !important;
-    order:2 !important;
-  }
-}
-@media screen and (max-width:480px) {
-  #loginView .auth-graphic-side { min-height:145px !important; padding:10px !important; }
-  #loginView .auth-graphic-side img.auth-illustration-img {
-    width:82% !important; max-width:260px !important; max-height:155px !important;
-  }
-}
-</style>
+  <style id="FINAL-MOBILE-LOGIN-IMAGE-FIX">
+    /* FINAL MOBILE OVERRIDE - DO NOT HIDE LOGIN ILLUSTRATION */
+    @media screen and (max-width: 768px) {
+      #loginView .auth-wrapper {
+        display: flex !important;
+        width: 100% !important;
+        min-height: 0 !important;
+        padding: 10px !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+      }
+
+      #loginView .auth-card {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 520px !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      #loginView .auth-graphic-side {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 170px !important;
+        height: auto !important;
+        flex: 0 0 auto !important;
+        order: 1 !important;
+        overflow: visible !important;
+      }
+
+      #loginView .auth-graphic-side img.auth-illustration-img {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: static !important;
+        width: 85% !important;
+        max-width: 300px !important;
+        height: auto !important;
+        max-height: 190px !important;
+        min-height: 80px !important;
+        object-fit: contain !important;
+        margin: 8px auto !important;
+      }
+
+      #loginView .auth-form-side {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        order: 2 !important;
+      }
+    }
+
+    @media screen and (max-width:480px) {
+      #loginView .auth-graphic-side {
+        min-height: 145px !important;
+        padding: 10px !important;
+      }
+
+      #loginView .auth-graphic-side img.auth-illustration-img {
+        width: 82% !important;
+        max-width: 260px !important;
+        max-height: 155px !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <!-- Interactive Ambient Background Mesh -->
   <div class="bg-mesh-pattern"></div>
@@ -1211,8 +2090,10 @@ button, input, select, textarea { max-width: 100%; }
       <ul id="publicNavMenu" class="nav-menu">
         <li class="nav-item"><a href="#home" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
         <li class="nav-item"><a href="#about" class="nav-link"><i class="fa-solid fa-users"></i> About Us</a></li>
-        <li class="nav-item"><a href="#request" class="nav-link"><i class="fa-solid fa-file-invoice-dollar"></i> Request Funds</a></li>
-        <li class="nav-item"><a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Contact Us</a></li>
+        <li class="nav-item"><a href="#request" class="nav-link"><i class="fa-solid fa-file-invoice-dollar"></i> Request
+            Funds</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+        </li>
       </ul>
 
       <!-- Action CTA Buttons -->
@@ -1223,14 +2104,15 @@ button, input, select, textarea { max-width: 100%; }
         <a href="#login" class="btn btn-primary btn-sm">
           <i class="fa-solid fa-right-to-bracket"></i> Login / Portal
         </a>
-        
+
         <!-- Notifications Symbol / Bell (Right side of Login button) -->
         <div class="notification-dropdown-wrap" id="publicNotifWrap">
-          <button type="button" id="publicNotifBtn" class="notif-icon-btn" title="Live Updates &amp; Announcements" aria-label="Notifications">
+          <button type="button" id="publicNotifBtn" class="notif-icon-btn" title="Live Updates &amp; Announcements"
+            aria-label="Notifications">
             <i class="fa-regular fa-bell"></i>
             <span class="notif-badge-pulse">3</span>
           </button>
-          
+
           <div id="publicNotifDropdown" class="notif-dropdown-menu">
             <div class="notif-dropdown-header">
               <h4><i class="fa-solid fa-bell" style="color: var(--primary);"></i> Live Announcements</h4>
@@ -1279,7 +2161,7 @@ button, input, select, textarea { max-width: 100%; }
        PUBLIC PAGES VIEW CONTAINER (SPA View Switcher)
        ========================================================================== -->
   <main id="publicViewsContainer" class="main-content">
-    
+
     <!-- 1. HOME PAGE VIEW -->
     <section id="homeView" class="view-section active-view">
       <!-- Hero Section -->
@@ -1293,7 +2175,10 @@ button, input, select, textarea { max-width: 100%; }
               <span>Fund Bridge</span> — Our NGO Fund Management System
             </h1>
             <p class="hero-subtitle">
-              Fund Bridge is the digital bridge connecting donors, NGOs, and the communities they serve. Built as a complete NGO Fund Management System, every dollar contributed is tracked with real-time audit verification. From urgent medical aid and children's education to disaster relief, we ensure funds reach verified beneficiaries instantly.
+              Fund Bridge is the digital bridge connecting donors, NGOs, and the communities they serve. Built as a
+              complete NGO Fund Management System, every dollar contributed is tracked with real-time audit
+              verification. From urgent medical aid and children's education to disaster relief, we ensure funds reach
+              verified beneficiaries instantly.
             </p>
             <div class="hero-buttons">
               <a href="#request" class="btn btn-primary btn-lg">
@@ -1336,7 +2221,8 @@ button, input, select, textarea { max-width: 100%; }
           <div class="section-header">
             <span class="section-tag">Direct &amp; Accountable</span>
             <h2>How Our Fund Workflow Works</h2>
-            <p>A closed-loop non-profit financial architecture ensuring complete transparency from donor contribution to field disbursement.</p>
+            <p>A closed-loop non-profit financial architecture ensuring complete transparency from donor contribution to
+              field disbursement.</p>
           </div>
 
           <div class="steps-grid">
@@ -1344,21 +2230,24 @@ button, input, select, textarea { max-width: 100%; }
               <span class="step-number">1</span>
               <div class="step-icon"><i class="fa-solid fa-qrcode"></i></div>
               <h3>1. Donor Contribution</h3>
-              <p>Instant tax-deductible donations via UPI QR code, Credit/Debit card, or Net Banking with immediate 80G receipt generation.</p>
+              <p>Instant tax-deductible donations via UPI QR code, Credit/Debit card, or Net Banking with immediate 80G
+                receipt generation.</p>
             </div>
 
             <div class="step-card">
               <span class="step-number">2</span>
               <div class="step-icon"><i class="fa-solid fa-file-shield"></i></div>
               <h3>2. Verified Requests</h3>
-              <p>Grassroots beneficiaries and medical cases submit aid applications verified by certified volunteer audits.</p>
+              <p>Grassroots beneficiaries and medical cases submit aid applications verified by certified volunteer
+                audits.</p>
             </div>
 
             <div class="step-card">
               <span class="step-number">3</span>
               <div class="step-icon"><i class="fa-solid fa-chart-pie"></i></div>
               <h3>3. Transparent Allocation</h3>
-              <p>Funds are matched and disbursed with public expense tracking, vendor invoices, and photographic field reports.</p>
+              <p>Funds are matched and disbursed with public expense tracking, vendor invoices, and photographic field
+                reports.</p>
             </div>
 
             <div class="step-card">
@@ -1389,7 +2278,8 @@ button, input, select, textarea { max-width: 100%; }
               </div>
               <div class="campaign-body">
                 <h3>Rural Mobile Medical Clinics</h3>
-                <p>Providing free pediatric checkups, essential medicines, and vaccine refrigeration across 45 remote villages.</p>
+                <p>Providing free pediatric checkups, essential medicines, and vaccine refrigeration across 45 remote
+                  villages.</p>
                 <div class="progress-container">
                   <div class="progress-labels">
                     <span>Raised: $42,500</span>
@@ -1399,7 +2289,8 @@ button, input, select, textarea { max-width: 100%; }
                     <div class="progress-fill" style="width: 85%;"></div>
                   </div>
                 </div>
-                <a href="#donate" class="btn btn-primary btn-block"><i class="fa-solid fa-hand-holding-dollar"></i> Support Healthcare</a>
+                <a href="#donate" class="btn btn-primary btn-block"><i class="fa-solid fa-hand-holding-dollar"></i>
+                  Support Healthcare</a>
               </div>
             </div>
 
@@ -1411,7 +2302,8 @@ button, input, select, textarea { max-width: 100%; }
               </div>
               <div class="campaign-body">
                 <h3>Underprivileged Child Scholarships</h3>
-                <p>Sponsoring tuition, textbooks, digital learning tablets, and nutritional midday meals for 500+ students.</p>
+                <p>Sponsoring tuition, textbooks, digital learning tablets, and nutritional midday meals for 500+
+                  students.</p>
                 <div class="progress-container">
                   <div class="progress-labels">
                     <span>Raised: $68,200</span>
@@ -1421,7 +2313,8 @@ button, input, select, textarea { max-width: 100%; }
                     <div class="progress-fill" style="width: 78%;"></div>
                   </div>
                 </div>
-                <a href="#donate" class="btn btn-primary btn-block"><i class="fa-solid fa-hand-holding-dollar"></i> Support Education</a>
+                <a href="#donate" class="btn btn-primary btn-block"><i class="fa-solid fa-hand-holding-dollar"></i>
+                  Support Education</a>
               </div>
             </div>
 
@@ -1433,7 +2326,8 @@ button, input, select, textarea { max-width: 100%; }
               </div>
               <div class="campaign-body">
                 <h3>Cyclone &amp; Flood Emergency Aid</h3>
-                <p>Rapid response supplying waterproof tents, dry ration kits, and emergency clean drinking water purification units.</p>
+                <p>Rapid response supplying waterproof tents, dry ration kits, and emergency clean drinking water
+                  purification units.</p>
                 <div class="progress-container">
                   <div class="progress-labels">
                     <span>Raised: $91,400</span>
@@ -1443,7 +2337,8 @@ button, input, select, textarea { max-width: 100%; }
                     <div class="progress-fill" style="width: 91%;"></div>
                   </div>
                 </div>
-                <a href="#donate" class="btn btn-primary btn-block"><i class="fa-solid fa-hand-holding-dollar"></i> Support Disaster Aid</a>
+                <a href="#donate" class="btn btn-primary btn-block"><i class="fa-solid fa-hand-holding-dollar"></i>
+                  Support Disaster Aid</a>
               </div>
             </div>
           </div>
@@ -1455,9 +2350,11 @@ button, input, select, textarea { max-width: 100%; }
     <section id="aboutView" class="view-section">
       <div class="about-hero">
         <div class="container">
-          <span class="section-tag" style="background: rgba(255,255,255,0.15); color: #5eead4;">Transparency First</span>
+          <span class="section-tag" style="background: rgba(255,255,255,0.15); color: #5eead4;">Transparency
+            First</span>
           <h1>About NGO Fund Management System</h1>
-          <p>Founded on the principle that trust is earned through radical financial transparency, direct community empowerment, and technology-driven accountability.</p>
+          <p>Founded on the principle that trust is earned through radical financial transparency, direct community
+            empowerment, and technology-driven accountability.</p>
         </div>
       </div>
 
@@ -1468,10 +2365,13 @@ button, input, select, textarea { max-width: 100%; }
             <span class="section-tag">Our Core Mission</span>
             <h2>Bridging Donors &amp; Communities with 100% Financial Integrity</h2>
             <p style="margin-bottom: 1rem;">
-              Traditional non-profit operations often suffer from administrative opacity, delayed funding, and high overhead costs. <strong>NGO Fund Management System</strong> was built as a unified digital ecosystem where every single contribution is accounted for in a verifiable ledger.
+              Traditional non-profit operations often suffer from administrative opacity, delayed funding, and high
+              overhead costs. <strong>NGO Fund Management System</strong> was built as a unified digital ecosystem where
+              every single contribution is accounted for in a verifiable ledger.
             </p>
             <p style="margin-bottom: 1.5rem;">
-              We operate across 4 key intervention pillars: Healthcare Accessibility, Quality Child Education, Food &amp; Nutrition Security, and Emergency Humanitarian Relief.
+              We operate across 4 key intervention pillars: Healthcare Accessibility, Quality Child Education, Food
+              &amp; Nutrition Security, and Emergency Humanitarian Relief.
             </p>
             <div style="display: flex; gap: 1rem;">
               <a href="#donate" class="btn btn-accent"><i class="fa-solid fa-heart"></i> Partner With Us</a>
@@ -1482,7 +2382,8 @@ button, input, select, textarea { max-width: 100%; }
           <div class="about-image-card">
             <img src="assets/hero-illustration.svg" alt="NGO Fund Transparency Dashboard" />
             <h4 style="margin-top: 1rem; color: var(--primary-dark);">Certified Non-Profit Financial Ecosystem</h4>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Registered under Non-Profit Act 2018 | Tax Exemption 80G Compliant</p>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Registered under Non-Profit Act 2018 | Tax
+              Exemption 80G Compliant</p>
           </div>
         </div>
 
@@ -1586,7 +2487,8 @@ button, input, select, textarea { max-width: 100%; }
                 </div>
                 <div class="custom-amount-input">
                   <span>$</span>
-                  <input type="number" id="customDonationAmount" value="100" min="5" placeholder="Custom Amount" required />
+                  <input type="number" id="customDonationAmount" value="100" min="5" placeholder="Custom Amount"
+                    required />
                 </div>
               </div>
 
@@ -1636,7 +2538,8 @@ button, input, select, textarea { max-width: 100%; }
                   <div class="qr-box">
                     <img src="assets/qr-code.svg" alt="UPI QR Code" />
                   </div>
-                  <div style="font-size: 1.15rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;" id="qrCodeDisplayAmount">
+                  <div style="font-size: 1.15rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;"
+                    id="qrCodeDisplayAmount">
                     $100.00 USD
                   </div>
                   <div class="upi-id-pill">
@@ -1676,11 +2579,13 @@ button, input, select, textarea { max-width: 100%; }
           <!-- Right: Trust & Guarantee Sidebar -->
           <div>
             <div class="card-box" style="margin-bottom: 1.5rem;">
-              <h3 style="margin-bottom: 1rem; color: var(--primary-dark);"><i class="fa-solid fa-shield-check" style="color: var(--primary);"></i> Donor Protection Promise</h3>
+              <h3 style="margin-bottom: 1rem; color: var(--primary-dark);"><i class="fa-solid fa-shield-check"
+                  style="color: var(--primary);"></i> Donor Protection Promise</h3>
               <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem;">
                 <li style="display: flex; gap: 0.6rem; align-items: flex-start;">
                   <i class="fa-solid fa-circle-check" style="color: var(--success); margin-top: 0.2rem;"></i>
-                  <span><strong>100% Tax Deductible:</strong> Recognized non-profit exemption certificate provided instantly.</span>
+                  <span><strong>100% Tax Deductible:</strong> Recognized non-profit exemption certificate provided
+                    instantly.</span>
                 </li>
                 <li style="display: flex; gap: 0.6rem; align-items: flex-start;">
                   <i class="fa-solid fa-circle-check" style="color: var(--success); margin-top: 0.2rem;"></i>
@@ -1688,18 +2593,22 @@ button, input, select, textarea { max-width: 100%; }
                 </li>
                 <li style="display: flex; gap: 0.6rem; align-items: flex-start;">
                   <i class="fa-solid fa-circle-check" style="color: var(--success); margin-top: 0.2rem;"></i>
-                  <span><strong>Direct Ground Tracking:</strong> Receive email updates and photographic proof of utilization.</span>
+                  <span><strong>Direct Ground Tracking:</strong> Receive email updates and photographic proof of
+                    utilization.</span>
                 </li>
               </ul>
             </div>
 
             <!-- Urgent Callout Box -->
             <div class="card-box" style="background: linear-gradient(135deg, #042f2e 0%, #0f766e 100%); color: white;">
-              <h3 style="color: white; margin-bottom: 0.5rem;"><i class="fa-solid fa-handshake-angle" style="color: var(--accent);"></i> Corporate CSR Matching</h3>
+              <h3 style="color: white; margin-bottom: 0.5rem;"><i class="fa-solid fa-handshake-angle"
+                  style="color: var(--accent);"></i> Corporate CSR Matching</h3>
               <p style="color: #ccfbf1; font-size: 0.85rem; margin-bottom: 1rem;">
-                Many employers match employee charitable gifts 1:1. Inquire about our CSR corporate partnership packages.
+                Many employers match employee charitable gifts 1:1. Inquire about our CSR corporate partnership
+                packages.
               </p>
-              <a href="#contact" class="btn btn-sm btn-light" style="color: var(--primary-dark);">Contact CSR Coordinator</a>
+              <a href="#contact" class="btn btn-sm btn-light" style="color: var(--primary-dark);">Contact CSR
+                Coordinator</a>
             </div>
           </div>
         </div>
@@ -1712,22 +2621,26 @@ button, input, select, textarea { max-width: 100%; }
         <div class="section-header">
           <span class="section-tag">Beneficiary Assistance</span>
           <h2>Apply for Non-Profit Aid &amp; Grants</h2>
-          <p>Submit your verified assistance request for healthcare, education, nutrition, or emergency relief funding.</p>
+          <p>Submit your verified assistance request for healthcare, education, nutrition, or emergency relief funding.
+          </p>
         </div>
 
         <div class="request-grid">
           <!-- Left: Application Form -->
           <div class="card-box">
-            <h3 style="margin-bottom: 1.25rem;"><i class="fa-solid fa-file-pen" style="color: var(--primary);"></i> Grant Application Form</h3>
+            <h3 style="margin-bottom: 1.25rem;"><i class="fa-solid fa-file-pen" style="color: var(--primary);"></i>
+              Grant Application Form</h3>
             <form id="fundRequestForm">
               <div class="form-row">
                 <div class="form-group">
                   <label><i class="fa-solid fa-user"></i> Applicant / Contact Person *</label>
-                  <input type="text" id="applicantName" class="form-control" placeholder="Full name of representative" required />
+                  <input type="text" id="applicantName" class="form-control" placeholder="Full name of representative"
+                    required />
                 </div>
                 <div class="form-group">
                   <label><i class="fa-solid fa-building"></i> Organization / Village / School</label>
-                  <input type="text" id="applicantOrg" class="form-control" placeholder="e.g. Hope Community Health Center" />
+                  <input type="text" id="applicantOrg" class="form-control"
+                    placeholder="e.g. Hope Community Health Center" />
                 </div>
               </div>
 
@@ -1754,18 +2667,23 @@ button, input, select, textarea { max-width: 100%; }
 
               <div class="form-group">
                 <label><i class="fa-solid fa-dollar-sign"></i> Estimated Funds Requested (USD) *</label>
-                <input type="number" id="requestAmount" class="form-control" placeholder="e.g. 1500" min="50" required />
+                <input type="number" id="requestAmount" class="form-control" placeholder="e.g. 1500" min="50"
+                  required />
               </div>
 
               <div class="form-group">
                 <label><i class="fa-solid fa-align-left"></i> Purpose &amp; Impact Description *</label>
-                <textarea id="requestPurpose" class="form-control" rows="4" placeholder="Explain the situation, number of direct beneficiaries, and how the funds will be utilized..." required></textarea>
+                <textarea id="requestPurpose" class="form-control" rows="4"
+                  placeholder="Explain the situation, number of direct beneficiaries, and how the funds will be utilized..."
+                  required></textarea>
               </div>
 
               <div class="form-group">
-                <label><i class="fa-solid fa-paperclip"></i> Verification Documents (Hospital Bill, Quotation, ID)</label>
+                <label><i class="fa-solid fa-paperclip"></i> Verification Documents (Hospital Bill, Quotation,
+                  ID)</label>
                 <input type="file" class="form-control" />
-                <span style="font-size: 0.75rem; color: var(--text-muted);">Attach PDF, JPG, or PNG estimates (Max 5MB)</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Attach PDF, JPG, or PNG estimates (Max
+                  5MB)</span>
               </div>
 
               <button type="submit" class="btn btn-primary btn-lg btn-block">
@@ -1777,9 +2695,11 @@ button, input, select, textarea { max-width: 100%; }
           <!-- Right: Live Application Tracker -->
           <div>
             <div class="tracker-card">
-              <h3><i class="fa-solid fa-location-crosshairs" style="color: var(--accent);"></i> Track Application Status</h3>
-              <p>Enter your unique reference tracking code to check real-time status, audit remarks, and disbursement dates.</p>
-              
+              <h3><i class="fa-solid fa-location-crosshairs" style="color: var(--accent);"></i> Track Application Status
+              </h3>
+              <p>Enter your unique reference tracking code to check real-time status, audit remarks, and disbursement
+                dates.</p>
+
               <div class="tracker-input-group">
                 <input type="text" id="trackingInputCode" placeholder="e.g. REQ-2026-8941" />
                 <button type="button" id="trackRequestBtn" class="btn btn-accent">
@@ -1794,9 +2714,11 @@ button, input, select, textarea { max-width: 100%; }
 
             <!-- Helper Box -->
             <div class="card-box" style="margin-top: 1.5rem;">
-              <h4 style="margin-bottom: 0.75rem; color: var(--primary-dark);"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Eligibility Criteria</h4>
+              <h4 style="margin-bottom: 0.75rem; color: var(--primary-dark);"><i class="fa-solid fa-circle-question"
+                  style="color: var(--primary);"></i> Eligibility Criteria</h4>
               <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
-                Grants are disbursed directly to accredited service providers (e.g. hospitals, registered suppliers, schools) to avoid cash misuse.
+                Grants are disbursed directly to accredited service providers (e.g. hospitals, registered suppliers,
+                schools) to avoid cash misuse.
               </p>
               <p style="font-size: 0.85rem; color: var(--text-muted);">
                 Our field volunteers may conduct a quick phone or video call verification.
@@ -1813,7 +2735,8 @@ button, input, select, textarea { max-width: 100%; }
         <div class="section-header">
           <span class="section-tag">Get In Touch</span>
           <h2>Contact NGO Fund Management Team</h2>
-          <p>Have questions about fund allocation, corporate partnerships, or volunteer programs? We are here to assist.</p>
+          <p>Have questions about fund allocation, corporate partnerships, or volunteer programs? We are here to assist.
+          </p>
         </div>
 
         <div class="contact-layout">
@@ -1823,7 +2746,8 @@ button, input, select, textarea { max-width: 100%; }
               <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
               <div>
                 <h4 style="margin-bottom: 0.25rem;">Global Headquarters</h4>
-                <p style="font-size: 0.85rem;">Global NGO Tower, Suite 400, Financial District, NY &amp; MG Road, New Delhi</p>
+                <p style="font-size: 0.85rem;">Global NGO Tower, Suite 400, Financial District, NY &amp; MG Road, New
+                  Delhi</p>
               </div>
             </div>
 
@@ -1854,7 +2778,8 @@ button, input, select, textarea { max-width: 100%; }
 
           <!-- Right: Contact Form -->
           <div class="card-box">
-            <h3 style="margin-bottom: 1.25rem;"><i class="fa-solid fa-paper-plane" style="color: var(--primary);"></i> Send an Inquiry</h3>
+            <h3 style="margin-bottom: 1.25rem;"><i class="fa-solid fa-paper-plane" style="color: var(--primary);"></i>
+              Send an Inquiry</h3>
             <form id="publicContactForm">
               <div class="form-row">
                 <div class="form-group">
@@ -1869,12 +2794,14 @@ button, input, select, textarea { max-width: 100%; }
 
               <div class="form-group">
                 <label>Subject / Topic</label>
-                <input type="text" id="contactSubject" class="form-control" placeholder="e.g. Corporate CSR / Donation Receipt Query" />
+                <input type="text" id="contactSubject" class="form-control"
+                  placeholder="e.g. Corporate CSR / Donation Receipt Query" />
               </div>
 
               <div class="form-group">
                 <label>Your Message *</label>
-                <textarea id="contactMessage" class="form-control" rows="4" placeholder="Type your message here..." required></textarea>
+                <textarea id="contactMessage" class="form-control" rows="4" placeholder="Type your message here..."
+                  required></textarea>
               </div>
 
               <button type="submit" class="btn btn-primary btn-lg btn-block">
@@ -1897,7 +2824,8 @@ button, input, select, textarea { max-width: 100%; }
               <i class="fa-solid fa-chevron-down"></i>
             </div>
             <div class="faq-body">
-              Tax receipts are generated immediately upon successful donation completion. You can download it directly from the confirmation modal or locate it via your registered email address.
+              Tax receipts are generated immediately upon successful donation completion. You can download it directly
+              from the confirmation modal or locate it via your registered email address.
             </div>
           </div>
 
@@ -1907,7 +2835,8 @@ button, input, select, textarea { max-width: 100%; }
               <i class="fa-solid fa-chevron-down"></i>
             </div>
             <div class="faq-body">
-              Over 92% of funds go directly towards program implementation and beneficiary disbursements, with less than 8% allocated for essential technology, logistics, and third-party financial audits.
+              Over 92% of funds go directly towards program implementation and beneficiary disbursements, with less than
+              8% allocated for essential technology, logistics, and third-party financial audits.
             </div>
           </div>
 
@@ -1917,7 +2846,8 @@ button, input, select, textarea { max-width: 100%; }
               <i class="fa-solid fa-chevron-down"></i>
             </div>
             <div class="faq-body">
-              Yes! We actively welcome volunteers, doctors, educators, and field monitors. Send us a message via this contact form or register as a Volunteer Member.
+              Yes! We actively welcome volunteers, doctors, educators, and field monitors. Send us a message via this
+              contact form or register as a Volunteer Member.
             </div>
           </div>
         </div>
@@ -1929,9 +2859,11 @@ button, input, select, textarea { max-width: 100%; }
       <div class="auth-wrapper">
         <div class="auth-card">
           <!-- Left: Graphic Illustration Side (As requested with NGO Fund Management image) -->
-          <div class="auth-graphic-side" style="display:flex !important; visibility:visible !important; opacity:1 !important;">
+          <div class="auth-graphic-side"
+            style="display:flex !important; visibility:visible !important; opacity:1 !important;">
             <div>
-              <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.15); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem;">
+              <div
+                style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.15); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem;">
                 <i class="fa-solid fa-lock"></i> 256-BIT SECURE ACCESS
               </div>
               <h2>NGO Fund Management System</h2>
@@ -1939,12 +2871,16 @@ button, input, select, textarea { max-width: 100%; }
             </div>
 
             <!-- Custom Graphic SVG -->
-            <img src="assets/login-illustration.svg" alt="NGO Fund Management Security" class="auth-illustration-img" style="display:block !important; visibility:visible !important; opacity:1 !important; width:100% !important; max-width:460px !important; height:auto !important; object-fit:contain !important; margin:12px auto !important;" />
+            <img src="assets/login-illustration.svg" alt="NGO Fund Management Security" class="auth-illustration-img"
+              style="display:block !important; visibility:visible !important; opacity:1 !important; width:100% !important; max-width:460px !important; height:auto !important; object-fit:contain !important; margin:12px auto !important;" />
 
             <ul class="auth-feature-list">
-              <li><i class="fa-solid fa-check-circle" style="color: #5eead4;"></i> Real-time Inflow &amp; Expense Tracking</li>
-              <li><i class="fa-solid fa-check-circle" style="color: #5eead4;"></i> Direct 80G Tax Exemption Invoicing</li>
-              <li><i class="fa-solid fa-check-circle" style="color: #5eead4;"></i> Interactive Financial Analytics &amp; Reports</li>
+              <li><i class="fa-solid fa-check-circle" style="color: #5eead4;"></i> Real-time Inflow &amp; Expense
+                Tracking</li>
+              <li><i class="fa-solid fa-check-circle" style="color: #5eead4;"></i> Direct 80G Tax Exemption Invoicing
+              </li>
+              <li><i class="fa-solid fa-check-circle" style="color: #5eead4;"></i> Interactive Financial Analytics &amp;
+                Reports</li>
             </ul>
           </div>
 
@@ -1967,7 +2903,8 @@ button, input, select, textarea { max-width: 100%; }
                 <button type="button" class="demo-pill" data-email="donor.aarav@example.com" data-role="Donor Member">
                   🤝 Donor Member
                 </button>
-                <button type="button" class="demo-pill" data-email="volunteer.elena@example.org" data-role="Volunteer Staff">
+                <button type="button" class="demo-pill" data-email="volunteer.elena@example.org"
+                  data-role="Volunteer Staff">
                   🌱 Volunteer Staff
                 </button>
               </div>
@@ -1995,11 +2932,13 @@ button, input, select, textarea { max-width: 100%; }
                   </select>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.85rem;">
+                <div
+                  style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.85rem;">
                   <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
                     <input type="checkbox" checked /> Remember session
                   </label>
-                  <a href="javascript:void(0)" onclick="showToast('Password reset link dispatched to demo email.', 'info')">Forgot password?</a>
+                  <a href="javascript:void(0)"
+                    onclick="showToast('Password reset link dispatched to demo email.', 'info')">Forgot password?</a>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg btn-block">
@@ -2038,7 +2977,8 @@ button, input, select, textarea { max-width: 100%; }
 
                 <div class="form-group">
                   <label><i class="fa-solid fa-lock"></i> Password *</label>
-                  <input type="password" id="regPassword" class="form-control" placeholder="Create strong password" required />
+                  <input type="password" id="regPassword" class="form-control" placeholder="Create strong password"
+                    required />
                 </div>
 
                 <button type="submit" class="btn btn-accent btn-lg btn-block">
@@ -2059,9 +2999,15 @@ button, input, select, textarea { max-width: 100%; }
   <div id="portalWrapper" class="app-portal-wrapper" style="display: none;">
     <!-- Persistent Sidebar -->
     <aside id="portalSidebar" class="portal-sidebar">
+      <!-- Drag Resizer Handle on Sidebar Right Edge -->
+      <div id="sidebarResizer" class="sidebar-resizer" title="Drag edge to resize sidebar">
+        <div class="resizer-handle-line"></div>
+      </div>
+
       <!-- Sidebar Header with Interactive NGO Logo Toggle -->
       <div class="sidebar-header">
-        <button type="button" id="sidebarLogoToggleBtn" class="sidebar-logo-toggle-btn" title="Toggle / Close Sidebar" aria-label="Toggle Sidebar">
+        <button type="button" id="sidebarLogoToggleBtn" class="sidebar-logo-toggle-btn" title="Toggle / Close Sidebar"
+          aria-label="Toggle Sidebar">
           <div class="sidebar-logo-box">
             <img src="assets/ngo-logo.svg" alt="NGO Logo" class="sidebar-ngo-logo" />
             <span class="logo-toggle-icon"><i class="fa-solid fa-chevron-left"></i></span>
@@ -2143,7 +3089,8 @@ button, input, select, textarea { max-width: 100%; }
       <!-- Topbar Header -->
       <header class="portal-topbar">
         <div class="topbar-left">
-          <button type="button" id="mobileSidebarToggle" class="mobile-sidebar-toggle-btn" title="Open Navigation Menu" aria-label="Open Navigation Menu">
+          <button type="button" id="mobileSidebarToggle" class="mobile-sidebar-toggle-btn" title="Open Navigation Menu"
+            aria-label="Open Navigation Menu">
             <img src="assets/ngo-logo.svg" alt="NGO Logo" class="mobile-logo-icon" />
           </button>
           <div class="page-title-badge">
@@ -2170,7 +3117,7 @@ button, input, select, textarea { max-width: 100%; }
 
       <!-- Portal View Body Containers -->
       <div class="portal-content-body">
-        
+
         <!-- SUB-VIEW 1: DASHBOARD OVERVIEW -->
         <div id="dashboardView" class="dash-view active-dash-view">
           <!-- 5 High-Contrast KPI Summary Cards -->
@@ -2225,7 +3172,8 @@ button, input, select, textarea { max-width: 100%; }
           <div class="charts-grid">
             <div class="chart-card">
               <div class="chart-header">
-                <h3><i class="fa-solid fa-chart-simple" style="color: var(--primary);"></i> 6-Month Inflow vs Outflow Trends</h3>
+                <h3><i class="fa-solid fa-chart-simple" style="color: var(--primary);"></i> 6-Month Inflow vs Outflow
+                  Trends</h3>
                 <span class="badge badge-primary">MONTHLY ANALYTICS</span>
               </div>
               <div class="chart-canvas-box">
@@ -2307,7 +3255,9 @@ button, input, select, textarea { max-width: 100%; }
             <div class="profile-card-sidebar">
               <div id="profileCardBigAvatar" class="profile-avatar-big">SJ</div>
               <h3 id="profileCardName" style="margin-bottom: 0.25rem;">Dr. Sarah Jenkins</h3>
-              <p id="profileCardRole" style="color: var(--primary); font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem;">Administrator &amp; Fund Director</p>
+              <p id="profileCardRole"
+                style="color: var(--primary); font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem;">Administrator
+                &amp; Fund Director</p>
               <div><span id="profileCardKyc" class="badge badge-success">KYC VERIFIED</span></div>
 
               <div class="profile-stats-list">
@@ -2324,7 +3274,8 @@ button, input, select, textarea { max-width: 100%; }
 
             <!-- Profile Edit Form -->
             <div class="card-box">
-              <h3 style="margin-bottom: 1.5rem;"><i class="fa-solid fa-user-pen" style="color: var(--primary);"></i> Edit Profile Details</h3>
+              <h3 style="margin-bottom: 1.5rem;"><i class="fa-solid fa-user-pen" style="color: var(--primary);"></i>
+                Edit Profile Details</h3>
               <form id="userProfileForm">
                 <div class="form-row">
                   <div class="form-group">
@@ -2377,7 +3328,8 @@ button, input, select, textarea { max-width: 100%; }
                 <button class="btn btn-sm btn-primary" onclick="openModal('addDonationModal')">
                   <i class="fa-solid fa-plus"></i> Record New Donation
                 </button>
-                <button class="btn btn-sm btn-light" onclick="showToast('Exported donations ledger to CSV.', 'success')">
+                <button class="btn btn-sm btn-light"
+                  onclick="showToast('Exported donations ledger to CSV.', 'success')">
                   <i class="fa-solid fa-file-csv"></i> Export CSV
                 </button>
               </div>
@@ -2470,7 +3422,8 @@ button, input, select, textarea { max-width: 100%; }
                 <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
                 <div>
                   <h4 style="margin-bottom: 0.25rem;">Global Headquarters</h4>
-                  <p style="font-size: 0.85rem;">Global NGO Tower, Suite 400, Financial District, NY &amp; MG Road, New Delhi</p>
+                  <p style="font-size: 0.85rem;">Global NGO Tower, Suite 400, Financial District, NY &amp; MG Road, New
+                    Delhi</p>
                 </div>
               </div>
 
@@ -2501,7 +3454,8 @@ button, input, select, textarea { max-width: 100%; }
 
             <!-- Right: Contact Form -->
             <div class="card-box">
-              <h3 style="margin-bottom: 1.25rem;"><i class="fa-solid fa-paper-plane" style="color: var(--primary);"></i> Send an Inquiry</h3>
+              <h3 style="margin-bottom: 1.25rem;"><i class="fa-solid fa-paper-plane" style="color: var(--primary);"></i>
+                Send an Inquiry</h3>
               <form id="portalContactForm">
                 <div class="form-row">
                   <div class="form-group">
@@ -2510,24 +3464,28 @@ button, input, select, textarea { max-width: 100%; }
                   </div>
                   <div class="form-group">
                     <label>Email Address *</label>
-                    <input type="email" id="portalContactEmail" class="form-control" placeholder="john@example.com" required />
+                    <input type="email" id="portalContactEmail" class="form-control" placeholder="john@example.com"
+                      required />
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label>Subject / Topic</label>
-                  <input type="text" id="portalContactSubject" class="form-control" placeholder="e.g. Corporate CSR / Donation Receipt Query" />
+                  <input type="text" id="portalContactSubject" class="form-control"
+                    placeholder="e.g. Corporate CSR / Donation Receipt Query" />
                 </div>
 
                 <div class="form-group">
                   <label>Your Message *</label>
-                  <textarea id="portalContactMessage" class="form-control" rows="4" placeholder="Type your message here..." required></textarea>
+                  <textarea id="portalContactMessage" class="form-control" rows="4"
+                    placeholder="Type your message here..." required></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg btn-block">
                   <i class="fa-solid fa-paper-plane"></i> Send Direct Message
                 </button>
-                <div id="portalContactStatus" style="display:none; margin-top: 0.75rem; padding: 0.65rem 0.9rem; border-radius: 8px; background: rgba(16,185,129,0.12); color: #059669; font-size: 0.85rem;">
+                <div id="portalContactStatus"
+                  style="display:none; margin-top: 0.75rem; padding: 0.65rem 0.9rem; border-radius: 8px; background: rgba(16,185,129,0.12); color: #059669; font-size: 0.85rem;">
                   <i class="fa-solid fa-circle-check"></i> Your message has been sent to our team.
                 </div>
               </form>
@@ -2575,8 +3533,9 @@ button, input, select, textarea { max-width: 100%; }
 
             <!-- Gateway Toggles & Data Management -->
             <div class="settings-card">
-              <h3><i class="fa-solid fa-shield-halved" style="color: var(--accent);"></i> Gateways &amp; Data Controls</h3>
-              
+              <h3><i class="fa-solid fa-shield-halved" style="color: var(--accent);"></i> Gateways &amp; Data Controls
+              </h3>
+
               <div class="switch-control">
                 <div>
                   <div class="switch-label">Enable UPI / QR Code Gateway</div>
@@ -2591,7 +3550,8 @@ button, input, select, textarea { max-width: 100%; }
               <div class="switch-control">
                 <div>
                   <div class="switch-label">Enable Card / Wire Gateway</div>
-                  <div style="font-size: 0.75rem; color: var(--text-muted);">Accept debit/credit cards and bank wires</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Accept debit/credit cards and bank wires
+                  </div>
                 </div>
                 <label class="switch">
                   <input type="checkbox" checked />
@@ -2613,10 +3573,12 @@ button, input, select, textarea { max-width: 100%; }
               <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
                 <h4 style="margin-bottom: 0.75rem; color: #dc2626;">System Maintenance</h4>
                 <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                  <button type="button" id="resetSystemDataBtn" class="btn btn-outline" style="border-color: #dc2626; color: #dc2626;">
+                  <button type="button" id="resetSystemDataBtn" class="btn btn-outline"
+                    style="border-color: #dc2626; color: #dc2626;">
                     <i class="fa-solid fa-rotate-left"></i> Reset Demo Data
                   </button>
-                  <button type="button" class="btn btn-light" onclick="showToast('Data backup JSON downloaded.', 'info')">
+                  <button type="button" class="btn btn-light"
+                    onclick="showToast('Data backup JSON downloaded.', 'info')">
                     <i class="fa-solid fa-download"></i> Backup JSON
                   </button>
                 </div>
@@ -2640,7 +3602,8 @@ button, input, select, textarea { max-width: 100%; }
           <h3 style="margin: 0;">FUND BRIDGE</h3>
         </div>
         <p style="font-size: 0.85rem; line-height: 1.6; color: #94a3b8;">
-          A transparent non-profit platform ensuring 100% accountability in fund raising, audited disbursements, and real-time community impact tracking.
+          A transparent non-profit platform ensuring 100% accountability in fund raising, audited disbursements, and
+          real-time community impact tracking.
         </p>
       </div>
 
@@ -2666,7 +3629,8 @@ button, input, select, textarea { max-width: 100%; }
 
       <div class="footer-links">
         <h4>Transparency</h4>
-        <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">Registered 501(c)(3) &amp; Section 80G Non-Profit Organization.</p>
+        <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">Registered 501(c)(3) &amp; Section 80G Non-Profit
+          Organization.</p>
         <p style="font-size: 0.85rem;">24/7 Helpline: +1 (800) 456-7890</p>
       </div>
     </div>
@@ -2680,7 +3644,7 @@ button, input, select, textarea { max-width: 100%; }
   <!-- ==========================================================================
        MODALS
        ========================================================================== -->
-  
+
   <!-- 1. Donation Tax Exemption Receipt Modal -->
   <div id="donationReceiptModal" class="modal-backdrop">
     <div class="modal-window">
@@ -2776,7 +3740,8 @@ button, input, select, textarea { max-width: 100%; }
         <div class="modal-body">
           <div class="form-group">
             <label>Claim Description / Purpose *</label>
-            <input type="text" id="modalExpenseTitle" class="form-control" placeholder="e.g. Mobile Ambulance Medicine Stock" required />
+            <input type="text" id="modalExpenseTitle" class="form-control"
+              placeholder="e.g. Mobile Ambulance Medicine Stock" required />
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -2796,7 +3761,8 @@ button, input, select, textarea { max-width: 100%; }
           </div>
           <div class="form-group">
             <label>Vendor / Supplier Name *</label>
-            <input type="text" id="modalExpenseVendor" class="form-control" placeholder="e.g. Apex Health Logistics" required />
+            <input type="text" id="modalExpenseVendor" class="form-control" placeholder="e.g. Apex Health Logistics"
+              required />
           </div>
           <div class="form-group">
             <label>Attach Vendor Invoice (Mockup)</label>
@@ -2834,54 +3800,54 @@ button, input, select, textarea { max-width: 100%; }
   <script src="js/charts.js"></script>
   <script src="js/app.js"></script>
 
-<script id="portal-contact-view-fix-js">
-document.addEventListener("DOMContentLoaded", function () {
+  <script id="portal-contact-view-fix-js">
+    document.addEventListener("DOMContentLoaded", function () {
 
-    var portalWrapper   = document.getElementById("portalWrapper");
-    var contactLink     = document.querySelector('.sidebar-nav-item[data-target="portalContact"]');
-    var contactView     = document.getElementById("portalContactView");
-    var topbarTitle      = document.getElementById("topbarPageTitle");
-    var contactForm      = document.getElementById("portalContactForm");
-    var contactStatus    = document.getElementById("portalContactStatus");
+      var portalWrapper = document.getElementById("portalWrapper");
+      var contactLink = document.querySelector('.sidebar-nav-item[data-target="portalContact"]');
+      var contactView = document.getElementById("portalContactView");
+      var topbarTitle = document.getElementById("topbarPageTitle");
+      var contactForm = document.getElementById("portalContactForm");
+      var contactStatus = document.getElementById("portalContactStatus");
 
-    if (!portalWrapper || !contactLink || !contactView) {
+      if (!portalWrapper || !contactLink || !contactView) {
         return;
-    }
+      }
 
-    function openPortalContactView() {
+      function openPortalContactView() {
         // Show only the contact sub-view inside the dashboard.
         document.querySelectorAll(".portal-content-body .dash-view").forEach(function (view) {
-            view.classList.remove("active-dash-view");
+          view.classList.remove("active-dash-view");
         });
         contactView.classList.add("active-dash-view");
 
         // Mark the sidebar link as active.
         document.querySelectorAll(".sidebar-nav-item").forEach(function (item) {
-            item.classList.remove("active");
+          item.classList.remove("active");
         });
         contactLink.classList.add("active");
 
         // Update the topbar heading.
         if (topbarTitle) {
-            topbarTitle.textContent = "📩 Contact Us";
+          topbarTitle.textContent = "📩 Contact Us";
         }
 
         // Close the sidebar on mobile after navigating.
         portalWrapper.classList.remove("sidebar-expanded");
         if (portalWrapper.classList.contains("mobile-open")) {
-            portalWrapper.classList.remove("mobile-open");
+          portalWrapper.classList.remove("mobile-open");
         }
         var sidebarEl = document.getElementById("portalSidebar");
         if (sidebarEl) {
-            sidebarEl.classList.remove("mobile-open");
+          sidebarEl.classList.remove("mobile-open");
         }
 
         window.dispatchEvent(new Event("resize"));
-    }
+      }
 
-    // Intercept the click in the capture phase so this always wins,
-    // regardless of any other listeners already bound to this link.
-    document.addEventListener("click", function (event) {
+      // Intercept the click in the capture phase so this always wins,
+      // regardless of any other listeners already bound to this link.
+      document.addEventListener("click", function (event) {
         var link = event.target.closest('.sidebar-nav-item[data-target="portalContact"]');
         if (!link) return;
 
@@ -2889,162 +3855,206 @@ document.addEventListener("DOMContentLoaded", function () {
         event.stopPropagation();
 
         openPortalContactView();
-    }, true);
+      }, true);
 
-    // Simple handling for the in-dashboard contact form.
-    if (contactForm) {
+      // Simple handling for the in-dashboard contact form.
+      if (contactForm) {
         contactForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-            if (contactStatus) {
-                contactStatus.style.display = "block";
-            }
-            contactForm.reset();
+          event.preventDefault();
+          if (contactStatus) {
+            contactStatus.style.display = "block";
+          }
+          contactForm.reset();
         });
-    }
+      }
 
-});
-</script>
+    });
+  </script>
 
-<!-- Public Navbar: mobile hamburger menu toggle + single-active-link behavior -->
-<script id="public-nav-mobile-toggle-js">
-document.addEventListener("DOMContentLoaded", function () {
+  <!-- Public Navbar: mobile hamburger menu toggle + single-active-link behavior -->
+  <script id="public-nav-mobile-toggle-js">
+    document.addEventListener("DOMContentLoaded", function () {
 
-    var menuBtn = document.getElementById("mobileMenuBtn");
-    var navMenu = document.getElementById("publicNavMenu");
+      var menuBtn = document.getElementById("mobileMenuBtn");
+      var navMenu = document.getElementById("publicNavMenu");
 
-    if (!menuBtn || !navMenu) {
+      if (!menuBtn || !navMenu) {
         return;
-    }
+      }
 
-    function closeMenu() {
+      function closeMenu() {
         navMenu.classList.remove("open");
         // Only force-hide with inline display on mobile widths, where the
         // menu is a toggled dropdown. On desktop/tablet widths the menu bar
         // must always stay visible, so we clear any inline override instead
         // and let the responsive CSS control its display.
         if (window.innerWidth <= 768) {
-            navMenu.style.display = "none";
+          navMenu.style.display = "none";
         } else {
-            navMenu.style.display = "";
+          navMenu.style.display = "";
         }
-    }
+      }
 
-    function openMenu() {
+      function openMenu() {
         // Close the notifications dropdown first, if it's open.
         var notifDropdown = document.getElementById("publicNotifDropdown");
         if (notifDropdown) {
-            notifDropdown.style.display = "none";
+          notifDropdown.style.display = "none";
         }
         navMenu.classList.add("open");
         navMenu.style.display = "flex";
-    }
+      }
 
-    function toggleMenu() {
+      function toggleMenu() {
         if (navMenu.classList.contains("open")) {
-            closeMenu();
+          closeMenu();
         } else {
-            openMenu();
+          openMenu();
         }
-    }
+      }
 
-    // Open / close the dropdown when the hamburger icon is tapped.
-    // Capture phase so this always fires, even if other scripts bind
-    // conflicting handlers to the same button.
-    menuBtn.addEventListener("click", function (event) {
+      // Open / close the dropdown when the hamburger icon is tapped.
+      // Capture phase so this always fires, even if other scripts bind
+      // conflicting handlers to the same button.
+      menuBtn.addEventListener("click", function (event) {
         event.stopPropagation();
         toggleMenu();
-    }, true);
+      }, true);
 
-    // When any menu option is chosen: mark only that option as active,
-    // then close the menu. Delegated + capture phase so it keeps working
-    // even if the menu links are re-rendered later, and always runs before
-    // any other click handler on the link (e.g. SPA view-switching logic).
-    document.addEventListener("click", function (event) {
+      // When any menu option is chosen: mark only that option as active,
+      // then close the menu. Delegated + capture phase so it keeps working
+      // even if the menu links are re-rendered later, and always runs before
+      // any other click handler on the link (e.g. SPA view-switching logic).
+      document.addEventListener("click", function (event) {
         var link = event.target.closest("#publicNavMenu .nav-link");
         if (!link) return;
 
         navMenu.querySelectorAll(".nav-link").forEach(function (item) {
-            item.classList.remove("active");
+          item.classList.remove("active");
         });
         link.classList.add("active");
         closeMenu();
-    }, true);
+      }, true);
 
-    // Close the menu if the user taps anywhere outside of it.
-    document.addEventListener("click", function (event) {
+      // Close the menu if the user taps anywhere outside of it.
+      document.addEventListener("click", function (event) {
         if (!navMenu.classList.contains("open")) return;
         if (navMenu.contains(event.target) || menuBtn.contains(event.target)) return;
         closeMenu();
-    });
+      });
 
-    // Close the menu automatically if the screen is resized back to desktop width,
-    // and clear the forced inline display so desktop CSS takes back over.
-    window.addEventListener("resize", function () {
+      // Close the menu automatically if the screen is resized back to desktop width,
+      // and clear the forced inline display so desktop CSS takes back over.
+      window.addEventListener("resize", function () {
         if (window.innerWidth > 768) {
-            navMenu.classList.remove("open");
-            navMenu.style.display = "";
+          navMenu.classList.remove("open");
+          navMenu.style.display = "";
         }
+      });
+
     });
+  </script>
 
-});
-</script>
+  <!-- Public Navbar: Live Announcements (bell) dropdown — closes after choosing any item -->
+  <script id="public-notif-dropdown-close-js">
+    document.addEventListener("DOMContentLoaded", function () {
 
-<!-- Public Navbar: Live Announcements (bell) dropdown — closes after choosing any item -->
-<script id="public-notif-dropdown-close-js">
-document.addEventListener("DOMContentLoaded", function () {
+      var notifBtn = document.getElementById("publicNotifBtn");
+      var notifDropdown = document.getElementById("publicNotifDropdown");
+      var notifWrap = document.getElementById("publicNotifWrap");
 
-    var notifBtn = document.getElementById("publicNotifBtn");
-    var notifDropdown = document.getElementById("publicNotifDropdown");
-    var notifWrap = document.getElementById("publicNotifWrap");
-
-    if (!notifBtn || !notifDropdown || !notifWrap) {
+      if (!notifBtn || !notifDropdown || !notifWrap) {
         return;
-    }
+      }
 
-    function isOpen() {
+      function isOpen() {
         return notifDropdown.style.display === "block";
-    }
+      }
 
-    function closeDropdown() {
+      function closeDropdown() {
         notifDropdown.style.display = "none";
-    }
+      }
 
-    function openDropdown() {
-        // Close the mobile hamburger menu first, if it's open.
+      function openDropdown() {
+        // Close the mobile hamburger menu first, if it's open — but only
+        // force-hide it on mobile widths. On desktop/tablet widths the nav
+        // menu bar must always stay visible alongside the dropdown.
         var navMenu = document.getElementById("publicNavMenu");
         if (navMenu) {
-            navMenu.classList.remove("open");
+          navMenu.classList.remove("open");
+          if (window.innerWidth <= 768) {
             navMenu.style.display = "none";
+          } else {
+            navMenu.style.display = "";
+          }
         }
         notifDropdown.style.display = "block";
-    }
+      }
 
-    // Toggle the dropdown when the bell icon is tapped. Capture phase so this
-    // always fires, even alongside any other click handler already bound to it.
-    notifBtn.addEventListener("click", function (event) {
+      // Toggle the dropdown when the bell icon is tapped. Capture phase so this
+      // always fires, even alongside any other click handler already bound to it.
+      notifBtn.addEventListener("click", function (event) {
         event.stopPropagation();
         if (isOpen()) {
-            closeDropdown();
+          closeDropdown();
         } else {
-            openDropdown();
+          openDropdown();
         }
-    }, true);
+      }, true);
 
-    // Close the dropdown as soon as any item or link inside it is chosen.
-    document.addEventListener("click", function (event) {
+      // Close the dropdown as soon as any item or link inside it is chosen.
+      document.addEventListener("click", function (event) {
         var chosen = event.target.closest("#publicNotifDropdown a, #publicNotifDropdown button");
         if (!chosen) return;
         closeDropdown();
-    }, true);
+      }, true);
 
-    // Close it if the user taps anywhere outside the dropdown.
-    document.addEventListener("click", function (event) {
+      // Close it if the user taps anywhere outside the dropdown.
+      document.addEventListener("click", function (event) {
         if (!isOpen()) return;
         if (notifWrap.contains(event.target)) return;
         closeDropdown();
-    });
+      });
 
-});
-</script>
+    });
+  </script>
+
+  <!-- Portal Sidebar: make the admin profile pill (avatar + name, just above
+     the Logout button) open the Profile view, same as the "Profile" link
+     in the sidebar menu. -->
+  <script id="sidebar-profile-pill-fix-js">
+    document.addEventListener("DOMContentLoaded", function () {
+
+      var userPill = document.querySelector(".sidebar-user-pill");
+      var profileLink = document.querySelector('.sidebar-nav-item[data-target="profile"]');
+
+      if (!userPill || !profileLink) {
+        return;
+      }
+
+      // Make it behave like a clickable control, without changing its look.
+      userPill.style.cursor = "pointer";
+      userPill.setAttribute("role", "button");
+      userPill.setAttribute("tabindex", "0");
+
+      function goToProfile(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        // Reuse the existing, already-working Profile link's own click
+        // handling instead of re-implementing view switching here.
+        profileLink.click();
+      }
+
+      userPill.addEventListener("click", goToProfile);
+
+      userPill.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          goToProfile(event);
+        }
+      });
+
+    });
+  </script>
 </body>
+
 </html>
