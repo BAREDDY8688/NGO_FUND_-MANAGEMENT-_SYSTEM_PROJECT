@@ -36,6 +36,11 @@ function initRouter() {
 function handleRoute() {
   const hash = window.location.hash.replace('#', '') || 'home';
 
+  // Automatically close any open modals (Record Donation, Submit Expense, Receipt, Logout) on navigation
+  document.querySelectorAll('.modal-backdrop').forEach(modal => {
+    modal.classList.remove('active', 'open', 'show');
+  });
+
   const publicNavbar = document.getElementById('publicNavbar');
   const publicFooter = document.getElementById('publicFooter');
   const publicContainer = document.getElementById('publicViewsContainer');
@@ -642,14 +647,20 @@ function initDashboardEvents() {
     });
   }
 
-  // Auto-close mobile sidebar when navigating via sidebar link on small screens
-  document.querySelectorAll('.sidebar-nav-item').forEach(item => {
-    item.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        closeMobileSidebar();
+  // Close any open modals & auto-close mobile sidebar when navigating via any sidebar option (Contact Us, Profile, Donations, etc.)
+  if (sidebar) {
+    sidebar.addEventListener('click', (e) => {
+      // If clicking anything inside sidebar other than the logo toggle button itself
+      if (!e.target.closest('#sidebarLogoToggleBtn')) {
+        document.querySelectorAll('.modal-backdrop').forEach(modal => {
+          modal.classList.remove('active', 'open', 'show');
+        });
+        if (window.innerWidth <= 768) {
+          closeMobileSidebar();
+        }
       }
-    });
-  });
+    }, true);
+  }
 
   // Real-time Drag Resizable Sidebar Edge Logic
   const sidebarResizer = document.getElementById('sidebarResizer');
