@@ -3841,6 +3841,13 @@
         if (sidebarEl) {
           sidebarEl.classList.remove("mobile-open");
         }
+        // Also clear the mobile sidebar's dark blurred backdrop overlay —
+        // otherwise, if it was opened (e.g. via the sidebar logo toggle),
+        // it stays stuck on top of this view after navigating.
+        var sidebarBackdropEl = document.getElementById("sidebarBackdrop");
+        if (sidebarBackdropEl) {
+          sidebarBackdropEl.classList.remove("active");
+        }
 
         window.dispatchEvent(new Event("resize"));
       }
@@ -3856,6 +3863,66 @@
 
         openPortalContactView();
       }, true);
+
+      // ------------------------------------------------------------------
+      // Messages view: force it open reliably, especially right after
+      // visiting Contact Us. Contact Us is a custom view (not one that
+      // js/app.js originally knew about), and navigating away from it was
+      // leaving app.js's own view-switching logic in a state where the
+      // Messages view would no longer open on click.
+      //
+      // This handler does NOT call preventDefault()/stopPropagation(), so
+      // the normal click (and any real handling still done by js/app.js,
+      // such as populating the inbox) keeps running as before — this just
+      // guarantees the correct view/sidebar-state is shown no matter what.
+      // ------------------------------------------------------------------
+      var messagesLink = document.querySelector('.sidebar-nav-item[data-target="messages"]');
+      var messagesView = document.getElementById("messagesView");
+      var messagesBadge = document.getElementById("sidebarMessagesBadge");
+
+      function openMessagesView() {
+        document.querySelectorAll(".portal-content-body .dash-view").forEach(function (view) {
+          view.classList.remove("active-dash-view");
+        });
+        messagesView.classList.add("active-dash-view");
+
+        document.querySelectorAll(".sidebar-nav-item").forEach(function (item) {
+          item.classList.remove("active");
+        });
+        messagesLink.classList.add("active");
+
+        if (topbarTitle) {
+          topbarTitle.textContent = "📨 Communications & Donor Inquiries";
+        }
+
+        if (messagesBadge) {
+          messagesBadge.style.display = "none";
+        }
+
+        portalWrapper.classList.remove("sidebar-expanded");
+        if (portalWrapper.classList.contains("mobile-open")) {
+          portalWrapper.classList.remove("mobile-open");
+        }
+        var sidebarEl = document.getElementById("portalSidebar");
+        if (sidebarEl) {
+          sidebarEl.classList.remove("mobile-open");
+        }
+        var sidebarBackdropEl2 = document.getElementById("sidebarBackdrop");
+        if (sidebarBackdropEl2) {
+          sidebarBackdropEl2.classList.remove("active");
+        }
+
+        window.dispatchEvent(new Event("resize"));
+      }
+
+      if (messagesLink && messagesView) {
+        document.addEventListener("click", function (event) {
+          var link = event.target.closest('.sidebar-nav-item[data-target="messages"]');
+          if (!link) return;
+
+          openMessagesView();
+        }, true);
+      }
 
       // Simple handling for the in-dashboard contact form.
       if (contactForm) {
