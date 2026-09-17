@@ -2067,6 +2067,621 @@
       }
     }
   </style>
+
+  <style id="forgot-password-module-css">
+    /* =========================================================
+       FORGOT PASSWORD MODULE
+       Reuses .auth-wrapper / .auth-card / .form-control / .btn
+       styling from css/style.css so it matches the Login page.
+       ========================================================= */
+    #forgotPasswordView {
+      display: none;
+    }
+
+    #forgotPasswordView.active-view {
+      display: block;
+    }
+
+    .fp-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: none;
+      border: none;
+      color: var(--primary-hover, #0f766e);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 1.25rem;
+    }
+
+    .fp-back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Step Progress Indicator */
+    .fp-steps {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.75rem;
+    }
+
+    .fp-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      flex: 0 0 auto;
+      opacity: 0.5;
+      transition: opacity 0.2s ease;
+    }
+
+    .fp-step.active,
+    .fp-step.completed {
+      opacity: 1;
+    }
+
+    .fp-step-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .fp-step.active .fp-step-circle {
+      background: var(--primary, #0d9488);
+      color: #fff;
+    }
+
+    .fp-step.completed .fp-step-circle {
+      background: #5eead4;
+      color: #064e3b;
+    }
+
+    .fp-step-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #64748b;
+      white-space: nowrap;
+    }
+
+    .fp-step.active .fp-step-label {
+      color: var(--primary-hover, #0f766e);
+    }
+
+    .fp-step-line {
+      flex: 1 1 auto;
+      height: 2px;
+      background: #e2e8f0;
+      margin: 0 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .fp-panel-title {
+      margin: 0 0 0.4rem 0;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #1e293b;
+    }
+
+    .fp-panel-subtitle {
+      margin: 0 0 1.25rem 0;
+      font-size: 0.85rem;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .fp-secondary-btn {
+      margin-top: 0.75rem;
+    }
+
+    /* OTP Input Boxes */
+    .fp-otp-group {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: space-between;
+    }
+
+    .fp-otp-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      border: 1px solid #cbd5e1;
+      border-radius: var(--radius, 8px);
+      background: #fff;
+      color: #1e293b;
+      min-width: 0;
+    }
+
+    .fp-otp-box:focus {
+      outline: none;
+      border-color: var(--primary, #0d9488);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+    }
+
+    .fp-otp-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+    }
+
+    .fp-otp-meta a {
+      font-weight: 700;
+      color: var(--primary-hover, #0f766e);
+    }
+
+    .fp-error-text {
+      color: #dc2626;
+      font-size: 0.8rem;
+      font-weight: 600;
+      min-height: 1rem;
+      display: block;
+    }
+
+    .fp-success-icon {
+      font-size: 3rem;
+      color: #10b981;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Responsive Breakpoints - mirrors #loginView rules above */
+    @media (max-width: 768px) {
+      #forgotPasswordView .auth-wrapper {
+        display: flex !important;
+        width: 100% !important;
+        min-height: 0 !important;
+        padding: 10px !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+      }
+
+      #forgotPasswordView .auth-card {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 520px !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      #forgotPasswordView .auth-graphic-side {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 170px !important;
+        height: auto !important;
+        flex: 0 0 auto !important;
+        order: 1 !important;
+        overflow: visible !important;
+        text-align: center !important;
+      }
+
+      #forgotPasswordView .auth-graphic-side img.auth-illustration-img {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: static !important;
+        width: 85% !important;
+        max-width: 300px !important;
+        height: auto !important;
+        max-height: 190px !important;
+        min-height: 80px !important;
+        object-fit: contain !important;
+        margin: 8px auto !important;
+      }
+
+      #forgotPasswordView .auth-graphic-side h2 {
+        font-size: 1.25rem !important;
+        line-height: 1.2 !important;
+        overflow-wrap: anywhere !important;
+      }
+
+      #forgotPasswordView .auth-graphic-side p {
+        font-size: 0.78rem !important;
+        line-height: 1.4 !important;
+      }
+
+      #forgotPasswordView .auth-feature-list {
+        width: 100% !important;
+        margin-top: 0.5rem !important;
+        text-align: left !important;
+      }
+
+      #forgotPasswordView .auth-form-side {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        order: 2 !important;
+      }
+
+      .fp-step-label {
+        font-size: 0.62rem;
+      }
+
+      .fp-otp-box {
+        font-size: 1.05rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #forgotPasswordView .auth-graphic-side {
+        min-height: 145px !important;
+        padding: 10px !important;
+      }
+
+      #forgotPasswordView .auth-graphic-side img.auth-illustration-img {
+        width: 82% !important;
+        max-width: 260px !important;
+        max-height: 155px !important;
+      }
+
+      #forgotPasswordView .auth-feature-list {
+        display: none !important;
+      }
+
+      .fp-steps {
+        margin-bottom: 1.35rem;
+      }
+
+      .fp-step-line {
+        margin: 0 0.2rem;
+        margin-bottom: 1.1rem;
+      }
+
+      .fp-step-label {
+        display: none;
+      }
+
+      .fp-otp-group {
+        gap: 0.35rem;
+      }
+
+      .fp-otp-box {
+        font-size: 1rem;
+        border-radius: 6px;
+      }
+
+      .fp-panel-title {
+        font-size: 1.15rem;
+      }
+    }
+  </style>
+
+  <style id="google-auth-module-css">
+    /* ================= GOOGLE AUTHENTICATION ================= */
+    .google-auth-wrap {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .btn-google {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 0.7rem 1rem;
+      background: #fff;
+      border: 1px solid #dadce0;
+      border-radius: var(--radius, 8px);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #3c4043;
+      cursor: pointer;
+      transition: box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-google:hover {
+      box-shadow: 0 1px 6px rgba(32, 33, 36, 0.2);
+      background: #f8f9fa;
+    }
+
+    .google-g-icon {
+      flex-shrink: 0;
+    }
+
+    .google-chooser {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid #dadce0;
+      border-radius: var(--radius, 10px);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+      z-index: 40;
+      overflow: hidden;
+    }
+
+    .google-chooser-header {
+      padding: 0.75rem 1rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #5f6368;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .google-account-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      border-top: 1px solid #f1f3f4;
+    }
+
+    .google-account-item:hover {
+      background: #f8f9fa;
+    }
+
+    .google-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .google-avatar-plus {
+      background: #e8eaed;
+      color: #5f6368;
+    }
+
+    .google-account-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .google-account-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #202124;
+    }
+
+    .google-account-email {
+      font-size: 0.75rem;
+      color: #5f6368;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin: 1rem 0;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .auth-divider span {
+      padding: 0 0.75rem;
+    }
+
+    /* ================= SIMULATED EMAIL INBOX (Forgot Password) ================= */
+    #fpInboxView {
+      display: none;
+    }
+
+    #fpInboxView.active-view {
+      display: block;
+    }
+
+    .fp-inbox-card {
+      background: #fff;
+      border-radius: var(--radius-lg, 14px);
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    .fp-inbox-banner {
+      background: #fff7ed;
+      color: #9a3412;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.6rem 1.25rem;
+      border-bottom: 1px solid #fed7aa;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .fp-inbox-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .fp-inbox-toolbar h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #1e293b;
+    }
+
+    .fp-inbox-list {
+      padding: 0.5rem;
+    }
+
+    .fp-inbox-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.9rem 0.85rem;
+      background: #f0fdfa;
+      border: 1px solid #99f6e4;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      margin-bottom: 0.5rem;
+    }
+
+    .fp-inbox-item:hover {
+      background: #ccfbf1;
+    }
+
+    .fp-inbox-item.read {
+      background: #fff;
+      border-color: #e2e8f0;
+    }
+
+    .fp-inbox-sender-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary, #0d9488);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+
+    .fp-inbox-item-body {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .fp-inbox-item-sender {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #1e293b;
+    }
+
+    .fp-inbox-item-subject {
+      font-size: 0.82rem;
+      color: #334155;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .fp-inbox-item-time {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      flex-shrink: 0;
+    }
+
+    .fp-unread-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ef4444;
+      flex-shrink: 0;
+    }
+
+    .fp-email-detail {
+      padding: 0 1.25rem 1.5rem;
+      display: none;
+    }
+
+    .fp-email-detail.open {
+      display: block;
+    }
+
+    .fp-email-detail-header {
+      padding: 1rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 1rem;
+    }
+
+    .fp-email-detail-header h4 {
+      margin: 0 0 0.5rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #1e293b;
+    }
+
+    .fp-email-meta-row {
+      font-size: 0.78rem;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .fp-email-body {
+      font-size: 0.88rem;
+      color: #334155;
+      line-height: 1.7;
+    }
+
+    .fp-otp-display {
+      display: inline-block;
+      margin: 1rem 0;
+      padding: 0.75rem 1.5rem;
+      background: #f0fdfa;
+      border: 1.5px dashed var(--primary, #0d9488);
+      border-radius: 10px;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 0.4rem;
+      color: var(--primary-hover, #0f766e);
+    }
+
+    .fp-inbox-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 480px) {
+      .fp-otp-display {
+        font-size: 1.2rem;
+        letter-spacing: 0.25rem;
+        padding: 0.6rem 1rem;
+      }
+
+      .fp-inbox-toolbar h3 {
+        font-size: 1rem;
+      }
+
+      .fp-email-detail {
+        padding: 0 0.85rem 1.25rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -2891,6 +3506,51 @@
               <button type="button" id="tabRegisterBtn" class="auth-tab-btn">New User (Register)</button>
             </div>
 
+            <!-- Google Authentication -->
+            <div class="google-auth-wrap">
+              <button type="button" class="btn-google" id="googleAuthBtn" onclick="toggleGoogleChooser(event)">
+                <svg class="google-g-icon" viewBox="0 0 48 48" width="18" height="18" aria-hidden="true">
+                  <path fill="#FFC107"
+                    d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z" />
+                  <path fill="#FF3D00"
+                    d="M6.3 14.7l6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4c-7.5 0-14 4.2-17.7 10.7z" />
+                  <path fill="#4CAF50"
+                    d="M24 44c5.5 0 10.4-2.1 14.2-5.5l-6.6-5.6C29.6 34.9 26.9 36 24 36c-5.3 0-9.7-3.1-11.3-7.6l-6.6 5.1C9.9 39.7 16.4 44 24 44z" />
+                  <path fill="#1976D2"
+                    d="M43.6 20.5H42V20H24v8h11.3c-.8 2.4-2.3 4.4-4.3 5.9l6.6 5.6C40.5 37 44 31.8 44 24c0-1.3-.1-2.7-.4-3.5z" />
+                </svg>
+                <span id="googleAuthBtnLabel">Continue with Google</span>
+              </button>
+
+              <!-- Simulated Google Account Chooser -->
+              <div class="google-chooser" id="googleChooser" style="display:none;">
+                <div class="google-chooser-header">Choose an account (demo)</div>
+                <button type="button" class="google-account-item" onclick="selectGoogleAccount('admin')">
+                  <span class="google-avatar" style="background:#0d9488;">A</span>
+                  <span class="google-account-info">
+                    <span class="google-account-name">Admin Demo</span>
+                    <span class="google-account-email">admin.demo@gmail.com</span>
+                  </span>
+                </button>
+                <button type="button" class="google-account-item" onclick="selectGoogleAccount('donor')">
+                  <span class="google-avatar" style="background:#f59e0b;">D</span>
+                  <span class="google-account-info">
+                    <span class="google-account-name">Aarav Sharma</span>
+                    <span class="google-account-email">aarav.donor@gmail.com</span>
+                  </span>
+                </button>
+                <button type="button" class="google-account-item google-account-other"
+                  onclick="selectGoogleAccount('other')">
+                  <span class="google-avatar google-avatar-plus"><i class="fa-solid fa-user-plus"></i></span>
+                  <span class="google-account-info">
+                    <span class="google-account-name">Use another account</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div class="auth-divider"><span>OR</span></div>
+
             <!-- Quick Demo 1-Click Buttons -->
             <div class="demo-credentials-box">
               <div style="font-weight: 700; color: var(--primary-hover); margin-bottom: 0.25rem;">
@@ -2937,8 +3597,7 @@
                   <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
                     <input type="checkbox" checked /> Remember session
                   </label>
-                  <a href="javascript:void(0)"
-                    onclick="showToast('Password reset link dispatched to demo email.', 'info')">Forgot password?</a>
+                  <a href="javascript:void(0)" onclick="openForgotPasswordView()">Forgot password?</a>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg btn-block">
@@ -2985,6 +3644,211 @@
                   <i class="fa-solid fa-user-plus"></i> Complete Registration &amp; Enter Portal
                 </button>
               </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6B. FORGOT PASSWORD PAGE VIEW -->
+    <section id="forgotPasswordView" class="view-section">
+      <div class="auth-wrapper">
+        <div class="auth-card">
+          <!-- Left: Graphic Illustration Side (matches Login page branding) -->
+          <div class="auth-graphic-side"
+            style="display:flex !important; visibility:visible !important; opacity:1 !important;">
+            <div>
+              <div
+                style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.15); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem;">
+                <i class="fa-solid fa-shield-halved"></i> ACCOUNT RECOVERY
+              </div>
+              <h2>Reset Your Password</h2>
+              <p>Securely verify your identity with an OTP and set a new password to regain access to your Fund
+                Bridge account.</p>
+            </div>
+
+            <img src="assets/login-illustration.svg" alt="NGO Fund Management Security" class="auth-illustration-img"
+              style="display:block !important; visibility:visible !important; opacity:1 !important; width:100% !important; max-width:460px !important; height:auto !important; object-fit:contain !important; margin:12px auto !important;" />
+
+            <ul class="auth-feature-list">
+              <li><i class="fa-solid fa-check-circle" style="color: #5eead4;"></i> Email-Verified OTP Security</li>
+              <li><i class="fa-solid fa-check-circle" style="color: #5eead4;"></i> 256-Bit Encrypted Reset Process
+              </li>
+              <li><i class="fa-solid fa-check-circle" style="color: #5eead4;"></i> Instant Login After Reset</li>
+            </ul>
+          </div>
+
+          <!-- Right: Forgot Password Step Wizard -->
+          <div class="auth-form-side">
+            <button type="button" class="fp-back-link" onclick="fpBackToLogin()">
+              <i class="fa-solid fa-arrow-left"></i> Back to Login
+            </button>
+
+            <!-- Step Progress Indicator -->
+            <div class="fp-steps" id="fpStepsIndicator">
+              <div class="fp-step active" data-step="1">
+                <span class="fp-step-circle">1</span>
+                <span class="fp-step-label">Email</span>
+              </div>
+              <div class="fp-step-line"></div>
+              <div class="fp-step" data-step="2">
+                <span class="fp-step-circle">2</span>
+                <span class="fp-step-label">Verify OTP</span>
+              </div>
+              <div class="fp-step-line"></div>
+              <div class="fp-step" data-step="3">
+                <span class="fp-step-circle">3</span>
+                <span class="fp-step-label">Reset</span>
+              </div>
+            </div>
+
+            <!-- Step 1: Enter Email -->
+            <div id="fpStep1" class="fp-step-panel">
+              <h3 class="fp-panel-title">Forgot your password?</h3>
+              <p class="fp-panel-subtitle">Enter the email address linked to your account. We'll send a one-time
+                verification code (OTP) to it.</p>
+              <form id="fpEmailForm" onsubmit="fpSendOtp(event)">
+                <div class="form-group">
+                  <label><i class="fa-solid fa-envelope"></i> Email Address</label>
+                  <input type="email" id="fpEmailInput" class="form-control" placeholder="you@example.com" required />
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                  <i class="fa-solid fa-paper-plane"></i> Send OTP
+                </button>
+              </form>
+            </div>
+
+            <!-- Step 2: Verify OTP -->
+            <div id="fpStep2" class="fp-step-panel" style="display:none;">
+              <h3 class="fp-panel-title">Verify OTP</h3>
+              <p class="fp-panel-subtitle">Enter the 6-digit code sent to <strong id="fpEmailDisplay">your
+                  email</strong>.</p>
+              <form id="fpOtpForm" onsubmit="fpVerifyOtp(event)">
+                <div class="form-group">
+                  <label><i class="fa-solid fa-key"></i> One-Time Password</label>
+                  <div class="fp-otp-group">
+                    <input type="text" inputmode="numeric" maxlength="1" class="fp-otp-box" data-otp-index="0" />
+                    <input type="text" inputmode="numeric" maxlength="1" class="fp-otp-box" data-otp-index="1" />
+                    <input type="text" inputmode="numeric" maxlength="1" class="fp-otp-box" data-otp-index="2" />
+                    <input type="text" inputmode="numeric" maxlength="1" class="fp-otp-box" data-otp-index="3" />
+                    <input type="text" inputmode="numeric" maxlength="1" class="fp-otp-box" data-otp-index="4" />
+                    <input type="text" inputmode="numeric" maxlength="1" class="fp-otp-box" data-otp-index="5" />
+                  </div>
+                  <div class="fp-otp-meta">
+                    <span id="fpOtpError" class="fp-error-text"></span>
+                    <a href="javascript:void(0)" id="fpResendLink" onclick="fpResendOtp()">Resend OTP</a>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                  <i class="fa-solid fa-circle-check"></i> Verify OTP
+                </button>
+                <button type="button" class="btn btn-outline btn-lg btn-block fp-secondary-btn"
+                  onclick="fpGoToStep(1)">
+                  <i class="fa-solid fa-arrow-left"></i> Change Email
+                </button>
+              </form>
+            </div>
+
+            <!-- Step 3: Reset Password -->
+            <div id="fpStep3" class="fp-step-panel" style="display:none;">
+              <h3 class="fp-panel-title">Create New Password</h3>
+              <p class="fp-panel-subtitle">Your identity is verified. Please set a new password for your account.</p>
+              <form id="fpResetForm" onsubmit="fpSubmitNewPassword(event)">
+                <div class="form-group">
+                  <label><i class="fa-solid fa-lock"></i> New Password</label>
+                  <input type="password" id="fpNewPassword" class="form-control" placeholder="Enter new password"
+                    minlength="8" required />
+                </div>
+                <div class="form-group">
+                  <label><i class="fa-solid fa-lock"></i> Confirm Password</label>
+                  <input type="password" id="fpConfirmPassword" class="form-control"
+                    placeholder="Re-enter new password" minlength="8" required />
+                </div>
+                <div id="fpResetError" class="fp-error-text" style="margin-bottom: 1rem;"></div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                  <i class="fa-solid fa-rotate"></i> Submit
+                </button>
+              </form>
+            </div>
+
+            <!-- Step 4: Success Confirmation -->
+            <div id="fpStepSuccess" class="fp-step-panel" style="display:none; text-align:center;">
+              <div class="fp-success-icon"><i class="fa-solid fa-circle-check"></i></div>
+              <h3 class="fp-panel-title">Password Reset Successful!</h3>
+              <p class="fp-panel-subtitle">Your password has been updated. You can now log in with your new
+                credentials.</p>
+              <button type="button" class="btn btn-primary btn-lg btn-block" onclick="fpBackToLogin()">
+                <i class="fa-solid fa-right-to-bracket"></i> Return to Login
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6C. SIMULATED EMAIL INBOX PAGE (Demo Password Reset Email) -->
+    <section id="fpInboxView" class="view-section">
+      <div class="auth-wrapper" style="display:flex; justify-content:center; align-items:flex-start;">
+        <div style="width:100%; max-width:640px;">
+          <button type="button" class="fp-back-link" style="margin-top:1.5rem;" onclick="fpBackFromInbox()">
+            <i class="fa-solid fa-arrow-left"></i> Back
+          </button>
+
+          <div class="fp-inbox-card">
+            <div class="fp-inbox-banner">
+              <i class="fa-solid fa-circle-info"></i>
+              Demo Mode: this inbox simulates the email FundBridge would send — no real email server is
+              connected.
+            </div>
+
+            <div class="fp-inbox-toolbar">
+              <i class="fa-solid fa-inbox" style="color: var(--primary, #0d9488); font-size:1.2rem;"></i>
+              <h3>Inbox — <span id="fpInboxRecipient">you@example.com</span></h3>
+            </div>
+
+            <!-- Email List (collapsed state) -->
+            <div class="fp-inbox-list" id="fpInboxList">
+              <button type="button" class="fp-inbox-item" id="fpInboxListItem" onclick="fpOpenEmail()">
+                <span class="fp-inbox-sender-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                <span class="fp-inbox-item-body">
+                  <span class="fp-inbox-item-sender">FundBridge Security</span><br />
+                  <span class="fp-inbox-item-subject">Reset your FundBridge password</span>
+                </span>
+                <span class="fp-unread-dot" id="fpInboxUnreadDot"></span>
+                <span class="fp-inbox-item-time">Just now</span>
+              </button>
+            </div>
+
+            <!-- Expanded Email Detail -->
+            <div class="fp-email-detail" id="fpEmailDetail">
+              <div class="fp-email-detail-header">
+                <h4>Reset your FundBridge password</h4>
+                <div class="fp-email-meta-row">
+                  From: <strong>FundBridge Security &lt;no-reply@fundbridge.org&gt;</strong><br />
+                  To: <strong id="fpEmailDetailRecipient">you@example.com</strong>
+                </div>
+              </div>
+              <div class="fp-email-body">
+                <p>Hi there,</p>
+                <p>We received a request to reset the password for your FundBridge account. Use the one-time
+                  passcode below to verify it's you, then choose a new password.</p>
+
+                <div style="text-align:center;">
+                  <div class="fp-otp-display" id="fpInboxOtpCode">------</div>
+                </div>
+
+                <p>This code expires in 10 minutes. If you didn't request a password reset, you can safely ignore
+                  this email.</p>
+
+                <div class="fp-inbox-actions">
+                  <button type="button" class="btn btn-primary btn-lg" onclick="fpProceedFromEmail()">
+                    <i class="fa-solid fa-key"></i> Reset Password Now
+                  </button>
+                  <button type="button" class="btn btn-outline btn-lg" onclick="fpResendOtp()">
+                    <i class="fa-solid fa-rotate"></i> Resend Email
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -4089,6 +4953,436 @@
   <!-- Portal Sidebar: make the admin profile pill (avatar + name, just above
      the Logout button) open the Profile view, same as the "Profile" link
      in the sidebar menu. -->
+  <script id="forgot-password-module-js">
+    (function () {
+      "use strict";
+
+      var fpState = {
+        email: "",
+        otp: "",
+        step: 1
+      };
+
+      function fpToast(message, type) {
+        if (typeof window.showToast === "function") {
+          window.showToast(message, type || "info");
+        }
+      }
+
+      function fpApplyActiveView(viewId) {
+        // Mirrors the existing public-page view switching pattern exactly:
+        // #homeView / #aboutView / etc. are shown purely via the
+        // "active-view" class (see .view-section { display:none } and
+        // .view-section.active-view { display:block } in the site's CSS).
+        // We ONLY toggle classes here — never inline styles — so that the
+        // site's own navigation (Home/About/Donate/Contact/etc.) is always
+        // free to take back over normally afterward, with nothing "stuck".
+        document.querySelectorAll(".view-section").forEach(function (section) {
+          section.classList.remove("active-view");
+        });
+        var target = document.getElementById(viewId);
+        if (target) {
+          target.classList.add("active-view");
+        }
+      }
+
+      function fpSetActivePublicView(viewId) {
+        fpApplyActiveView(viewId);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // Re-assert shortly after, purely via the same class toggle, in case
+        // this was reached via a direct page load with a hash the site's own
+        // router doesn't recognize and it resets to a default view slightly
+        // after our initial run. This never leaves any lingering inline
+        // style, so normal nav clicks always work correctly afterward.
+        setTimeout(function () { fpApplyActiveView(viewId); }, 60);
+        setTimeout(function () { fpApplyActiveView(viewId); }, 300);
+      }
+
+      // Update the address bar for bookmarking purposes WITHOUT firing a
+      // "hashchange" event — this avoids handing an unrecognized route to
+      // the site's own hash-based router, which is what caused other pages
+      // to stop showing their content.
+      function fpUpdateAddressBar(hash) {
+        if (window.history && typeof window.history.replaceState === "function") {
+          window.history.replaceState(null, "", "#" + hash);
+        }
+      }
+
+      function fpGenerateOtp() {
+        var code = Math.floor(100000 + Math.random() * 900000).toString();
+        fpState.otp = code;
+        return code;
+      }
+
+      window.openForgotPasswordView = function () {
+        // Pre-fill with whatever is currently in the login email field, if any
+        var loginEmailEl = document.getElementById("loginEmail");
+        var fpEmailInput = document.getElementById("fpEmailInput");
+        if (loginEmailEl && fpEmailInput && loginEmailEl.value) {
+          fpEmailInput.value = loginEmailEl.value;
+        }
+        fpResetWizard();
+        fpSetActivePublicView("forgotPasswordView");
+        fpUpdateAddressBar("forgot-password");
+      };
+
+      window.fpBackToLogin = function () {
+        fpResetWizard();
+        fpSetActivePublicView("loginView");
+        fpUpdateAddressBar("login");
+      };
+
+      // "Back" button on the simulated inbox page returns to the email-entry step
+      window.fpBackFromInbox = function () {
+        fpSetActivePublicView("forgotPasswordView");
+        fpGoToStep(1);
+        fpUpdateAddressBar("forgot-password");
+      };
+
+
+      function fpResetWizard() {
+        fpState = { email: "", otp: "", step: 1 };
+        var otpForm = document.getElementById("fpOtpForm");
+        var resetForm = document.getElementById("fpResetForm");
+        if (otpForm) otpForm.reset();
+        if (resetForm) resetForm.reset();
+        document.querySelectorAll(".fp-otp-box").forEach(function (box) {
+          box.value = "";
+        });
+        var otpErr = document.getElementById("fpOtpError");
+        var resetErr = document.getElementById("fpResetError");
+        if (otpErr) otpErr.textContent = "";
+        if (resetErr) resetErr.textContent = "";
+
+        // Reset the simulated inbox back to its "unread / unopened" state
+        var inboxItem = document.getElementById("fpInboxListItem");
+        var emailDetail = document.getElementById("fpEmailDetail");
+        var unreadDot = document.getElementById("fpInboxUnreadDot");
+        if (inboxItem) inboxItem.classList.remove("read");
+        if (emailDetail) emailDetail.classList.remove("open");
+        if (unreadDot) unreadDot.style.display = "block";
+
+        fpGoToStep(1);
+      }
+
+      window.fpGoToStep = function (stepNumber) {
+        fpState.step = stepNumber;
+
+        var panels = {
+          1: document.getElementById("fpStep1"),
+          2: document.getElementById("fpStep2"),
+          3: document.getElementById("fpStep3"),
+          success: document.getElementById("fpStepSuccess")
+        };
+
+        Object.keys(panels).forEach(function (key) {
+          if (panels[key]) panels[key].style.display = "none";
+        });
+
+        if (stepNumber === "success") {
+          if (panels.success) panels.success.style.display = "block";
+        } else if (panels[stepNumber]) {
+          panels[stepNumber].style.display = "block";
+        }
+
+        // Update the step indicator UI
+        var indicatorSteps = document.querySelectorAll("#fpStepsIndicator .fp-step");
+        indicatorSteps.forEach(function (el) {
+          var n = parseInt(el.getAttribute("data-step"), 10);
+          el.classList.remove("active", "completed");
+          if (stepNumber === "success" || n < stepNumber) {
+            el.classList.add("completed");
+          } else if (n === stepNumber) {
+            el.classList.add("active");
+          }
+        });
+
+        var indicatorWrap = document.getElementById("fpStepsIndicator");
+        if (indicatorWrap) {
+          indicatorWrap.style.display = stepNumber === "success" ? "none" : "flex";
+        }
+
+        // Focus the first relevant field for convenience
+        setTimeout(function () {
+          if (stepNumber === 1) {
+            var el1 = document.getElementById("fpEmailInput");
+            if (el1) el1.focus();
+          } else if (stepNumber === 2) {
+            var firstOtp = document.querySelector('.fp-otp-box[data-otp-index="0"]');
+            if (firstOtp) firstOtp.focus();
+          } else if (stepNumber === 3) {
+            var el3 = document.getElementById("fpNewPassword");
+            if (el3) el3.focus();
+          }
+        }, 50);
+      };
+
+      // Step 1 submit: "send" the reset email, then take the user to the
+      // simulated inbox page so they can open it (mirrors a real email flow).
+      window.fpSendOtp = function (event) {
+        event.preventDefault();
+        var emailInput = document.getElementById("fpEmailInput");
+        var email = emailInput ? emailInput.value.trim() : "";
+
+        if (!email) {
+          fpToast("Please enter your email address.", "error");
+          return false;
+        }
+
+        fpState.email = email;
+        var displayEl = document.getElementById("fpEmailDisplay");
+        if (displayEl) displayEl.textContent = email;
+
+        var code = fpGenerateOtp();
+
+        var recipientEl = document.getElementById("fpInboxRecipient");
+        var recipientEl2 = document.getElementById("fpEmailDetailRecipient");
+        var otpCodeEl = document.getElementById("fpInboxOtpCode");
+        if (recipientEl) recipientEl.textContent = email;
+        if (recipientEl2) recipientEl2.textContent = email;
+        if (otpCodeEl) otpCodeEl.textContent = code;
+
+        // Reset inbox to unread state for the new email
+        var inboxItem = document.getElementById("fpInboxListItem");
+        var emailDetail = document.getElementById("fpEmailDetail");
+        var unreadDot = document.getElementById("fpInboxUnreadDot");
+        if (inboxItem) inboxItem.classList.remove("read");
+        if (emailDetail) emailDetail.classList.remove("open");
+        if (unreadDot) unreadDot.style.display = "block";
+
+        fpToast("A password reset email has been sent to " + email + ".", "success");
+        fpSetActivePublicView("fpInboxView");
+        fpUpdateAddressBar("forgot-password-inbox");
+        return false;
+      };
+
+      // Opens the simulated email in the demo inbox
+      window.fpOpenEmail = function () {
+        var inboxItem = document.getElementById("fpInboxListItem");
+        var emailDetail = document.getElementById("fpEmailDetail");
+        var unreadDot = document.getElementById("fpInboxUnreadDot");
+        if (inboxItem) inboxItem.classList.add("read");
+        if (emailDetail) emailDetail.classList.add("open");
+        if (unreadDot) unreadDot.style.display = "none";
+      };
+
+      // "Reset Password Now" button inside the opened email
+      window.fpProceedFromEmail = function () {
+        fpSetActivePublicView("forgotPasswordView");
+        fpUpdateAddressBar("forgot-password");
+        fpGoToStep(2);
+      };
+
+      window.fpResendOtp = function () {
+        if (!fpState.email) return;
+        var code = fpGenerateOtp();
+        var otpCodeEl = document.getElementById("fpInboxOtpCode");
+        if (otpCodeEl) otpCodeEl.textContent = code;
+
+        fpToast("A new OTP has been sent to " + fpState.email + ".", "info");
+        document.querySelectorAll(".fp-otp-box").forEach(function (box) {
+          box.value = "";
+        });
+        var otpErr = document.getElementById("fpOtpError");
+        if (otpErr) otpErr.textContent = "";
+        var firstOtp = document.querySelector('.fp-otp-box[data-otp-index="0"]');
+        if (firstOtp) firstOtp.focus();
+      };
+
+      window.fpVerifyOtp = function (event) {
+        event.preventDefault();
+        var boxes = document.querySelectorAll(".fp-otp-box");
+        var otpValue = "";
+        boxes.forEach(function (box) {
+          otpValue += box.value.trim();
+        });
+
+        var otpErr = document.getElementById("fpOtpError");
+
+        if (otpValue.length !== 6 || !/^\d{6}$/.test(otpValue)) {
+          if (otpErr) otpErr.textContent = "Please enter the complete 6-digit OTP.";
+          return false;
+        }
+
+        if (fpState.otp && otpValue !== fpState.otp) {
+          if (otpErr) otpErr.textContent = "Incorrect OTP. Check your email and try again.";
+          document.querySelectorAll(".fp-otp-box").forEach(function (box) {
+            box.value = "";
+          });
+          var firstOtp = document.querySelector('.fp-otp-box[data-otp-index="0"]');
+          if (firstOtp) firstOtp.focus();
+          return false;
+        }
+
+        if (otpErr) otpErr.textContent = "";
+        fpToast("OTP verified successfully.", "success");
+        fpGoToStep(3);
+        return false;
+      };
+
+      window.fpSubmitNewPassword = function (event) {
+        event.preventDefault();
+        var newPass = document.getElementById("fpNewPassword").value;
+        var confirmPass = document.getElementById("fpConfirmPassword").value;
+        var errEl = document.getElementById("fpResetError");
+
+        if (newPass.length < 8) {
+          if (errEl) errEl.textContent = "Password must be at least 8 characters long.";
+          return false;
+        }
+
+        if (newPass !== confirmPass) {
+          if (errEl) errEl.textContent = "Passwords do not match. Please try again.";
+          return false;
+        }
+
+        if (errEl) errEl.textContent = "";
+        fpToast("Your password has been reset successfully.", "success");
+        fpGoToStep("success");
+        return false;
+      };
+
+      // Auto-advance focus between OTP boxes as the user types
+      document.addEventListener("input", function (e) {
+        if (!e.target.classList || !e.target.classList.contains("fp-otp-box")) return;
+        e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 1);
+        if (e.target.value) {
+          var idx = parseInt(e.target.getAttribute("data-otp-index"), 10);
+          var next = document.querySelector('.fp-otp-box[data-otp-index="' + (idx + 1) + '"]');
+          if (next) next.focus();
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (!e.target.classList || !e.target.classList.contains("fp-otp-box")) return;
+        if (e.key === "Backspace" && !e.target.value) {
+          var idx = parseInt(e.target.getAttribute("data-otp-index"), 10);
+          var prev = document.querySelector('.fp-otp-box[data-otp-index="' + (idx - 1) + '"]');
+          if (prev) prev.focus();
+        }
+      });
+
+      // Support deep-linking / back-forward navigation
+      window.addEventListener("hashchange", function () {
+        if (window.location.hash === "#forgot-password") {
+          fpSetActivePublicView("forgotPasswordView");
+        } else if (window.location.hash === "#forgot-password-inbox") {
+          fpSetActivePublicView("fpInboxView");
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.location.hash === "#forgot-password") {
+          fpResetWizard();
+          fpSetActivePublicView("forgotPasswordView");
+        } else if (window.location.hash === "#forgot-password-inbox") {
+          fpSetActivePublicView("fpInboxView");
+        }
+      });
+    })();
+  </script>
+
+  <script id="google-auth-module-js">
+    (function () {
+      "use strict";
+
+      var GOOGLE_DEMO_ACCOUNTS = {
+        admin: { name: "Admin Demo", email: "admin.demo@gmail.com", role: "Administrator" },
+        donor: { name: "Aarav Sharma", email: "aarav.donor@gmail.com", role: "Donor Member" }
+      };
+      var DEMO_PASSWORD = "GoogleAuth@123";
+
+      function gaToast(message, type) {
+        if (typeof window.showToast === "function") {
+          window.showToast(message, type || "info");
+        }
+      }
+
+      function isRegisterTabActive() {
+        var registerContainer = document.getElementById("registerFormContainer");
+        return !!(registerContainer && registerContainer.style.display !== "none");
+      }
+
+      window.toggleGoogleChooser = function (event) {
+        if (event) event.stopPropagation();
+        var chooser = document.getElementById("googleChooser");
+        if (!chooser) return;
+        var isOpen = chooser.style.display === "block";
+        chooser.style.display = isOpen ? "none" : "block";
+      };
+
+      document.addEventListener("click", function (e) {
+        var chooser = document.getElementById("googleChooser");
+        var trigger = document.getElementById("googleAuthBtn");
+        if (!chooser || chooser.style.display !== "block") return;
+        if (chooser.contains(e.target) || (trigger && trigger.contains(e.target))) return;
+        chooser.style.display = "none";
+      });
+
+      window.selectGoogleAccount = function (key) {
+        var chooser = document.getElementById("googleChooser");
+        if (chooser) chooser.style.display = "none";
+
+        if (key === "other") {
+          gaToast("Demo mode: only the sample Google accounts above are available.", "info");
+          return;
+        }
+
+        var account = GOOGLE_DEMO_ACCOUNTS[key];
+        if (!account) return;
+
+        if (isRegisterTabActive()) {
+          var nameEl = document.getElementById("regFullName");
+          var emailEl = document.getElementById("regEmail");
+          var roleEl = document.getElementById("regRole");
+          var passEl = document.getElementById("regPassword");
+          if (nameEl) nameEl.value = account.name;
+          if (emailEl) emailEl.value = account.email;
+          if (passEl) passEl.value = DEMO_PASSWORD;
+          if (roleEl) {
+            var matched = false;
+            Array.prototype.forEach.call(roleEl.options, function (opt) {
+              if (opt.value === account.role) matched = true;
+            });
+            if (matched) roleEl.value = account.role;
+          }
+          gaToast("Google account linked as " + account.name + ". Completing registration…", "success");
+          var registerForm = document.getElementById("authRegisterForm");
+          setTimeout(function () {
+            if (registerForm && typeof registerForm.requestSubmit === "function") {
+              registerForm.requestSubmit();
+            } else if (registerForm) {
+              registerForm.submit();
+            }
+          }, 400);
+        } else {
+          var loginEmailEl = document.getElementById("loginEmail");
+          var loginPasswordEl = document.getElementById("loginPassword");
+          var loginRoleEl = document.getElementById("loginRoleSelect");
+          if (loginEmailEl) loginEmailEl.value = account.email;
+          if (loginPasswordEl) loginPasswordEl.value = DEMO_PASSWORD;
+          if (loginRoleEl) {
+            var matchedRole = false;
+            Array.prototype.forEach.call(loginRoleEl.options, function (opt) {
+              if (opt.value === account.role) matchedRole = true;
+            });
+            if (matchedRole) loginRoleEl.value = account.role;
+          }
+          gaToast("Signed in with Google as " + account.name + "…", "success");
+          var loginForm = document.getElementById("authLoginForm");
+          setTimeout(function () {
+            if (loginForm && typeof loginForm.requestSubmit === "function") {
+              loginForm.requestSubmit();
+            } else if (loginForm) {
+              loginForm.submit();
+            }
+          }, 400);
+        }
+      };
+    })();
+  </script>
+
   <script id="sidebar-profile-pill-fix-js">
     document.addEventListener("DOMContentLoaded", function () {
 
